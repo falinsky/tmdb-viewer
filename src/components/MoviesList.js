@@ -32,7 +32,10 @@ class MoviesList extends React.Component {
             <p>
               {movie.title}
             </p>
-            <img src={getMoviePosterImageUrl(movie.poster_path)} />
+            <img
+              src={getMoviePosterImageUrl(movie.poster_path)}
+              alt={movie.title}
+            />
           </li>
         ))}
       </ul>
