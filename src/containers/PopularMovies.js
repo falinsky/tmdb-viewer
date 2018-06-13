@@ -8,8 +8,6 @@ const mapStateToProps = (state) => ({
   isError: state.popularMovies.isError
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchPopularMovies: () => dispatch(fetchPopularMovies()),
-});
+const mapDispatchToProps = {fetchPopularMovies};
 
 export default connect(mapStateToProps, mapDispatchToProps)(MoviesList);
