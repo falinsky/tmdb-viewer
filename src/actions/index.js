@@ -26,3 +26,24 @@ export const fetchPopularMovies = () => (dispatch) => {
   );
 
 };
+
+export const FETCH_GENRES_REQUEST = 'FETCH_GENRES_REQUEST';
+export const FETCH_GENRES_SUCCESS = 'FETCH_GENRES_SUCCESS';
+export const FETCH_GENRES_FAILURE = 'FETCH_GENRES_FAILURE';
+
+export const fetchGenres = () => (dispatch) => {
+  dispatch({
+    type: FETCH_GENRES_REQUEST,
+  });
+
+  api.getGenresListForMovies().then(
+    ({genres}) => dispatch({
+      type: FETCH_GENRES_SUCCESS,
+      genres,
+    }),
+    errorMessage => dispatch({
+      type: FETCH_GENRES_FAILURE,
+      errorMessage,
+    })
+  );
+};
