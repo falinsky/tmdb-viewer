@@ -19,9 +19,9 @@ export const fetchPopularMovies = () => (dispatch) => {
         results,
       },
     }),
-    errorMessage => dispatch({
+    error => dispatch({
       type: FETCH_POPULAR_MOVIES_FAILURE,
-      errorMessage
+      error: error.message
     })
   );
 
@@ -41,9 +41,9 @@ export const fetchGenres = () => (dispatch) => {
       type: FETCH_GENRES_SUCCESS,
       genres,
     }),
-    errorMessage => dispatch({
+    error => dispatch({
       type: FETCH_GENRES_FAILURE,
-      errorMessage,
+      error: error.message,
     })
   );
 };
