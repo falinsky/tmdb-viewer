@@ -1,5 +1,6 @@
 import React from 'react';
 import {getMoviePosterImageUrl} from '../api';
+import Genre from '../containers/Genre';
 
 const MESSAGE__LOADING = 'Loading...';
 const MESSAGE__ERROR = 'Error';
@@ -36,6 +37,13 @@ class MoviesList extends React.Component {
               src={getMoviePosterImageUrl(movie.poster_path)}
               alt={movie.title}
             />
+            <ul>
+              {movie.genre_ids.map(genreId => (
+                <li key={genreId}>
+                  <Genre id={genreId} />
+                </li>
+              ))}
+            </ul>
           </li>
         ))}
       </ul>
