@@ -8,7 +8,7 @@ const MESSAGE__NO_MOVIES_FOUND = 'No movies found';
 
 class MoviesList extends React.Component {
   componentDidMount() {
-    this.props.fetchPopularMovies();
+    this.props.fetchMovies();
   }
 
   render() {
