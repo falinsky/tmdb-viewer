@@ -6,7 +6,7 @@ import {createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
 import {Provider} from 'react-redux';
 import rootReducer from './reducers';
-import PopularMovies from './containers/PopularMovies';
+import App from './containers/App';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
@@ -18,7 +18,7 @@ const store = createStore(
 
 ReactDOM.render((
   <Provider store={store}>
-    <PopularMovies />
+    <App/>
   </Provider>
 ), document.getElementById('root'));
 registerServiceWorker();
