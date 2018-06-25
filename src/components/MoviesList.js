@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import {getMoviePosterImageUrl} from '../api';
 import Genre from '../containers/Genre';
 
@@ -30,20 +31,22 @@ class MoviesList extends React.Component {
       <ul>
         {movies.map(movie => (
           <li key={movie.id}>
-            <p>
-              {movie.title}
-            </p>
-            <img
-              src={getMoviePosterImageUrl(movie.poster_path)}
-              alt={movie.title}
-            />
-            <ul>
-              {movie.genre_ids.map(genreId => (
-                <li key={genreId}>
-                  <Genre id={genreId} />
-                </li>
-              ))}
-            </ul>
+            <Link to={`/movie/${movie.id}`}>
+              <p>
+                {movie.title}
+              </p>
+              <img
+                src={getMoviePosterImageUrl(movie.poster_path)}
+                alt={movie.title}
+              />
+              <ul>
+                {movie.genre_ids.map(genreId => (
+                  <li key={genreId}>
+                    <Genre id={genreId} />
+                  </li>
+                ))}
+              </ul>
+            </Link>
           </li>
         ))}
       </ul>

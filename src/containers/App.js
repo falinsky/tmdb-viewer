@@ -1,7 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Route, withRouter} from 'react-router-dom';
 import PopularMovies from './PopularMovies';
 import {fetchGenres} from '../actions';
+import MovieDetails from '../containers/MovieDetails';
 
 class App extends React.Component {
   componentDidMount() {
@@ -10,9 +12,12 @@ class App extends React.Component {
 
   render() {
     return (
-      <PopularMovies/>
+      <div>
+        <Route path="/" exact component={PopularMovies} />
+        <Route path="/movie/:id" component={MovieDetails} />
+      </div>
     );
   }
 }
 
-export default connect()(App);
+export default withRouter(connect()(App));
