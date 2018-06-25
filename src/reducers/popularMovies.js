@@ -5,7 +5,7 @@ import {
 } from '../actions';
 
 const defaultState = {
-  results: [],
+  items: [],
   isFetching: false,
   isError: false,
 };
@@ -23,8 +23,8 @@ export default function popularMovies(state = defaultState, action) {
       return {
         isFetching: false,
         isError: false,
-        results: [
-          ...state.results,
+        items: [
+          ...state.items,
           ...action.payload.results,
         ],
       };

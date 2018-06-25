@@ -5,7 +5,7 @@ import {
 } from '../actions';
 
 const defaultState = {
-  list: [],
+  items: [],
   isFetching: false,
   isError: false,
 };
@@ -23,7 +23,7 @@ export default function genres(state = defaultState, action) {
       return {
         isFetching: false,
         isError: false,
-        list: action.genres,
+        items: action.genres,
       };
 
     case FETCH_GENRES_FAILURE:
