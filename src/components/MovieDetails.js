@@ -5,8 +5,7 @@ import {getMoviePosterImageUrl} from '../api';
 function MovieDetails({movie}) {  
   return (
     <React.Fragment>
-      {!movie && 'Loading movie info...'}
-      {movie && (
+      {!movie ? 'Loading movie info...' : (
         <main>
           <h1>{movie.title}</h1>
           <p>{movie.overview}</p>
