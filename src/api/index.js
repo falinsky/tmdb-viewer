@@ -20,23 +20,28 @@ function generateUrl(path, params = {}) {
 }
 
 function throwCommonError(data) {
+  if (data.errors && data.errors.length) {
+    throw new Error(data.errors.join(' | '));
+  }
+
   throw new Error(`${data.status_message} (error code: ${data.status_code})`);
 }
 
-function handleApiCall(url, requiredResponseParamName) {
-  return fetch(url).then(response => response.json()).then(data => {
-    if (data[requiredResponseParamName]) {
-      return data;
-    }
-
+async function handleApiCall(url) {
+  const response = await fetch(url);
+  const data = await response.json();
+  
+  if (!response.ok) {
     throwCommonError(data);
-  });
+  }
+
+  return data;
 }
 
 export function getPopularMovies(page = 1) {
   const url = generateUrl('movie/popular', {page});
   
-  return handleApiCall(url, 'results');
+  return handleApiCall(url);
 }
 
 export function getMoviePosterImageUrl(posterPath) {
@@ -46,5 +51,5 @@ export function getMoviePosterImageUrl(posterPath) {
 export function getGenresListForMovies() {
   const url = generateUrl('genre/movie/list');
 
-  return handleApiCall(url, 'genres');
+  return handleApiCall(url);
 }
