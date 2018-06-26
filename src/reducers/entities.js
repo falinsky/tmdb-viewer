@@ -1,9 +1,11 @@
 import {
   FETCH_POPULAR_MOVIES_SUCCESS,
+  FETCH_GENRES_SUCCESS,
 } from '../actions';
 
 const defaultState = {
   movies: {},
+  genres: {},
 };
 
 export default function entities(state = defaultState, action) {
@@ -15,6 +17,12 @@ export default function entities(state = defaultState, action) {
           ...state.movies,
           ...action.payload.entities.movies,
         },
+      };
+
+    case FETCH_GENRES_SUCCESS:
+      return {
+        ...state,
+        genres: action.payload.entities.genres,
       };
 
     default:

@@ -23,7 +23,7 @@ export default function genres(state = defaultState, action) {
       return {
         isFetching: false,
         isError: false,
-        items: action.genres,
+        items: action.payload.result,
       };
 
     case FETCH_GENRES_FAILURE:

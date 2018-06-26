@@ -41,7 +41,7 @@ export const fetchGenres = () => (dispatch) => {
   api.getGenresListForMovies().then(
     ({genres}) => dispatch({
       type: FETCH_GENRES_SUCCESS,
-      genres,
+      payload: normalize(genres, schema.arrayOfGenres),
     }),
     error => dispatch({
       type: FETCH_GENRES_FAILURE,
