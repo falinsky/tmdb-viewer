@@ -1,4 +1,6 @@
 import * as api from '../api';
+import {normalize} from 'normalizr';
+import * as schema from './schema';
 
 export const FETCH_POPULAR_MOVIES_REQUEST = 'FETCH_POPULAR_MOVIES_REQUEST';
 export const FETCH_POPULAR_MOVIES_SUCCESS = 'FETCH_POPULAR_MOVIES_SUCCESS';
@@ -16,7 +18,7 @@ export const fetchPopularMovies = () => (dispatch) => {
         page,
         totalResults: total_results,
         totalPages: total_pages,
-        results,
+        ...normalize(results, schema.arrayOfMovies),
       },
     }),
     error => dispatch({

@@ -3,7 +3,7 @@ import MoviesList from '../components/MoviesList';
 import {fetchPopularMovies} from '../actions';
 
 const mapStateToProps = (state) => ({
-  movies: state.popularMovies.items,
+  movies: state.popularMovies.items.map(id => state.entities.movies[id]),
   isLoading: state.popularMovies.isFetching,
   isError: state.popularMovies.isError
 });

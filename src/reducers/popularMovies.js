@@ -25,7 +25,7 @@ export default function popularMovies(state = defaultState, action) {
         isError: false,
         items: [
           ...state.items,
-          ...action.payload.results,
+          ...action.payload.result.filter(id => !state.items.includes(id)),
         ],
       };
 
