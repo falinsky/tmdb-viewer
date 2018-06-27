@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "lodash": "^4.17.10",
     "normalizr": "^3.2.4",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
