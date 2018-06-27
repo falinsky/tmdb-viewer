@@ -40,7 +40,7 @@ class MoviesList extends React.Component {
                 alt={movie.title}
               />
               <ul>
-                {movie.genre_ids.map(genreId => (
+                {movie.genres.map(genreId => (
                   <li key={genreId}>
                     <Genre id={genreId} />
                   </li>
