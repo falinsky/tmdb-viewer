@@ -15,4 +15,8 @@ export const movie = new schema.Entity('movies', { genres: arrayOfGenres }, {
   },
 });
 
-export const arrayOfMovies = new schema.Array(movie);
+const arrayOfMovies = new schema.Array(movie);
+
+export const paginatedListOfMovies = {
+  results: arrayOfMovies,
+};

@@ -12,14 +12,9 @@ export const fetchPopularMovies = () => (dispatch) => {
   });
 
   api.getPopularMovies().then(
-    ({results, page, total_results, total_pages}) => dispatch({
+    (data) => dispatch({
       type: FETCH_POPULAR_MOVIES_SUCCESS,
-      payload: {
-        page,
-        totalResults: total_results,
-        totalPages: total_pages,
-        ...normalize(results, schema.arrayOfMovies),
-      },
+      payload: normalize(data, schema.paginatedListOfMovies),
     }),
     error => dispatch({
       type: FETCH_POPULAR_MOVIES_FAILURE,
