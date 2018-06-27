@@ -44,6 +44,12 @@ export function getPopularMovies(page = 1) {
   return handleApiCall(url);
 }
 
+export function getMovie(id) {
+  const url = generateUrl(`movie/${id}`);
+  
+  return handleApiCall(url);
+}
+
 export function getMoviePosterImageUrl(posterPath) {
   return `${BASE_IMG_API}w300/${posterPath}`;
 }
