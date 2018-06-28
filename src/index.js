@@ -8,14 +8,24 @@ import {Provider} from 'react-redux';
 import {BrowserRouter as Router} from 'react-router-dom';
 import rootReducer from './reducers';
 import App from './containers/App';
+import {loadState, saveState} from './localStorage';
+
+const initialState = loadState();
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   rootReducer,
+  initialState,
   composeEnhancers(
     applyMiddleware(thunk)
   )
 );
+
+store.subscribe(() => {
+  saveState({
+    favorites: store.getState().favorites,
+  });
+});
 
 ReactDOM.render((
   <Provider store={store}>
