@@ -50,6 +50,12 @@ export function getMovie(id) {
   return handleApiCall(url);
 }
 
+export function getMovieRecommendations(id) {
+  const url = generateUrl(`movie/${id}/recommendations`);
+
+  return handleApiCall(url);
+}
+
 export function getMoviePosterImageUrl(posterPath) {
   return `${BASE_IMG_API}w300/${posterPath}`;
 }

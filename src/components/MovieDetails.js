@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {getMoviePosterImageUrl} from '../api';
+import MovieRecommendations from '../containers/MovieRecommendations';
 
 class MovieDetails extends React.Component {
   componentDidMount() {
@@ -13,11 +14,17 @@ class MovieDetails extends React.Component {
     return (
       <React.Fragment>
         {!movie ? 'Loading movie info...' : (
-          <main>
-            <h1>{movie.title}</h1>
-            <p>{movie.overview}</p>
-            <img src={getMoviePosterImageUrl(movie.backdrop_path)} alt={movie.title} />
-          </main>
+          <React.Fragment>
+            <main>
+              <h1>{movie.title}</h1>
+              <p>{movie.overview}</p>
+              <img src={getMoviePosterImageUrl(movie.backdrop_path)} alt={movie.title} />
+            </main>
+            <section>
+              <h2>Recommendations</h2>
+              <MovieRecommendations movie={movie} />
+            </section>
+          </React.Fragment>
         )}
         <footer>
           <Link to="/">Return to main page</Link>
