@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {getMoviePosterImageUrl} from '../api';
 import Genre from '../containers/Genre';
+import FavoriteBadge from '../containers/FavoriteBadge';
 
 const MESSAGE__LOADING = 'Loading...';
 const MESSAGE__ERROR = 'Error';
@@ -39,6 +40,7 @@ class MoviesList extends React.Component {
                 src={getMoviePosterImageUrl(movie.poster_path)}
                 alt={movie.title}
               />
+              <FavoriteBadge movie={movie} />
               <ul>
                 {movie.genres.map(genreId => (
                   <li key={genreId}>
