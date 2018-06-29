@@ -1,5 +1,5 @@
 import React from 'react';
-import MovieCard from './MovieCard';
+import MovieCard from '../containers/MovieCard';
 
 const MESSAGE__LOADING = 'Loading...';
 const MESSAGE__ERROR = 'Error';
@@ -29,7 +29,7 @@ class MoviesList extends React.Component {
       <ul>
         {movies.map(movie => (
           <li key={movie.id}>
-            <MovieCard movie={movie} />
+            <MovieCard id={movie.id} />
           </li>
         ))}
       </ul>
