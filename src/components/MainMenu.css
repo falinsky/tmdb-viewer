@@ -1,0 +1,23 @@
+.MainMenu {
+  padding: 1rem;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+}
+
+.MainMenu-Item {
+  text-decoration: none;
+  margin: 1rem;
+}
+
+.MainMenu-Item:hover:not(.active) {
+  text-decoration: underline;
+}
+
+.MainMenu-Item.active {
+  font-weight: bold;
+}
+
+.MainMenu-Item.active:hover,
+.MainMenu-Item.active:active {
+  cursor: default;
+}
