@@ -6,6 +6,7 @@ function MainMenu() {
   return (
     <nav className="MainMenu">
       <NavLink className="MainMenu-Item" exact to="/">Popular</NavLink>
+      <NavLink className="MainMenu-Item" to="/favorites">Favorites</NavLink>
     </nav>
   );
 }

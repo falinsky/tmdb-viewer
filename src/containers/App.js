@@ -5,6 +5,7 @@ import PopularMovies from './PopularMovies';
 import {fetchGenres} from '../actions';
 import MovieDetails from '../containers/MovieDetails';
 import MainMenu from '../components/MainMenu';
+import FavoriteMovies from './FavoriteMovies';
 
 class App extends React.Component {
   componentDidMount() {
@@ -19,6 +20,7 @@ class App extends React.Component {
         </header>
         <section>
           <Route path="/" exact component={PopularMovies} />
+          <Route path="/favorites" component={FavoriteMovies} />
           <Route path="/movie/:id" component={MovieDetails} />
         </section>
       </div>
