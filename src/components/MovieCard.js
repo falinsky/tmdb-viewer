@@ -7,6 +7,10 @@ import FavoriteBadge from '../containers/FavoriteBadge';
 import './MovieCard.css';
 
 function MovieCard({ movie }) {
+  if (!movie) {
+    return null;
+  }
+
   return (
     <Link to={`/movie/${movie.id}`}>
       <article className="MovieCard">
@@ -37,7 +41,7 @@ MovieCard.propTypes = {
     title: PropTypes.string.isRequired,
     poster_path: PropTypes.string.isRequired,
     genres: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
-  }).isRequired,
+  }),
 };
 
 export default MovieCard;
