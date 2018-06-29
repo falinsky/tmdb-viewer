@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MovieCard from '../containers/MovieCard';
+import './MoviesList.css';
 
 const MESSAGE__LOADING = 'Loading...';
 const MESSAGE__ERROR = 'Error';
@@ -27,9 +28,9 @@ class MoviesList extends React.Component {
     }
 
     return (
-      <ul>
+      <ul className="MoviesList">
         {movies.map(id => (
-          <li key={id}>
+          <li className="MoviesList-Item" key={id}>
             <MovieCard id={id} />
           </li>
         ))}

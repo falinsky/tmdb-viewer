@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import {getMoviePosterImageUrl} from '../api';
 import MovieRecommendations from '../containers/MovieRecommendations';
 import FavoriteBadge from '../containers/FavoriteBadge';
+import './MovieDetails.css';
 
 class MovieDetails extends React.Component {
   componentDidMount() {
@@ -23,7 +24,7 @@ class MovieDetails extends React.Component {
               <img src={getMoviePosterImageUrl(movie.backdrop_path)} alt={movie.title} />
               <FavoriteBadge movie={movie.id} />
             </main>
-            <section>
+            <section className="MovieRecommendations">
               <h2>Recommendations</h2>
               <MovieRecommendations movie={movie.id} />
             </section>

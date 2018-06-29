@@ -1,0 +1,5 @@
+.MovieRecommendations .MoviesList {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  justify-content: flex-start;
+}

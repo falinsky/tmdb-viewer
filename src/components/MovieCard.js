@@ -4,25 +4,29 @@ import {Link} from 'react-router-dom';
 import {getMoviePosterImageUrl} from '../api';
 import Genre from '../containers/Genre';
 import FavoriteBadge from '../containers/FavoriteBadge';
+import './MovieCard.css';
 
 function MovieCard({ movie }) {
   return (
     <Link to={`/movie/${movie.id}`}>
-      <p>
-        {movie.title}
-      </p>
-      <img
-        src={getMoviePosterImageUrl(movie.poster_path)}
-        alt={movie.title}
-      />
-      <FavoriteBadge movie={movie.id} />
-      <ul>
-        {movie.genres.map(genreId => (
-          <li key={genreId}>
-            <Genre id={genreId} />
-          </li>
-        ))}
-      </ul>
+      <article className="MovieCard">
+        <p>
+          {movie.title}
+        </p>
+        <img
+          className="MovieCard-Poster"
+          src={getMoviePosterImageUrl(movie.poster_path)}
+          alt={movie.title}
+        />
+        <FavoriteBadge movie={movie.id} />
+        <ul className="MovieCard-GenresList">
+          {movie.genres.map(genreId => (
+            <li className="MovieCard-GenresList-Item" key={genreId}>
+              <Genre id={genreId} />
+            </li>
+          ))}
+        </ul>
+      </article>
     </Link>
   );
 }
