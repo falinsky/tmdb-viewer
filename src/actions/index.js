@@ -28,7 +28,7 @@ export const FETCH_MOVIE_REQUEST = 'FETCH_MOVIE_REQUEST';
 export const FETCH_MOVIE_SUCCESS = 'FETCH_MOVIE_SUCCESS';
 export const FETCH_MOVIE_FAILURE = 'FETCH_MOVIE_FAILURE';
 
-export const fetchMovie = (id) => (dispatch) => {
+const fetchMovie = (id) => (dispatch) => {
   dispatch({
     type: FETCH_MOVIE_REQUEST,
   });
@@ -44,6 +44,14 @@ export const fetchMovie = (id) => (dispatch) => {
     })
   );
 
+};
+
+export const loadMovie = (id) => (dispatch, getState) => {
+  if (getState().entities.movies[id]) {
+    return;
+  }
+
+  return dispatch(fetchMovie(id));
 };
 
 export const FETCH_MOVIE_RECOMMENDATIONS_REQUEST = 'FETCH_MOVIE_RECOMMENDATIONS_REQUEST';
