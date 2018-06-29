@@ -24,7 +24,7 @@ class MovieDetails extends React.Component {
             </main>
             <section>
               <h2>Recommendations</h2>
-              <MovieRecommendations movie={movie} />
+              <MovieRecommendations movie={movie.id} />
             </section>
           </React.Fragment>
         )}

@@ -3,7 +3,7 @@ import MoviesList from './MoviesList';
 
 class MovieRecommendations extends React.Component {
   componentDidUpdate(prevProps) {
-    if (prevProps.movie.id !== this.props.movie.id) {
+    if (prevProps.movie !== this.props.movie) {
       this.props.fetchMovies();
     }
   }
