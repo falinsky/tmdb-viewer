@@ -3,12 +3,12 @@ import FavoriteBadge from '../components/FavoriteBadge';
 import {addMovieToFavorites, removeMovieFromFavorites} from '../actions';
 
 const mapStateToProps = (state, ownProps) => ({
-    inFavorites: state.favorites.includes(ownProps.movie.id),
+    inFavorites: state.favorites.includes(ownProps.movie),
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    onAdd: () => dispatch(addMovieToFavorites(ownProps.movie.id)),
-    onRemove: () => dispatch(removeMovieFromFavorites(ownProps.movie.id)),
+    onAdd: () => dispatch(addMovieToFavorites(ownProps.movie)),
+    onRemove: () => dispatch(removeMovieFromFavorites(ownProps.movie)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FavoriteBadge);

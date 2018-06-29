@@ -14,7 +14,7 @@ function MovieCard({ movie }) {
         src={getMoviePosterImageUrl(movie.poster_path)}
         alt={movie.title}
       />
-      <FavoriteBadge movie={movie} />
+      <FavoriteBadge movie={movie.id} />
       <ul>
         {movie.genres.map(genreId => (
           <li key={genreId}>
