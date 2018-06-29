@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import MoviesList from './MoviesList';
 
 class MovieRecommendations extends React.Component {
@@ -14,5 +15,11 @@ class MovieRecommendations extends React.Component {
     );
   }
 }
+
+MovieRecommendations.propTypes = {
+  movie: PropTypes.number.isRequired,
+  movies: PropTypes.arrayOf(PropTypes.number.isRequired),
+  fetchMovies: PropTypes.func.isRequired,
+};
 
 export default MovieRecommendations;

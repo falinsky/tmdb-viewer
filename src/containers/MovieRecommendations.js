@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import MovieRecommendations from '../components/MovieRecommendations';
 import {fetchMovieRecommendations} from '../actions';
@@ -12,4 +13,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   fetchMovies: () => dispatch(fetchMovieRecommendations(ownProps.movie)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(MovieRecommendations);
+const MovieRecommendationsContainer = connect(mapStateToProps, mapDispatchToProps)(MovieRecommendations);
+MovieRecommendationsContainer.propTypes = {
+  movie: PropTypes.number.isRequired,
+};
+
+export default MovieRecommendationsContainer;

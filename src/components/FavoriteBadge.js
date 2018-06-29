@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function FavoriteBadge({inFavorites, onAdd, onRemove}) {
   return (
@@ -9,6 +10,12 @@ function FavoriteBadge({inFavorites, onAdd, onRemove}) {
       {`${inFavorites ? 'Remove from' : 'Add to'} Favorites`}
     </button>
   );
+};
+
+FavoriteBadge.propTypes = {
+  inFavorites: PropTypes.bool.isRequired,
+  onAdd: PropTypes.func.isRequired,
+  onRemove: PropTypes.func.isRequired,
 };
 
 export default FavoriteBadge;

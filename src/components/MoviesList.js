@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import MovieCard from '../containers/MovieCard';
 
 const MESSAGE__LOADING = 'Loading...';
@@ -41,6 +42,13 @@ MoviesList.defaultProps = {
   movies: [],
   isLoading: false,
   isError: false,
+};
+
+MoviesList.propTypes = {
+  movies: PropTypes.arrayOf(PropTypes.number.isRequired),
+  isLoading: PropTypes.bool,
+  isError: PropTypes.bool,
+  fetchMovies: PropTypes.func.isRequired,
 };
 
 export default MoviesList;

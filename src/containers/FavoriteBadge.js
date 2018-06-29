@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import FavoriteBadge from '../components/FavoriteBadge';
 import {addMovieToFavorites, removeMovieFromFavorites} from '../actions';
@@ -11,4 +12,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     onRemove: () => dispatch(removeMovieFromFavorites(ownProps.movie)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(FavoriteBadge);
+const FavoriteBadgeContainer = connect(mapStateToProps, mapDispatchToProps)(FavoriteBadge);
+FavoriteBadgeContainer.propTypes = {
+    movie: PropTypes.number.isRequired,
+};
+
+export default FavoriteBadgeContainer;

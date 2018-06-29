@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {getMoviePosterImageUrl} from '../api';
 import MovieRecommendations from '../containers/MovieRecommendations';
@@ -35,5 +36,15 @@ class MovieDetails extends React.Component {
     );
   }
 }
+
+MovieDetails.propTypes = {
+  movie: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    overview: PropTypes.string.isRequired,
+    backdrop_path: PropTypes.string.isRequired,
+  }),
+  fetchMovie: PropTypes.func.isRequired,
+};
 
 export default MovieDetails;
