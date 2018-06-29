@@ -27,9 +27,9 @@ class MoviesList extends React.Component {
 
     return (
       <ul>
-        {movies.map(movie => (
-          <li key={movie.id}>
-            <MovieCard id={movie.id} />
+        {movies.map(id => (
+          <li key={id}>
+            <MovieCard id={id} />
           </li>
         ))}
       </ul>

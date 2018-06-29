@@ -3,7 +3,7 @@ import MovieRecommendations from '../components/MovieRecommendations';
 import {fetchMovieRecommendations} from '../actions';
 
 const mapStateToProps = (state, ownProps) => ({
-  movies: (state.movieRecommendations.itemsById[ownProps.movie.id] || []).map(id => state.entities.movies[id]),
+  movies: state.movieRecommendations.itemsById[ownProps.movie.id],
   isLoading: state.movieRecommendations.isFetching,
   isError: state.movieRecommendations.isError,
 });
