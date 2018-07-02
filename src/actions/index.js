@@ -138,3 +138,10 @@ export const searchMovies = (query) => (dispatch) => {
     })
   );
 };
+
+export const SEARCH_MOVIES_UPDATE_QUERY = 'SEARCH_MOVIES_UPDATE_QUERY';
+
+export const updateSearchMoviesQuery = (value) => ({
+  type: SEARCH_MOVIES_UPDATE_QUERY,
+  payload: value,
+});

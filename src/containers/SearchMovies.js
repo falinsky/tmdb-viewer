@@ -1,12 +1,12 @@
 import {connect} from 'react-redux';
 import SearchMovies from '../components/SearchMovies';
-import {searchMovies} from '../actions';
+import {updateSearchMoviesQuery} from '../actions';
 
 const mapStateToProps = (state) => ({
   query: state.searchMovies.query,
 });
 
 const mapDispatchToProps = {
-  searchMovies,
+  onChange: updateSearchMoviesQuery,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(SearchMovies);

@@ -1,7 +1,8 @@
 import {
   SEARCH_MOVIES_REQUEST,
   SEARCH_MOVIES_SUCCESS,
-  SEARCH_MOVIES_FAILURE
+  SEARCH_MOVIES_FAILURE,
+  SEARCH_MOVIES_UPDATE_QUERY,
 } from '../actions';
 
 const defaultState = {
@@ -15,8 +16,7 @@ export default function searchMovies(state = defaultState, action) {
   switch (action.type) {
     case SEARCH_MOVIES_REQUEST:
       return {
-        items: [],
-        query: action.payload.query,
+        ...state,
         isFetching: true,
         isError: false,
       };
@@ -36,6 +36,12 @@ export default function searchMovies(state = defaultState, action) {
         ...state,
         isFetching: false,
         isError: true,
+      };
+
+    case SEARCH_MOVIES_UPDATE_QUERY:
+      return {
+        ...state,
+        query: action.payload,
       };
 
     default:
