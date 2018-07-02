@@ -6,6 +6,8 @@ import {fetchGenres} from '../actions';
 import MovieDetails from '../containers/MovieDetails';
 import MainMenu from '../components/MainMenu';
 import FavoriteMovies from './FavoriteMovies';
+import SearchMovies from "../components/SearchMovies";
+import '../components/App.css'
 
 class App extends React.Component {
   componentDidMount() {
@@ -15,8 +17,9 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <header>
+        <header className="MainHeader">
           <MainMenu />
+          <SearchMovies onChange={() => {}} />
         </header>
         <main>
           <Route path="/" exact component={PopularMovies} />
