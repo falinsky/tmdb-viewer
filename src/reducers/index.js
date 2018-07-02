@@ -4,6 +4,7 @@ import genres from './genres';
 import entities from './entities';
 import movieRecommendations from './movieRecommendations';
 import favorites from './favorites';
+import searchMovies from './searchMovies';
 
 export default combineReducers({
   popularMovies,
@@ -11,4 +12,5 @@ export default combineReducers({
   entities,
   movieRecommendations,
   favorites,
+  searchMovies,
 });
