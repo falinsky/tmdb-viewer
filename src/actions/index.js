@@ -111,3 +111,30 @@ export const removeMovieFromFavorites = (id) => ({
   type: FAVORITES_REMOVE_MOVIE,
   payload: id,
 });
+
+export const SEARCH_MOVIES_REQUEST = 'SEARCH_MOVIES_REQUEST';
+export const SEARCH_MOVIES_SUCCESS = 'SEARCH_MOVIES_SUCCESS';
+export const SEARCH_MOVIES_FAILURE = 'SEARCH_MOVIES_FAILURE';
+
+export const searchMovies = (query) => (dispatch) => {
+  dispatch({
+    type: SEARCH_MOVIES_REQUEST,
+    payload: {
+      query,
+    },
+  });
+
+  api.searchMovies(query).then(
+    (data) => dispatch({
+      type: SEARCH_MOVIES_SUCCESS,
+      payload: {
+        ...normalize(data, schema.paginatedListOfMovies),
+        query,
+      },
+    }),
+    error => dispatch({
+      type: SEARCH_MOVIES_FAILURE,
+      error: error.message
+    })
+  );
+};
