@@ -7,6 +7,7 @@ import MovieDetails from '../containers/MovieDetails';
 import MainMenu from '../components/MainMenu';
 import FavoriteMovies from './FavoriteMovies';
 import SearchMovies from "./SearchMovies";
+import SearchMoviesResult from "./SearchMoviesResult";
 import '../components/App.css'
 
 class App extends React.Component {
@@ -23,6 +24,7 @@ class App extends React.Component {
         </header>
         <main>
           <Route path="/" exact component={PopularMovies} />
+          <Route path="/search" component={SearchMoviesResult} />
           <Route path="/favorites" component={FavoriteMovies} />
           <Route path="/movie/:id" component={MovieDetails} />
         </main>
