@@ -7,22 +7,20 @@ import './MovieDetails.css';
 
 function MovieDetails({movie}) {
   return (
-    <React.Fragment>
+    <article>
       {!movie ? 'Loading movie info...' : (
         <React.Fragment>
-          <main>
-            <h1>{movie.title}</h1>
-            <p>{movie.overview}</p>
-            <img src={getMoviePosterImageUrl(movie.backdrop_path)} alt={movie.title} />
-            <FavoriteBadge movie={movie.id} />
-          </main>
+          <h1>{movie.title}</h1>
+          <p>{movie.overview}</p>
+          <img src={getMoviePosterImageUrl(movie.backdrop_path)} alt={movie.title} />
+          <FavoriteBadge movie={movie.id} />
           <section className="MovieRecommendations">
             <h2>Recommendations</h2>
             <MovieRecommendations movie={movie.id} />
           </section>
         </React.Fragment>
       )}
-    </React.Fragment>
+    </article>
   );
 }
 

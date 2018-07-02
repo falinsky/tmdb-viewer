@@ -14,16 +14,16 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <React.Fragment>
         <header>
           <MainMenu />
         </header>
-        <section>
+        <main>
           <Route path="/" exact component={PopularMovies} />
           <Route path="/favorites" component={FavoriteMovies} />
           <Route path="/movie/:id" component={MovieDetails} />
-        </section>
-      </div>
+        </main>
+      </React.Fragment>
     );
   }
 }
