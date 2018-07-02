@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
 import {getMoviePosterImageUrl} from '../api';
 import MovieRecommendations from '../containers/MovieRecommendations';
 import FavoriteBadge from '../containers/FavoriteBadge';
@@ -23,9 +22,6 @@ function MovieDetails({movie}) {
           </section>
         </React.Fragment>
       )}
-      <footer>
-        <Link to="/">Return to main page</Link>
-      </footer>
     </React.Fragment>
   );
 }
