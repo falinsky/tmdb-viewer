@@ -1,0 +1,14 @@
+.SearchMovies {
+  align-self: center;
+  padding: 1rem;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.SearchMovies input {
+  margin: 0 1rem;
+  padding: 0.5rem;
+  width: 20rem;
+}
