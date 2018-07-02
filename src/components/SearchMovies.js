@@ -2,21 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './SearchMovies.css';
 
-function SearchMovies({search, onChange}) {
+function SearchMovies({query, searchMovies}) {
   return (
     <section className="SearchMovies">
       <label htmlFor="SearchMovies-SearchValue">
         Search
       </label>
 
-      <input id="SearchMovies-SearchValue" value={search} onChange={onChange} />
+      <input id="SearchMovies-SearchValue" value={query} onChange={(event) => searchMovies(event.target.value)} />
     </section>
   );
 }
 
 SearchMovies.propTypes = {
-  search: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
+  query: PropTypes.string,
+  searchMovies: PropTypes.func.isRequired,
 };
 
 export default SearchMovies;
