@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Route, withRouter} from 'react-router-dom';
+import {Route, withRouter, Redirect, Switch} from 'react-router-dom';
 import PopularMovies from './PopularMovies';
 import {fetchGenres} from '../actions';
 import MovieDetails from '../containers/MovieDetails';
@@ -23,10 +23,13 @@ class App extends React.Component {
           <Route component={SearchMovies} />
         </header>
         <main>
-          <Route path="/" exact component={PopularMovies} />
-          <Route path="/search" component={SearchMoviesResult} />
-          <Route path="/favorites" component={FavoriteMovies} />
-          <Route path="/movie/:id" component={MovieDetails} />
+          <Switch>
+            <Redirect from="/search" exact to="/" />
+            <Route path="/" exact component={PopularMovies} />
+            <Route path="/search/:query" component={SearchMoviesResult} />
+            <Route path="/favorites" component={FavoriteMovies} />
+            <Route path="/movie/:id" component={MovieDetails} />
+          </Switch>
         </main>
       </React.Fragment>
     );
