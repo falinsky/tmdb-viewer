@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import SearchMovies from '../components/SearchMovies';
-import {updateSearchMoviesQuery} from '../actions';
+import {updateSearchMoviesQuery, searchMovies} from '../actions';
 
 const mapStateToProps = (state) => ({
   query: state.searchMovies.query,
@@ -8,5 +8,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   onChange: updateSearchMoviesQuery,
+  onSubmit: searchMovies,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(SearchMovies);
