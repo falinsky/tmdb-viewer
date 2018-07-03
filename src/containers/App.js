@@ -20,7 +20,7 @@ class App extends React.Component {
       <React.Fragment>
         <header className="MainHeader">
           <MainMenu />
-          <SearchMovies />
+          <Route component={SearchMovies} />
         </header>
         <main>
           <Route path="/" exact component={PopularMovies} />
