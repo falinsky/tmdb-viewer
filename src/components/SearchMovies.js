@@ -7,7 +7,9 @@ function SearchMovies({query, onChange, onSubmit}) {
     <section className="SearchMovies">
       <form onSubmit={(event) => {
         event.preventDefault();
-        onSubmit(query);
+        if (query.trim()) {
+          onSubmit(query);
+        }
       }}>
         <label htmlFor="SearchMovies-SearchValue">
           Search
