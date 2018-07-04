@@ -1,15 +1,14 @@
 import {connect} from 'react-redux';
-import MoviesList from '../components/MoviesList';
+import InfiniteMoviesList from '../components/InfiniteMoviesList';
 import {searchMovies} from '../actions';
 
 const mapStateToProps = (state) => ({
   movies: state.searchMovies.items,
-  isLoading: state.searchMovies.isFetching,
-  isError: state.searchMovies.isError
+  hasMore: !state.searchMovies.allFetched,
 });
 
 const mapDispatchToProps = {
-  fetchMovies: () => (dispatch, getState) => dispatch(searchMovies(getState().searchMovies.query)),
+  fetchMovies: (page) => (dispatch, getState) => dispatch(searchMovies(getState().searchMovies.query, page)),
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MoviesList);
+export default connect(mapStateToProps, mapDispatchToProps)(InfiniteMoviesList);
