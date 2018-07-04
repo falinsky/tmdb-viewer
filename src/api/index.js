@@ -66,8 +66,8 @@ export function getGenresListForMovies() {
   return handleApiCall(url);
 }
 
-export function searchMovies(query) {
-  const url = generateUrl('search/movie', {query});
+export function searchMovies(query, page = 1) {
+  const url = generateUrl('search/movie', {query, page});
 
   return handleApiCall(url);
 }
