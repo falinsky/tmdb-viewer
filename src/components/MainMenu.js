@@ -7,7 +7,6 @@ function MainMenu() {
     <nav className="MainMenu">
       <NavLink className="MainMenu-Item" exact to="/">Popular</NavLink>
       <NavLink className="MainMenu-Item" to="/favorites">Favorites</NavLink>
-      <NavLink className="MainMenu-Item" to="/search">Search</NavLink>
     </nav>
   );
 }
