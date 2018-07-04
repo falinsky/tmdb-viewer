@@ -8,6 +8,7 @@ const defaultState = {
   items: [],
   isFetching: false,
   isError: false,
+  allFetched: false,
 };
 
 export default function popularMovies(state = defaultState, action) {
@@ -27,6 +28,7 @@ export default function popularMovies(state = defaultState, action) {
           ...state.items,
           ...action.payload.result.results.filter(id => !state.items.includes(id)),
         ],
+        allFetched: state.allFetched || action.payload.result.page >= action.payload.result.total_pages,
       };
 
     case FETCH_POPULAR_MOVIES_FAILURE:
