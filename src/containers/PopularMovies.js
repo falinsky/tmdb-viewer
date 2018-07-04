@@ -1,15 +1,14 @@
 import {connect} from 'react-redux';
-import MoviesList from '../components/MoviesList';
+import InfiniteMoviesList from '../components/InfiniteMoviesList';
 import {fetchPopularMovies} from '../actions';
 
 const mapStateToProps = (state) => ({
   movies: state.popularMovies.items,
-  isLoading: state.popularMovies.isFetching,
-  isError: state.popularMovies.isError
+  hasMore: !state.popularMovies.allFetched,
 });
 
 const mapDispatchToProps = {
   fetchMovies: fetchPopularMovies,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MoviesList);
+export default connect(mapStateToProps, mapDispatchToProps)(InfiniteMoviesList);
