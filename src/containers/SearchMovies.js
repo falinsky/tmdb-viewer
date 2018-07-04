@@ -10,7 +10,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   onChange: (value) => dispatch(updateSearchMoviesQuery(value)),
   onSubmit: (value) => {
     dispatch(searchMovies(value));
-    ownProps.history.push(`/search?query=${value}`);
+    ownProps.history.push(`/search/${value}`);
   }
 });
 export default connect(mapStateToProps, mapDispatchToProps)(SearchMovies);
