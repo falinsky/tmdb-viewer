@@ -22,7 +22,7 @@ class App extends React.Component {
           <MainMenu />
           <Route component={SearchMovies} />
         </header>
-        <main>
+        <main className="MainContent">
           <Switch>
             <Redirect from="/search" exact to="/" />
             <Route path="/" exact component={PopularMovies} />
