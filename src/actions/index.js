@@ -6,12 +6,12 @@ export const FETCH_POPULAR_MOVIES_REQUEST = 'FETCH_POPULAR_MOVIES_REQUEST';
 export const FETCH_POPULAR_MOVIES_SUCCESS = 'FETCH_POPULAR_MOVIES_SUCCESS';
 export const FETCH_POPULAR_MOVIES_FAILURE = 'FETCH_POPULAR_MOVIES_FAILURE';
 
-export const fetchPopularMovies = () => (dispatch) => {
+export const fetchPopularMovies = (page) => (dispatch) => {
   dispatch({
     type: FETCH_POPULAR_MOVIES_REQUEST,
   });
 
-  api.getPopularMovies().then(
+  api.getPopularMovies(page).then(
     (data) => dispatch({
       type: FETCH_POPULAR_MOVIES_SUCCESS,
       payload: normalize(data, schema.paginatedListOfMovies),
