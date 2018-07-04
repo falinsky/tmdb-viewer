@@ -3,6 +3,7 @@ import {
   SEARCH_MOVIES_SUCCESS,
   SEARCH_MOVIES_FAILURE,
   SEARCH_MOVIES_UPDATE_QUERY,
+  SEARCH_MOVIES_PREPARE_FOR_NEW_SEARCH,
 } from '../actions';
 
 const defaultState = {
@@ -11,6 +12,7 @@ const defaultState = {
   isFetching: false,
   isError: false,
   allFetched: false,
+  key: Date.now(),
 };
 
 export default function searchMovies(state = defaultState, action) {
@@ -45,6 +47,13 @@ export default function searchMovies(state = defaultState, action) {
       return {
         ...state,
         query: action.payload,
+      };
+
+    case SEARCH_MOVIES_PREPARE_FOR_NEW_SEARCH:
+      return {
+        ...defaultState,
+        query: state.query,
+        key: Date.now(),
       };
 
     default:

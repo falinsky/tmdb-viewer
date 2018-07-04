@@ -4,9 +4,10 @@ import InfiniteScroll from 'react-infinite-scroller';
 import MovieCard from '../containers/MovieCard';
 import './InfiniteMoviesList.css';
 
-function InfiniteMoviesList({movies, fetchMovies, hasMore}) {
+function InfiniteMoviesList({movies, fetchMovies, hasMore, uniqueKey}) {
   return (
     <InfiniteScroll
+      key={uniqueKey}
       className="InfiniteMoviesList"
       element="ul"
       hasMore={hasMore}
@@ -30,7 +31,10 @@ InfiniteMoviesList.defaultProps = {
 InfiniteMoviesList.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.number.isRequired),
   fetchMovies: PropTypes.func.isRequired,
-  hasMore: PropTypes.bool.isRequired
+  hasMore: PropTypes.bool.isRequired,
+  // uniqueKey param is needed to completely remount InfiniteScroll component
+  // it's needed to make it possible to start new searches with page 1 passed
+  uniqueKey: PropTypes.string,
 };
 
 export default InfiniteMoviesList;

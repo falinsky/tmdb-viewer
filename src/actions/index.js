@@ -145,3 +145,9 @@ export const updateSearchMoviesQuery = (value) => ({
   type: SEARCH_MOVIES_UPDATE_QUERY,
   payload: value,
 });
+
+export const SEARCH_MOVIES_PREPARE_FOR_NEW_SEARCH = 'SEARCH_MOVIES_PREPARE_FOR_NEW_SEARCH';
+
+export const prepareForNewSearchMovies = () => ({
+  type: SEARCH_MOVIES_PREPARE_FOR_NEW_SEARCH,
+});
