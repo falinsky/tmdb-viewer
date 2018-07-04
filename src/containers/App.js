@@ -8,6 +8,7 @@ import MainMenu from '../components/MainMenu';
 import FavoriteMovies from './FavoriteMovies';
 import SearchMovies from "./SearchMovies";
 import SearchMoviesResult from "./SearchMoviesResult";
+import SearchQueryRestore from './SearchQueryRestore';
 import '../components/App.css'
 
 class App extends React.Component {
@@ -21,6 +22,7 @@ class App extends React.Component {
         <header className="MainHeader">
           <MainMenu />
           <Route component={SearchMovies} />
+          <Route path="/search/:query" component={SearchQueryRestore} />
         </header>
         <main className="MainContent">
           <Switch>
