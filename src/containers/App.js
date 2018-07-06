@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Route, withRouter, Redirect, Switch} from 'react-router-dom';
 import PopularMovies from './PopularMovies';
@@ -9,7 +10,16 @@ import FavoriteMovies from './FavoriteMovies';
 import SearchMovies from "./SearchMovies";
 import SearchMoviesResult from "./SearchMoviesResult";
 import SearchQueryRestore from './SearchQueryRestore';
-import '../components/App.css'
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import {withStyles} from '@material-ui/core/styles';
+
+const styles = {
+  toolbar: {
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
+  }
+};
 
 class App extends React.Component {
   componentDidMount() {
@@ -17,14 +27,18 @@ class App extends React.Component {
   }
 
   render() {
+    const {classes} = this.props;
+
     return (
       <React.Fragment>
-        <header className="MainHeader">
-          <MainMenu />
-          <Route component={SearchMovies} />
-          <Route path="/search/:query" component={SearchQueryRestore} />
-        </header>
-        <main className="MainContent">
+        <AppBar position={'sticky'}>
+          <Toolbar className={classes.toolbar}>
+            <Route component={MainMenu} />
+            <Route component={SearchMovies} />
+            <Route path="/search/:query" component={SearchQueryRestore} />
+          </Toolbar>
+        </AppBar>
+        <main>
           <Switch>
             <Redirect from="/search" exact to="/" />
             <Route path="/" exact component={PopularMovies} />
@@ -38,4 +52,8 @@ class App extends React.Component {
   }
 }
 
-export default withRouter(connect()(App));
+App.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(withRouter(connect()(App)));

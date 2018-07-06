@@ -1,13 +1,18 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
-import './MainMenu.css';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 
-function MainMenu() {
+function MainMenu({location, history}) {
   return (
-    <nav className="MainMenu">
-      <NavLink className="MainMenu-Item" exact to="/">Popular</NavLink>
-      <NavLink className="MainMenu-Item" to="/favorites">Favorites</NavLink>
-    </nav>
+    <Tabs
+      value={location.pathname}
+      onChange={(event, value) => {
+        history.push(value);
+      }}
+    >
+      <Tab value="/" label="Popular"/>
+      <Tab value="/favorites" label="Favorites"/>
+    </Tabs>
   );
 }
 
