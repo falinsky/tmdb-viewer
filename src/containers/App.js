@@ -13,6 +13,7 @@ import SearchQueryRestore from './SearchQueryRestore';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import {withStyles} from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 const styles = {
   toolbar: {
@@ -31,6 +32,7 @@ class App extends React.Component {
 
     return (
       <React.Fragment>
+        <CssBaseline />
         <AppBar position={'sticky'}>
           <Toolbar className={classes.toolbar}>
             <Route component={MainMenu} />
