@@ -20,6 +20,12 @@ function MainMenu({location, history, items}) {
 }
 
 MainMenu.propTypes = {
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+  }).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
   items: PropTypes.arrayOf(
     PropTypes.arrayOf(
       PropTypes.string.isRequired,
