@@ -35,7 +35,14 @@ class App extends React.Component {
         <CssBaseline />
         <AppBar position={'sticky'}>
           <Toolbar className={classes.toolbar}>
-            <Route component={MainMenu} />
+            <Route render={(props) => (
+              <MainMenu
+                {...props}
+                items={[
+                  ['/', 'Popular'],
+                  ['/favorites', 'Favorites'],
+                ]}
+              />)} />
             <Route component={SearchMovies} />
             <Route path="/search/:query" component={SearchQueryRestore} />
           </Toolbar>
