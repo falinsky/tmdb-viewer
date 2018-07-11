@@ -17,7 +17,7 @@ const styles = theme => ({
   }
 });
 
-function SingleLineMoviesList({classes, title, movies, onMovieClick}) {
+function SingleLineMoviesList({classes, title, movies}) {
   return (
     <section className={classes.root}>
       {title && <Typography variant="title" gutterBottom>{title}</Typography>}
