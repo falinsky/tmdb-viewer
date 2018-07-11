@@ -11,8 +11,14 @@ export function withDataAutoload(WrappedComponent) {
       this.props.loadData();
     }
 
+    componentDidUpdate(prevProps) {
+      if (this.props.shouldReloadDataAfterUpdate && this.props.shouldReloadDataAfterUpdate(prevProps, this.props)) {
+        this.props.loadData();
+      }
+    }
+
     render() {
-      const {loadData, ...otherProps} = this.props;
+      const {loadData, shouldReloadDataAfterUpdate, ...otherProps} = this.props;
 
       return <WrappedComponent {...otherProps} />;
     }
@@ -20,6 +26,7 @@ export function withDataAutoload(WrappedComponent) {
 
   WithDataAutoload.propTypes = {
     loadData: PropTypes.func.isRequired,
+    shouldReloadDataAfterUpdate: PropTypes.func,
   };
 
   WithDataAutoload.displayName = `WithDataAutoload(${getDisplayName(WrappedComponent)})`;
