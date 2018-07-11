@@ -25,7 +25,7 @@ function SingleLineMoviesList({classes, title, movies}) {
   return (
     <Paper className={classes.root} component="section">
       {title && <Typography variant="title" gutterBottom>{title}</Typography>}
-      <GridList className={classes.list} cols={4}>
+      <GridList className={classes.list} cols={2.5}>
         {movies.map(id => (
           <SingleLineMoviesListItem id={id} key={id} />
         ))}
