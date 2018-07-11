@@ -12,6 +12,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   loadData: () => dispatch(fetchMovieRecommendations(ownProps.movie)),
+  shouldReloadDataAfterUpdate: (prevProps, currentProps) => prevProps.movie !== currentProps.movie,
 });
 
 const MovieRecommendations = connect(mapStateToProps, mapDispatchToProps)(withDataAutoload(SingleLineMoviesList));
