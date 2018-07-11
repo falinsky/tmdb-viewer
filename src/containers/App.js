@@ -19,6 +19,13 @@ const styles = {
   toolbar: {
     justifyContent: 'space-between',
     flexWrap: 'wrap',
+  },
+  main: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  content: {
+    width: '85%',
   }
 };
 
@@ -47,14 +54,16 @@ class App extends React.Component {
             <Route path="/search/:query" component={SearchQueryRestore} />
           </Toolbar>
         </AppBar>
-        <main>
-          <Switch>
-            <Redirect from="/search" exact to="/" />
-            <Route path="/" exact component={PopularMovies} />
-            <Route path="/search/:query" component={SearchMoviesResult} />
-            <Route path="/favorites" component={FavoriteMovies} />
-            <Route path="/movie/:id" component={MovieDetails} />
-          </Switch>
+        <main className={classes.main}>
+          <div className={classes.content}>
+            <Switch>
+              <Redirect from="/search" exact to="/" />
+              <Route path="/" exact component={PopularMovies} />
+              <Route path="/search/:query" component={SearchMoviesResult} />
+              <Route path="/favorites" component={FavoriteMovies} />
+              <Route path="/movie/:id" component={MovieDetails} />
+            </Switch>
+          </div>
         </main>
       </React.Fragment>
     );
