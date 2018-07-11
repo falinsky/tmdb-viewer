@@ -4,11 +4,15 @@ import {withStyles} from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import GridList from '@material-ui/core/GridList';
 import SingleLineMoviesListItem from '../containers/SingleLineMoviesListItem';
+import Paper from '@material-ui/core/Paper';
 
 const styles = theme => ({
   root: {
     overflow: 'hidden',
     backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing.unit,
+    marginTop: 2 * theme.spacing.unit,
+    marginBottom: 2 * theme.spacing.unit,
   },
   list: {
     flexWrap: 'nowrap',
@@ -19,14 +23,14 @@ const styles = theme => ({
 
 function SingleLineMoviesList({classes, title, movies}) {
   return (
-    <section className={classes.root}>
+    <Paper className={classes.root} component="section">
       {title && <Typography variant="title" gutterBottom>{title}</Typography>}
       <GridList className={classes.list} cols={4}>
         {movies.map(id => (
           <SingleLineMoviesListItem id={id} key={id} />
         ))}
       </GridList>
-    </section>
+    </Paper>
   );
 }
 
