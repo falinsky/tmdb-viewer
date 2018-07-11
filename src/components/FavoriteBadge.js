@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import IconButton from '@material-ui/core/IconButton';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
-import StarIcon from '@material-ui/icons/Star';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import {withStyles} from '@material-ui/core/styles';
 
 const styles = (theme) => ({
@@ -20,7 +20,7 @@ function FavoriteBadge({classes, inFavorites, onAdd, onRemove}) {
       }}
       title={`${inFavorites ? 'Remove from' : 'Add to'} Favorites`}
       className={classes.root}>
-      {inFavorites ? <StarIcon/> : <StarBorderIcon/>}
+      {inFavorites ? <FavoriteIcon/> : <FavoriteBorderIcon/>}
     </IconButton>
   );
 }
