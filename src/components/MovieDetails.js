@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {getMoviePosterImageUrl} from '../api';
 import MovieRecommendations from '../containers/MovieRecommendations';
 import FavoriteBadge from '../containers/FavoriteBadge';
-import './MovieDetails.css';
 
 function MovieDetails({movie}) {
   return (
@@ -14,10 +13,7 @@ function MovieDetails({movie}) {
           <p>{movie.overview}</p>
           <img src={getMoviePosterImageUrl(movie.backdrop_path)} alt={movie.title} />
           <FavoriteBadge movie={movie.id} />
-          <section className="MovieRecommendations">
-            <h2>Recommendations</h2>
-            <MovieRecommendations movie={movie.id} />
-          </section>
+          <MovieRecommendations movie={movie.id} title="Recommendations" />
         </React.Fragment>
       )}
     </article>

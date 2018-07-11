@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import MovieRecommendations from '../components/MovieRecommendations';
+import SingleLineMoviesList from '../components/SingleLineMoviesList';
+import {withDataAutoload} from '../hoc';
 import {fetchMovieRecommendations} from '../actions';
 
 const mapStateToProps = (state, ownProps) => ({
@@ -10,12 +11,12 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  fetchMovies: () => dispatch(fetchMovieRecommendations(ownProps.movie)),
+  loadData: () => dispatch(fetchMovieRecommendations(ownProps.movie)),
 });
 
-const MovieRecommendationsContainer = connect(mapStateToProps, mapDispatchToProps)(MovieRecommendations);
-MovieRecommendationsContainer.propTypes = {
+const MovieRecommendations = connect(mapStateToProps, mapDispatchToProps)(withDataAutoload(SingleLineMoviesList));
+MovieRecommendations.propTypes = {
   movie: PropTypes.number.isRequired,
 };
 
-export default MovieRecommendationsContainer;
+export default MovieRecommendations;
