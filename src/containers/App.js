@@ -14,6 +14,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import {withStyles} from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
 const styles = {
   toolbar: {
@@ -46,8 +48,8 @@ class App extends React.Component {
               <MainMenu
                 {...props}
                 items={[
-                  ['/', 'Popular'],
-                  ['/favorites', 'Favorites'],
+                  {path: '/', label: 'Popular', iconComponent: StarBorderIcon},
+                  {path: '/favorites', label: 'Favorites', iconComponent: FavoriteBorderIcon},
                 ]}
               />)} />
             <Route component={SearchMovies} />

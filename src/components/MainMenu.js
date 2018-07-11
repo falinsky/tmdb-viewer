@@ -4,7 +4,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
 function MainMenu({location, history, items}) {
-  const itemsMap = new Map(items);
+  const itemsMap = new Map(items.map(item => [item.path, item]));
   return (
     <Tabs
       value={itemsMap.has(location.pathname) ? location.pathname : false}
@@ -12,8 +12,8 @@ function MainMenu({location, history, items}) {
         history.push(value);
       }}
     >
-      {Array.from(itemsMap.entries()).map(([link, label]) => (
-        <Tab value={link} label={label} key={link}/>
+      {Array.from(itemsMap.values()).map(item => (
+        <Tab value={item.path} label={item.label} icon={<item.iconComponent />} key={item.path} />
       ))}
     </Tabs>
   );
@@ -27,9 +27,15 @@ MainMenu.propTypes = {
     push: PropTypes.func.isRequired,
   }).isRequired,
   items: PropTypes.arrayOf(
-    PropTypes.arrayOf(
-      PropTypes.string.isRequired,
-    ).isRequired
+    PropTypes.shape({
+      path: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+      iconComponent: PropTypes.oneOfType([
+        PropTypes.func,
+        PropTypes.string,
+        PropTypes.object,
+      ]),
+    }).isRequired
   ).isRequired,
 };
 
