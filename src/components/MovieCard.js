@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
-import {getMovieBackdropImageUrl} from '../api';
+import {getMovieBackdropImageUrl, getMovieReleaseYear} from '../api';
 import Genre from '../containers/Genre';
 import FavoriteBadge from '../containers/FavoriteBadge';
 import Card from '@material-ui/core/Card';
@@ -41,7 +41,7 @@ function MovieCard({classes, movie}) {
       />
       <CardHeader
         title={movie.title}
-        subheader={new Date(movie.release_date).getFullYear()}
+        subheader={getMovieReleaseYear(movie)}
         action={
           <FavoriteBadge movie={movie.id} />
         }
@@ -58,7 +58,6 @@ MovieCard.propTypes = {
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     genres: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
-    release_date: PropTypes.string.isRequired,
   }),
   classes: PropTypes.object.isRequired,
 };

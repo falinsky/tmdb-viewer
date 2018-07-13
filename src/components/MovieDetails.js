@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {getMoviePosterImageUrl} from '../api';
+import {getMoviePosterImageUrl, getMovieReleaseYear} from '../api';
 import MovieRecommendations from '../containers/MovieRecommendations';
 import FavoriteBadge from '../containers/FavoriteBadge';
 import {withStyles} from '@material-ui/core/styles';
@@ -56,7 +56,7 @@ function MovieDetails({classes, movie}) {
               <CardHeader
                 title={
                   <Typography variant="headline" gutterBottom>
-                    {movie.title} <time dateTime={movie.release_date}>({new Date(movie.release_date).getFullYear()})</time>
+                    {movie.title} <time dateTime={movie.release_date}>({getMovieReleaseYear(movie)})</time>
                   </Typography>
                 }
                 action={

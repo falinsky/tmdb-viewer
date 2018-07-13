@@ -85,3 +85,11 @@ export function getMovieBackdropImageUrl(movie) {
 
   return `${BASE_IMG_API}w500/${movie.backdrop_path}`;
 }
+
+export function getMovieReleaseYear(movie) {
+  if (!movie.release_date) {
+    return 'N/A';
+  }
+
+  return new Date(movie.release_date).getFullYear();
+}
