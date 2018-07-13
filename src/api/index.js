@@ -69,9 +69,17 @@ export function searchMovies(query, page = 1) {
 }
 
 export function getMoviePosterImageUrl(movie) {
+  if (!movie.poster_path) {
+    return '/no-image.png';
+  }
+
   return `${BASE_IMG_API}w500/${movie.poster_path}`;
 }
 
 export function getMovieBackdropImageUrl(movie) {
+  if (!movie.backdrop_path) {
+    return '/no-image.png'
+  }
+
   return `${BASE_IMG_API}w500/${movie.backdrop_path}`;
 }
