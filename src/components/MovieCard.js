@@ -4,34 +4,52 @@ import {Link} from 'react-router-dom';
 import {getMoviePosterImageUrl} from '../api';
 import Genre from '../containers/Genre';
 import FavoriteBadge from '../containers/FavoriteBadge';
-import './MovieCard.css';
+import Card from '@material-ui/core/Card';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
+import {withStyles} from '@material-ui/core/styles';
 
-function MovieCard({ movie }) {
+const styles = theme => ({
+  root: {
+    display: 'block',
+    textDecoration: 'none',
+  },
+  media: {
+    height: 0,
+    paddingTop: '56.25%', // 16:9
+  },
+  genre: {
+    backgroundColor: 'transparent',
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: theme.palette.primary.light,
+  }
+});
+
+function MovieCard({classes, movie}) {
   if (!movie) {
     return null;
   }
 
   return (
-    <Link to={`/movie/${movie.id}`}>
-      <article className="MovieCard">
-        <p>
-          {movie.title}
-        </p>
-        <img
-          className="MovieCard-Poster"
-          src={getMoviePosterImageUrl(movie.poster_path)}
-          alt={movie.title}
-        />
-        <FavoriteBadge movie={movie.id} />
-        <ul className="MovieCard-GenresList">
-          {movie.genres.map(genreId => (
-            <li className="MovieCard-GenresList-Item" key={genreId}>
-              <Genre id={genreId} />
-            </li>
-          ))}
-        </ul>
-      </article>
-    </Link>
+    <Card className={classes.root} component={Link} to={`/movie/${movie.id}`}>
+      <CardMedia
+        className={classes.media}
+        image={getMoviePosterImageUrl(movie.backdrop_path)}
+        title={movie.title}
+      />
+      <CardHeader
+        title={movie.title}
+        subheader={new Date(movie.release_date).getFullYear()}
+        action={
+          <FavoriteBadge movie={movie.id} />
+        }
+      />
+      <CardContent>
+        {movie.genres.map(id => <Genre id={id} key={id} classes={{root: classes.genre}} />)}
+      </CardContent>
+    </Card>
   );
 }
 
@@ -39,9 +57,11 @@ MovieCard.propTypes = {
   movie: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
-    poster_path: PropTypes.string.isRequired,
+    backdrop_path: PropTypes.string.isRequired,
     genres: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+    release_date: PropTypes.string.isRequired,
   }),
+  classes: PropTypes.object.isRequired,
 };
 
-export default MovieCard;
+export default withStyles(styles)(MovieCard);
