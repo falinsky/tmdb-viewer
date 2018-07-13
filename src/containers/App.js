@@ -20,7 +20,6 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 const styles = {
   toolbar: {
     justifyContent: 'space-between',
-    flexWrap: 'wrap',
   },
   main: {
     display: 'flex',

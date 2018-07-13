@@ -7,6 +7,13 @@ const styles = (theme) => ({
   root: {
     marginTop: theme.spacing.unit,
     marginBottom: theme.spacing.unit,
+    marginLeft: theme.spacing.unit,
+    flexShrink: 1,
+  },
+  input: {
+    '& input': {
+      width: '100%',
+    }
   }
 });
 
@@ -20,6 +27,9 @@ function SearchMovies({classes, query, onChange, onSubmit}) {
           if (query.trim()) {
             onSubmit(query);
           }
+        }}
+        classes={{
+          input: classes.input,
         }}
       />
     </div>

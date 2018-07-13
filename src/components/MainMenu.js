@@ -2,11 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import {withStyles} from '@material-ui/core/styles';
 
-function MainMenu({location, history, items}) {
+const styles = {
+  root: {
+    flexShrink: 0,
+  },
+};
+
+function MainMenu({classes, location, history, items}) {
   const itemsMap = new Map(items.map(item => [item.path, item]));
   return (
     <Tabs
+      className={classes.root}
       value={itemsMap.has(location.pathname) ? location.pathname : false}
       onChange={(event, value) => {
         history.push(value);
@@ -37,6 +45,7 @@ MainMenu.propTypes = {
       ]),
     }).isRequired
   ).isRequired,
+  classes: PropTypes.object.isRequired,
 };
 
-export default MainMenu;
+export default withStyles(styles)(MainMenu);
