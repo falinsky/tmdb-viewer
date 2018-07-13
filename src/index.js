@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 import {createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
