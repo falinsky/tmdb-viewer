@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
-import {getMoviePosterImageUrl} from '../api';
+import {getMovieBackdropImageUrl} from '../api';
 import Genre from '../containers/Genre';
 import FavoriteBadge from '../containers/FavoriteBadge';
 import Card from '@material-ui/core/Card';
@@ -36,7 +36,7 @@ function MovieCard({classes, movie}) {
     <Card className={classes.root} component={Link} to={`/movie/${movie.id}`}>
       <CardMedia
         className={classes.media}
-        image={getMoviePosterImageUrl(movie.backdrop_path)}
+        image={getMovieBackdropImageUrl(movie)}
         title={movie.title}
       />
       <CardHeader
@@ -57,7 +57,6 @@ MovieCard.propTypes = {
   movie: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
-    backdrop_path: PropTypes.string.isRequired,
     genres: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
     release_date: PropTypes.string.isRequired,
   }),

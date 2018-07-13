@@ -49,7 +49,7 @@ function MovieDetails({classes, movie}) {
           <Card className={classes.card} component="article">
             <CardMedia
               className={classes.media}
-              image={getMoviePosterImageUrl(movie.poster_path)}
+              image={getMoviePosterImageUrl(movie)}
               title={movie.title}
             />
             <div className={classes.contentWrapper}>
@@ -93,7 +93,6 @@ MovieDetails.propTypes = {
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     overview: PropTypes.string.isRequired,
-    poster_path: PropTypes.string.isRequired,
     release_date: PropTypes.string.isRequired,
     vote_count: PropTypes.number.isRequired,
     vote_average: PropTypes.number.isRequired,

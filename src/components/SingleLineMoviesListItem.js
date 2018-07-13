@@ -4,7 +4,7 @@ import {withStyles} from '@material-ui/core/styles';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import FavoriteBadge from '../containers/FavoriteBadge';
-import {getMoviePosterImageUrl} from '../api';
+import {getMovieBackdropImageUrl} from '../api';
 import {Link} from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
 import LinkIcon from '@material-ui/icons/Link';
@@ -25,7 +25,7 @@ const styles = theme => ({
 function SingleLineMoviesListItem({classes, movie, ...otherProps}) {
   return (
     <GridListTile {...otherProps}>
-      <img src={getMoviePosterImageUrl(movie.backdrop_path)} alt={movie.title}/>
+      <img src={getMovieBackdropImageUrl(movie)} alt={movie.title}/>
       <GridListTileBar
         title={movie.title}
         classes={{
@@ -50,7 +50,6 @@ SingleLineMoviesListItem.propTypes = {
   movie: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
-    backdrop_path: PropTypes.string.isRequired,
   }),
   classes: PropTypes.object.isRequired,
 };

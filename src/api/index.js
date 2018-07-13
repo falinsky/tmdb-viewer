@@ -56,10 +56,6 @@ export function getMovieRecommendations(id) {
   return handleApiCall(url);
 }
 
-export function getMoviePosterImageUrl(posterPath) {
-  return `${BASE_IMG_API}w300/${posterPath}`;
-}
-
 export function getGenresListForMovies() {
   const url = generateUrl('genre/movie/list');
 
@@ -70,4 +66,12 @@ export function searchMovies(query, page = 1) {
   const url = generateUrl('search/movie', {query, page});
 
   return handleApiCall(url);
+}
+
+export function getMoviePosterImageUrl(movie) {
+  return `${BASE_IMG_API}w300/${movie.poster_path}`;
+}
+
+export function getMovieBackdropImageUrl(movie) {
+  return `${BASE_IMG_API}w300/${movie.backdrop_path}`;
 }
