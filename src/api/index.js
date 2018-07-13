@@ -69,9 +69,9 @@ export function searchMovies(query, page = 1) {
 }
 
 export function getMoviePosterImageUrl(movie) {
-  return `${BASE_IMG_API}w300/${movie.poster_path}`;
+  return `${BASE_IMG_API}w500/${movie.poster_path}`;
 }
 
 export function getMovieBackdropImageUrl(movie) {
-  return `${BASE_IMG_API}w300/${movie.backdrop_path}`;
+  return `${BASE_IMG_API}w500/${movie.backdrop_path}`;
 }
