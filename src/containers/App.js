@@ -16,6 +16,7 @@ import {withStyles} from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 const styles = {
   toolbar: {
@@ -27,7 +28,11 @@ const styles = {
   },
   content: {
     width: '85%',
-  }
+  },
+  progress: {
+    position: 'absolute',
+    width: '100%',
+  },
 };
 
 class App extends React.Component {
@@ -36,12 +41,13 @@ class App extends React.Component {
   }
 
   render() {
-    const {classes} = this.props;
+    const {classes, isFetching} = this.props;
 
     return (
       <React.Fragment>
         <CssBaseline />
         <AppBar position={'sticky'}>
+          {isFetching && <LinearProgress className={classes.progress} color="secondary" />}
           <Toolbar className={classes.toolbar}>
             <Route render={(props) => (
               <MainMenu
@@ -75,4 +81,8 @@ App.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(withRouter(connect()(App)));
+const mapStateToProps = (state) => ({
+  isFetching: Object.keys(state).filter(key => state[key] && state[key].isFetching).length > 0,
+});
+
+export default withStyles(styles)(withRouter(connect(mapStateToProps)(App)));
