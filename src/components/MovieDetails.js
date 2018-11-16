@@ -55,7 +55,7 @@ function MovieDetails({classes, movie}) {
             <div className={classes.contentWrapper}>
               <CardHeader
                 title={
-                  <Typography variant="headline" gutterBottom>
+                  <Typography variant="h5" gutterBottom>
                     {movie.title} <time dateTime={movie.release_date}>({getMovieReleaseYear(movie)})</time>
                   </Typography>
                 }
@@ -69,11 +69,11 @@ function MovieDetails({classes, movie}) {
               />
               <CardContent>
                 <section className={classes.section}>
-                  <Typography variant="title" gutterBottom>Overview</Typography>
+                  <Typography variant="h6" gutterBottom>Overview</Typography>
                   <Typography gutterBottom>{movie.overview}</Typography>
                 </section>
                 <section className={classes.section}>
-                  <Typography variant="title" gutterBottom>Genres</Typography>
+                  <Typography variant="h6" gutterBottom>Genres</Typography>
                   <div className={classes.genresList}>
                     {movie.genres.map(id => <Genre id={id} key={id} />)}
                   </div>

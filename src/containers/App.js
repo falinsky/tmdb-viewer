@@ -12,11 +12,18 @@ import SearchMoviesResult from "./SearchMoviesResult";
 import SearchQueryRestore from './SearchQueryRestore';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
 import {withStyles} from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import LinearProgress from '@material-ui/core/LinearProgress';
+
+const theme = createMuiTheme({
+  typography: {
+    useNextVariants: true,
+  }
+});
 
 const styles = {
   toolbar: {
@@ -44,7 +51,7 @@ class App extends React.Component {
     const {classes, isFetching} = this.props;
 
     return (
-      <React.Fragment>
+      <MuiThemeProvider theme={theme}>
         <CssBaseline />
         <AppBar position={'sticky'}>
           {isFetching && <LinearProgress className={classes.progress} color="secondary" />}
@@ -72,7 +79,7 @@ class App extends React.Component {
             </Switch>
           </div>
         </main>
-      </React.Fragment>
+      </MuiThemeProvider>
     );
   }
 }
