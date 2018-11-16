@@ -4,12 +4,14 @@ import {searchMovies} from '../actions';
 
 const mapStateToProps = (state) => ({
   movies: state.searchMovies.items,
-  hasMore: !state.searchMovies.allFetched,
+  hasMore: !state.searchMovies.allFetched && (state.searchMovies.query !== ''),
   uniqueKey: state.searchMovies.key.toString(),
+  query: state.searchMovies.query,
 });
 
-const mapDispatchToProps = {
-  fetchMovies: (page) => (dispatch, getState) => dispatch(searchMovies(getState().searchMovies.query, page)),
-};
+const mergeProps = ({query, ...props}, {dispatch}) => ({
+  ...props,
+  fetchMovies: (page) => dispatch(searchMovies(query, page)),
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(InfiniteMoviesList);
+export default connect(mapStateToProps, undefined, mergeProps)(InfiniteMoviesList);
