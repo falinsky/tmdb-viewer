@@ -9,6 +9,7 @@ import App from './containers/App';
 import {loadState, saveState} from './localStorage';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './sagas';
+import {fetchGenres} from './actions';
 
 const initialState = loadState();
 
@@ -30,6 +31,8 @@ store.subscribe(() => {
     favorites: store.getState().favorites,
   });
 });
+
+store.dispatch(fetchGenres());
 
 ReactDOM.render((
   <Provider store={store}>

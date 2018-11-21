@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Route, withRouter, Redirect, Switch} from 'react-router-dom';
 import PopularMovies from './PopularMovies';
-import {fetchGenres} from '../actions';
 import MovieDetails from '../containers/MovieDetails';
 import MainMenu from '../components/MainMenu';
 import FavoriteMovies from './FavoriteMovies';
@@ -43,10 +42,6 @@ const styles = {
 };
 
 class App extends React.Component {
-  componentDidMount() {
-    this.props.dispatch(fetchGenres());
-  }
-
   render() {
     const {classes, isFetching} = this.props;
 
