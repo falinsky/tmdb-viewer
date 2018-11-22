@@ -111,12 +111,14 @@ function InfiniteMoviesList({classes, movies, fetchMovies, hasMore, uniqueKey, i
 InfiniteMoviesList.defaultProps = {
   movies: [],
   isFetching: false,
+  hasMore: false,
+  fetchMovies: () => {},
 };
 
 InfiniteMoviesList.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.number.isRequired),
-  fetchMovies: PropTypes.func.isRequired,
-  hasMore: PropTypes.bool.isRequired,
+  fetchMovies: PropTypes.func,
+  hasMore: PropTypes.bool,
   isFetching: PropTypes.bool,
   // uniqueKey param is needed to completely remount InfiniteLoader component
   // it's needed to make it possible to start new searches  TODO: eliminate this dirty and slow hack
