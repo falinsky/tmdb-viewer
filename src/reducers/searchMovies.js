@@ -12,6 +12,7 @@ const defaultState = {
   isFetching: false,
   isError: false,
   allFetched: false,
+  page: 0,
   key: Date.now(),
 };
 
@@ -34,6 +35,7 @@ export default function searchMovies(state = defaultState, action) {
           ...action.payload.result.results.filter(id => !state.items.includes(id)),
         ],
         allFetched: state.allFetched || action.payload.result.page >= action.payload.result.total_pages,
+        page: Math.max(state.page, action.payload.result.page),
       };
 
     case SEARCH_MOVIES_FAILURE:

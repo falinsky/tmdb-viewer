@@ -1,4 +1,4 @@
-import {call, put, takeEvery} from 'redux-saga/effects';
+import {call, put, takeEvery, select} from 'redux-saga/effects';
 import * as api from '../api';
 import {
   prepareForNewSearchMovies,
@@ -11,9 +11,10 @@ import {normalize} from 'normalizr';
 import * as schema from '../schema';
 
 function *searchMoviesRequest(action) {
-  const {query, page} = action.payload;
+  const {query} = action.payload;
 
   try {
+    const page = action.payload.page || (yield select(store => store.searchMovies.page)) + 1;
     const data = yield call(api.searchMovies, query, page);
 
     yield put({

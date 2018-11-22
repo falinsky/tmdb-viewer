@@ -5,6 +5,7 @@ import {searchMovies} from '../actions';
 const mapStateToProps = (state) => ({
   movies: state.searchMovies.items,
   hasMore: !state.searchMovies.allFetched && (state.searchMovies.query !== ''),
+  isFetching: state.searchMovies.isFetching,
   uniqueKey: state.searchMovies.key.toString(),
   query: state.searchMovies.query,
 });
