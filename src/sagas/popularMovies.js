@@ -1,4 +1,4 @@
-import {call, put, takeEvery} from 'redux-saga/effects';
+import {call, put, takeEvery, select} from 'redux-saga/effects';
 import * as api from '../api';
 import {FETCH_POPULAR_MOVIES_FAILURE, FETCH_POPULAR_MOVIES_REQUEST, FETCH_POPULAR_MOVIES_SUCCESS} from '../actions';
 import {normalize} from 'normalizr';
@@ -6,7 +6,8 @@ import * as schema from '../schema';
 
 function *popularMoviesRequest(action) {
   try {
-    const data = yield call(api.getPopularMovies, action.payload.page);
+    const page = action.payload.page || (yield select(store => store.popularMovies.page)) + 1;
+    const data = yield call(api.getPopularMovies, page);
 
     yield put({
       type: FETCH_POPULAR_MOVIES_SUCCESS,
