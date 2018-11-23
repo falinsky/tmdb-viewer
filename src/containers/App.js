@@ -40,42 +40,38 @@ const styles = {
   },
 };
 
-class App extends React.Component {
-  render() {
-    const {classes} = this.props;
-
-    return (
-      <MuiThemeProvider theme={theme}>
-        <CssBaseline />
-        <AppBar position={'sticky'}>
-          <LoadingIndicator className={classes.progress}/>
-          <Toolbar className={classes.toolbar}>
-            <Route render={(props) => (
-              <MainMenu
-                {...props}
-                items={[
-                  {path: '/', label: 'Popular', iconComponent: StarBorderIcon},
-                  {path: '/favorites', label: 'Favorites', iconComponent: FavoriteBorderIcon},
-                ]}
-              />)} />
-            <Route component={SearchMovies} />
-            <Route path="/search/:query" component={SearchQueryRestore} />
-          </Toolbar>
-        </AppBar>
-        <main className={classes.main}>
-          <div className={classes.content}>
-            <Switch>
-              <Redirect from="/search" exact to="/" />
-              <Route path="/" exact component={PopularMovies} />
-              <Route path="/search/:query" component={SearchMoviesResult} />
-              <Route path="/favorites" component={FavoriteMovies} />
-              <Route path="/movie/:id" component={MovieDetails} />
-            </Switch>
-          </div>
-        </main>
-      </MuiThemeProvider>
-    );
-  }
+function App({classes}) {
+  return (
+    <MuiThemeProvider theme={theme}>
+      <CssBaseline/>
+      <AppBar position={'sticky'}>
+        <LoadingIndicator className={classes.progress}/>
+        <Toolbar className={classes.toolbar}>
+          <Route render={(props) => (
+            <MainMenu
+              {...props}
+              items={[
+                {path: '/', label: 'Popular', iconComponent: StarBorderIcon},
+                {path: '/favorites', label: 'Favorites', iconComponent: FavoriteBorderIcon},
+              ]}
+            />)}/>
+          <Route component={SearchMovies}/>
+          <Route path="/search/:query" component={SearchQueryRestore}/>
+        </Toolbar>
+      </AppBar>
+      <main className={classes.main}>
+        <div className={classes.content}>
+          <Switch>
+            <Redirect from="/search" exact to="/"/>
+            <Route path="/" exact component={PopularMovies}/>
+            <Route path="/search/:query" component={SearchMoviesResult}/>
+            <Route path="/favorites" component={FavoriteMovies}/>
+            <Route path="/movie/:id" component={MovieDetails}/>
+          </Switch>
+        </div>
+      </main>
+    </MuiThemeProvider>
+  );
 }
 
 App.propTypes = {
