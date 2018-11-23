@@ -13,7 +13,7 @@ LoadingIndicator.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    isLoading: Object.keys(state).filter(key => state[key] && state[key].isFetching).length > 0,
+    isLoading: Object.keys(state).some(key => state[key] && state[key].isFetching),
   }
 }
 
