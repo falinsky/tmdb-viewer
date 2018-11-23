@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {Route, withRouter, Redirect, Switch} from 'react-router-dom';
+import {Route, Redirect, Switch} from 'react-router-dom';
 import PopularMovies from './PopularMovies';
 import MovieDetails from '../containers/MovieDetails';
 import MainMenu from '../components/MainMenu';
@@ -16,7 +15,7 @@ import {withStyles} from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import LinearProgress from '@material-ui/core/LinearProgress';
+import LoadingIndicator from './LoadingIndicator';
 
 const theme = createMuiTheme({
   typography: {
@@ -43,13 +42,13 @@ const styles = {
 
 class App extends React.Component {
   render() {
-    const {classes, isFetching} = this.props;
+    const {classes} = this.props;
 
     return (
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
         <AppBar position={'sticky'}>
-          {isFetching && <LinearProgress className={classes.progress} color="secondary" />}
+          <LoadingIndicator className={classes.progress}/>
           <Toolbar className={classes.toolbar}>
             <Route render={(props) => (
               <MainMenu
@@ -83,8 +82,4 @@ App.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  isFetching: Object.keys(state).filter(key => state[key] && state[key].isFetching).length > 0,
-});
-
-export default withStyles(styles)(withRouter(connect(mapStateToProps)(App)));
+export default withStyles(styles)(App);
