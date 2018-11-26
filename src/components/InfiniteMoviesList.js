@@ -84,26 +84,26 @@ class InfiniteMoviesList extends React.PureComponent {
     return (
       <section>
         <AutoSizer disableHeight>
-          {({width}) => (
-            <WindowScroller>
-              {({height, scrollTop}) => {
-                const {movies, hasMore} = this.props;
-                const rowCount = getRowsAmount(width, movies.length, hasMore);
+          {({width}) => {
+            const {movies, hasMore} = this.props;
+            const rowCount = getRowsAmount(width, movies.length, hasMore);
 
-                return (
-                  <InfiniteLoader
-                    ref={this.infiniteLoaderRef}
-                    rowCount={rowCount}
-                    isRowLoaded={({index}) => {
-                      const {hasMore, movies} = this.props;
-                      const maxItemsPerRow = getMaxItemsAmountPerRow(width);
-                      const allItemsLoaded = generateIndexesForRow(index, maxItemsPerRow, movies.length).length > 0;
+            return (
+              <InfiniteLoader
+                ref={this.infiniteLoaderRef}
+                rowCount={rowCount}
+                isRowLoaded={({index}) => {
+                  const {hasMore, movies} = this.props;
+                  const maxItemsPerRow = getMaxItemsAmountPerRow(width);
+                  const allItemsLoaded = generateIndexesForRow(index, maxItemsPerRow, movies.length).length > 0;
 
-                      return !hasMore || allItemsLoaded;
-                    }}
-                    loadMoreRows={this.loadMoreRows}
-                  >
-                    {({onRowsRendered, registerChild}) => (
+                  return !hasMore || allItemsLoaded;
+                }}
+                loadMoreRows={this.loadMoreRows}
+              >
+                {({onRowsRendered, registerChild}) => (
+                  <WindowScroller>
+                    {({height, scrollTop}) => (
                       <List
                         className={classes.grid}
                         autoHeight
@@ -130,11 +130,11 @@ class InfiniteMoviesList extends React.PureComponent {
                         noRowsRenderer={this.noRowsRenderer}
                       />
                     )}
-                  </InfiniteLoader>
-                );
-              }}
-            </WindowScroller>
-          )}
+                  </WindowScroller>
+                )}
+              </InfiniteLoader>
+            );
+          }}
         </AutoSizer>
       </section>
     );
