@@ -58,6 +58,7 @@ const RowItem = React.memo(function RowItem({movieId, classes}) {
 });
 
 class InfiniteMoviesList extends React.PureComponent {
+  infiniteLoaderRef = React.createRef();
 
   loadMoreRows = () => {
     if (!this.props.isFetching) {
@@ -71,8 +72,14 @@ class InfiniteMoviesList extends React.PureComponent {
     </Grid>
   );
 
+  componentDidUpdate(prevProps) {
+    if (!prevProps.reset && this.props.reset && this.infiniteLoaderRef.current) {
+      this.infiniteLoaderRef.current.resetLoadMoreRowsCache(true);
+    }
+  }
+
   render() {
-    const {classes, uniqueKey} = this.props;
+    const {classes} = this.props;
 
     return (
       <section>
@@ -85,7 +92,7 @@ class InfiniteMoviesList extends React.PureComponent {
 
                 return (
                   <InfiniteLoader
-                    key={uniqueKey}
+                    ref={this.infiniteLoaderRef}
                     rowCount={rowCount}
                     isRowLoaded={({index}) => {
                       const {hasMore, movies} = this.props;
@@ -138,6 +145,7 @@ InfiniteMoviesList.defaultProps = {
   movies: [],
   isFetching: false,
   hasMore: false,
+  reset: false,
   fetchMovies: () => {},
 };
 
@@ -146,9 +154,7 @@ InfiniteMoviesList.propTypes = {
   fetchMovies: PropTypes.func,
   hasMore: PropTypes.bool,
   isFetching: PropTypes.bool,
-  // uniqueKey param is needed to completely remount InfiniteLoader component
-  // it's needed to make it possible to start new searches  TODO: eliminate this dirty and slow hack
-  uniqueKey: PropTypes.string,
+  reset: PropTypes.bool,
   classes: PropTypes.object.isRequired,
 };
 

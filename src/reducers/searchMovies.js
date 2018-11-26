@@ -13,7 +13,7 @@ const defaultState = {
   isError: false,
   allFetched: false,
   page: 0,
-  key: Date.now(),
+  reset: false,
 };
 
 export default function searchMovies(state = defaultState, action) {
@@ -49,13 +49,14 @@ export default function searchMovies(state = defaultState, action) {
       return {
         ...state,
         query: action.payload,
+        reset: false,
       };
 
     case SEARCH_MOVIES_PREPARE_FOR_NEW_SEARCH:
       return {
         ...defaultState,
         query: state.query,
-        key: Date.now(),
+        reset: true,
       };
 
     default:
