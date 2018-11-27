@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import {withStyles} from '@material-ui/core/styles';
 
 const ITEM_WIDTH = 400;
-const ITEM_HEIGHT = 440;
+const ITEM_HEIGHT = 360;
 
 const styles = theme => ({
   grid: {
@@ -17,7 +17,7 @@ const styles = theme => ({
   },
   gridItem: {
     width: ITEM_WIDTH,
-    margin: 1.5 * theme.spacing.unit,
+    padding: 1.5 * theme.spacing.unit,
   },
   card: {
     height: '100%',
@@ -112,7 +112,7 @@ class InfiniteMoviesList extends React.PureComponent {
                         scrollTop={scrollTop}
                         width={width}
                         rowCount={rowCount}
-                        rowHeight={ITEM_HEIGHT /* TODO: fix this hardcoded row height */}
+                        rowHeight={ITEM_HEIGHT}
                         onRowsRendered={onRowsRendered}
                         rowRenderer={({index, style, key}) => {
                           const {movies, classes} = this.props;
