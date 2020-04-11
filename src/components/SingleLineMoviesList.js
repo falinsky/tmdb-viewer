@@ -23,7 +23,7 @@ const styles = theme => ({
 
 function SingleLineMoviesList({classes, title, movies}) {
   return (
-    <Paper className={classes.root} component="section">
+    <Paper className={classes.root} component="section" elevation={2}>
       {title && <Typography variant="h6" gutterBottom>{title}</Typography>}
       {movies.length ? (
         <GridList className={classes.list} cols={2.5}>
