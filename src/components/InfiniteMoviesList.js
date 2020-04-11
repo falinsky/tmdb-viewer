@@ -11,13 +11,13 @@ const ITEM_HEIGHT = 360;
 
 const styles = theme => ({
   grid: {
-    marginTop: theme.spacing.unit,
-    marginBottom: theme.spacing.unit,
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
     justifyContent: 'center',
   },
   gridItem: {
     width: ITEM_WIDTH,
-    padding: 1.5 * theme.spacing.unit,
+    padding: theme.spacing(1.5),
   },
   card: {
     height: '100%',

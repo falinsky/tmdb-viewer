@@ -15,8 +15,8 @@ import Genre from '../containers/Genre';
 const styles = theme => ({
   card: {
     display: 'flex',
-    marginTop: theme.spacing.unit * 2,
-    marginBottom: theme.spacing.unit * 2,
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
     flexWrap: 'wrap',
   },
   media: {
@@ -37,7 +37,7 @@ const styles = theme => ({
     flexWrap: 'wrap',
   },
   section: {
-    marginTop: theme.spacing.unit * 2,
+    marginTop: theme.spacing(2),
   },
 });
 

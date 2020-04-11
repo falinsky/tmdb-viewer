@@ -6,9 +6,9 @@ import debounce from 'lodash/debounce';
 
 const styles = (theme) => ({
   root: {
-    marginTop: theme.spacing.unit,
-    marginBottom: theme.spacing.unit,
-    marginLeft: theme.spacing.unit,
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+    marginLeft: theme.spacing(1),
     flexShrink: 1,
   },
   input: {

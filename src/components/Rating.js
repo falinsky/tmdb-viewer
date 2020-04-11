@@ -19,7 +19,7 @@ const styles = theme => ({
   value: {
     ...theme.typography.button,
     color: theme.palette.secondary.contrastText,
-    padding: theme.spacing.unit,
+    padding: theme.spacing(1),
   }
 });
 

@@ -10,9 +10,9 @@ const styles = theme => ({
   root: {
     overflow: 'hidden',
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing.unit,
-    marginTop: 2 * theme.spacing.unit,
-    marginBottom: 2 * theme.spacing.unit,
+    padding: theme.spacing(1),
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
   },
   list: {
     flexWrap: 'nowrap',
