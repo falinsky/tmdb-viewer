@@ -10,18 +10,11 @@ import SearchMoviesResult from "../containers/SearchMoviesResult";
 import SearchQueryRestore from '../containers/SearchQueryRestore';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
 import {withStyles} from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import LoadingIndicator from '../containers/LoadingIndicator';
-
-const theme = createMuiTheme({
-  typography: {
-    useNextVariants: true,
-  }
-});
 
 const styles = {
   toolbar: {
@@ -42,7 +35,7 @@ const styles = {
 
 function App({classes}) {
   return (
-    <MuiThemeProvider theme={theme}>
+    <>
       <CssBaseline/>
       <AppBar position={'sticky'}>
         <LoadingIndicator className={classes.progress}/>
@@ -70,7 +63,7 @@ function App({classes}) {
           </Switch>
         </div>
       </main>
-    </MuiThemeProvider>
+    </>
   );
 }
 
