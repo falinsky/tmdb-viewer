@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import SearchBar from 'material-ui-search-bar';
-import {withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import debounce from 'lodash/debounce';
 
 const styles = (theme) => ({
@@ -14,8 +14,8 @@ const styles = (theme) => ({
   input: {
     '& input': {
       width: '100%',
-    }
-  }
+    },
+  },
 });
 
 class SearchMovies extends React.Component {
@@ -28,25 +28,25 @@ class SearchMovies extends React.Component {
   }
 
   handleRequestSearch() {
-    const {query, onSubmit} = this.props;
+    const { query, onSubmit } = this.props;
 
     if (query.trim()) {
       onSubmit(query);
     }
-  };
+  }
 
   handleChange(value) {
     this.props.onChange(value);
 
     this.handleDebouncedRequestSearch(this.props.query);
-  };
+  }
 
   componentWillUnmount() {
     this.handleDebouncedRequestSearch.cancel();
   }
 
   render() {
-    const {classes, query} = this.props;
+    const { classes, query } = this.props;
 
     return (
       <div className={classes.root}>

@@ -1,15 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {InfiniteLoader, List, WindowScroller, AutoSizer} from 'react-virtualized';
+import {
+  InfiniteLoader,
+  List,
+  WindowScroller,
+  AutoSizer,
+} from 'react-virtualized';
 import MovieCard from '../containers/MovieCard';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import {withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 const ITEM_WIDTH = 400;
 const ITEM_HEIGHT = 360;
 
-const styles = theme => ({
+const styles = (theme) => ({
   grid: {
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
@@ -25,14 +30,18 @@ const styles = theme => ({
   row: {
     display: 'flex',
     justifyContent: 'center',
-  }
+  },
 });
 
 function generateIndexesForRow(rowIndex, maxItemsPerRow, itemsAmount) {
   const result = [];
   const startIndex = rowIndex * maxItemsPerRow;
 
-  for (let i = startIndex; i < Math.min(startIndex + maxItemsPerRow, itemsAmount); i++) {
+  for (
+    let i = startIndex;
+    i < Math.min(startIndex + maxItemsPerRow, itemsAmount);
+    i++
+  ) {
     result.push(i);
   }
 
@@ -46,13 +55,13 @@ function getMaxItemsAmountPerRow(width) {
 function getRowsAmount(width, itemsAmount, hasMore) {
   const maxItemsPerRow = getMaxItemsAmountPerRow(width);
 
-  return Math.ceil(itemsAmount/ maxItemsPerRow) + (hasMore ? 1 : 0);
+  return Math.ceil(itemsAmount / maxItemsPerRow) + (hasMore ? 1 : 0);
 }
 
-const RowItem = React.memo(function RowItem({movieId, classes}) {
+const RowItem = React.memo(function RowItem({ movieId, classes }) {
   return (
     <Grid item className={classes.gridItem} key={movieId}>
-      <MovieCard id={movieId} classes={{root: classes.card}} />
+      <MovieCard id={movieId} classes={{ root: classes.card }} />
     </Grid>
   );
 });
@@ -73,37 +82,43 @@ class InfiniteMoviesList extends React.PureComponent {
   );
 
   componentDidUpdate(prevProps) {
-    if (!prevProps.reset && this.props.reset && this.infiniteLoaderRef.current) {
+    if (
+      !prevProps.reset &&
+      this.props.reset &&
+      this.infiniteLoaderRef.current
+    ) {
       this.infiniteLoaderRef.current.resetLoadMoreRowsCache(true);
     }
   }
 
   render() {
-    const {classes} = this.props;
+    const { classes } = this.props;
 
     return (
       <section>
         <AutoSizer disableHeight>
-          {({width}) => {
-            const {movies, hasMore} = this.props;
+          {({ width }) => {
+            const { movies, hasMore } = this.props;
             const rowCount = getRowsAmount(width, movies.length, hasMore);
 
             return (
               <InfiniteLoader
                 ref={this.infiniteLoaderRef}
                 rowCount={rowCount}
-                isRowLoaded={({index}) => {
-                  const {hasMore, movies} = this.props;
+                isRowLoaded={({ index }) => {
+                  const { hasMore, movies } = this.props;
                   const maxItemsPerRow = getMaxItemsAmountPerRow(width);
-                  const allItemsLoaded = generateIndexesForRow(index, maxItemsPerRow, movies.length).length > 0;
+                  const allItemsLoaded =
+                    generateIndexesForRow(index, maxItemsPerRow, movies.length)
+                      .length > 0;
 
                   return !hasMore || allItemsLoaded;
                 }}
                 loadMoreRows={this.loadMoreRows}
               >
-                {({onRowsRendered, registerChild}) => (
+                {({ onRowsRendered, registerChild }) => (
                   <WindowScroller>
-                    {({height, scrollTop}) => (
+                    {({ height, scrollTop }) => (
                       <List
                         className={classes.grid}
                         autoHeight
@@ -114,18 +129,30 @@ class InfiniteMoviesList extends React.PureComponent {
                         rowCount={rowCount}
                         rowHeight={ITEM_HEIGHT}
                         onRowsRendered={onRowsRendered}
-                        rowRenderer={({index, style, key}) => {
-                          const {movies, classes} = this.props;
+                        rowRenderer={({ index, style, key }) => {
+                          const { movies, classes } = this.props;
                           const maxItemsPerRow = getMaxItemsAmountPerRow(width);
-                          const moviesIds = generateIndexesForRow(index, maxItemsPerRow, movies.length).map(movieIndex => movies[movieIndex]);
+                          const moviesIds = generateIndexesForRow(
+                            index,
+                            maxItemsPerRow,
+                            movies.length
+                          ).map((movieIndex) => movies[movieIndex]);
 
                           return (
-                            <div style={style} key={key} className={classes.row}>
-                              {moviesIds.map(movieId => (
-                                <RowItem key={movieId} movieId={movieId} classes={classes}/>
+                            <div
+                              style={style}
+                              key={key}
+                              className={classes.row}
+                            >
+                              {moviesIds.map((movieId) => (
+                                <RowItem
+                                  key={movieId}
+                                  movieId={movieId}
+                                  classes={classes}
+                                />
                               ))}
                             </div>
-                          )
+                          );
                         }}
                         noRowsRenderer={this.noRowsRenderer}
                       />

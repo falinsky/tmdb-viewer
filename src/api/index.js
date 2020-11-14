@@ -9,10 +9,12 @@ const API_KEY = '63683e7ba09287916ca1fd562d966e29';
 function generateQueryString(params = {}) {
   params = {
     api_key: API_KEY,
-    ...params
+    ...params,
   };
 
-  return Object.keys(params).map((key) => `${key}=${params[key]}`).join('&');
+  return Object.keys(params)
+    .map((key) => `${key}=${params[key]}`)
+    .join('&');
 }
 
 function generateUrl(path, params = {}) {
@@ -32,7 +34,7 @@ function throwCommonError(data) {
 async function handleApiCall(url) {
   const response = await fetch(url);
   const data = await response.json();
-  
+
   if (!response.ok) {
     throwCommonError(data);
   }
@@ -41,14 +43,14 @@ async function handleApiCall(url) {
 }
 
 export function getPopularMovies(page = 1) {
-  const url = generateUrl('movie/popular', {page});
-  
+  const url = generateUrl('movie/popular', { page });
+
   return handleApiCall(url);
 }
 
 export function getMovie(id) {
   const url = generateUrl(`movie/${id}`);
-  
+
   return handleApiCall(url);
 }
 
@@ -65,7 +67,7 @@ export function getGenresListForMovies() {
 }
 
 export function searchMovies(query, page = 1) {
-  const url = generateUrl('search/movie', {query, page});
+  const url = generateUrl('search/movie', { query, page });
 
   return handleApiCall(url);
 }

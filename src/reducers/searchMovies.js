@@ -32,9 +32,13 @@ export default function searchMovies(state = defaultState, action) {
         isError: false,
         items: [
           ...state.items,
-          ...action.payload.result.results.filter(id => !state.items.includes(id)),
+          ...action.payload.result.results.filter(
+            (id) => !state.items.includes(id)
+          ),
         ],
-        allFetched: state.allFetched || action.payload.result.page >= action.payload.result.total_pages,
+        allFetched:
+          state.allFetched ||
+          action.payload.result.page >= action.payload.result.total_pages,
         page: Math.max(state.page, action.payload.result.page),
       };
 

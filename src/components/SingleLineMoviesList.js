@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import GridList from '@material-ui/core/GridList';
 import SingleLineMoviesListItem from '../containers/SingleLineMoviesListItem';
 import Paper from '@material-ui/core/Paper';
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     overflow: 'hidden',
     backgroundColor: theme.palette.background.paper,
@@ -18,16 +18,20 @@ const styles = theme => ({
     flexWrap: 'nowrap',
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     transform: 'translateZ(0)',
-  }
+  },
 });
 
-function SingleLineMoviesList({classes, title, movies}) {
+function SingleLineMoviesList({ classes, title, movies }) {
   return (
     <Paper className={classes.root} component="section" elevation={2}>
-      {title && <Typography variant="h6" gutterBottom>{title}</Typography>}
+      {title && (
+        <Typography variant="h6" gutterBottom>
+          {title}
+        </Typography>
+      )}
       {movies.length ? (
         <GridList className={classes.list} cols={2.5}>
-          {movies.map(id => (
+          {movies.map((id) => (
             <SingleLineMoviesListItem id={id} key={id} />
           ))}
         </GridList>

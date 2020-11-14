@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {updateSearchMoviesQuery} from '../actions';
+import { connect } from 'react-redux';
+import { updateSearchMoviesQuery } from '../actions';
 
 class SearchQueryRestore extends React.Component {
   componentDidMount() {
@@ -10,7 +10,9 @@ class SearchQueryRestore extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.match.params.query !== this.props.match.params.query) {
-      this.props.dispatch(updateSearchMoviesQuery(this.props.match.params.query));
+      this.props.dispatch(
+        updateSearchMoviesQuery(this.props.match.params.query)
+      );
     }
   }
 

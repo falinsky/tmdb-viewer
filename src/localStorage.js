@@ -20,4 +20,4 @@ export const loadState = () => {
     console.warn(`Failed to load state from local storage: ${error.message}`);
     return undefined;
   }
-}
+};

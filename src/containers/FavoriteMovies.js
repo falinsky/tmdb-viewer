@@ -1,4 +1,4 @@
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import InfiniteMoviesList from '../components/InfiniteMoviesList';
 
 const mapStateToProps = (state) => ({

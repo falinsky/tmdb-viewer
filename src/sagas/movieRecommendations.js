@@ -1,15 +1,15 @@
-import {call, put, takeEvery} from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import * as api from '../api';
 import {
   FETCH_MOVIE_RECOMMENDATIONS_FAILURE,
   FETCH_MOVIE_RECOMMENDATIONS_REQUEST,
-  FETCH_MOVIE_RECOMMENDATIONS_SUCCESS
+  FETCH_MOVIE_RECOMMENDATIONS_SUCCESS,
 } from '../actions';
-import {normalize} from 'normalizr';
+import { normalize } from 'normalizr';
 import * as schema from '../schema';
 
-function *movieRecommendationsRequest(action) {
-  const {id} = action.payload;
+function* movieRecommendationsRequest(action) {
+  const { id } = action.payload;
 
   try {
     const data = yield call(api.getMovieRecommendations, id);
@@ -29,6 +29,9 @@ function *movieRecommendationsRequest(action) {
   }
 }
 
-export function *watchMovieRecommendationsRequest() {
-  yield takeEvery(FETCH_MOVIE_RECOMMENDATIONS_REQUEST, movieRecommendationsRequest);
+export function* watchMovieRecommendationsRequest() {
+  yield takeEvery(
+    FETCH_MOVIE_RECOMMENDATIONS_REQUEST,
+    movieRecommendationsRequest
+  );
 }

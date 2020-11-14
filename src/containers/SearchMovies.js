@@ -1,6 +1,6 @@
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import SearchMovies from '../components/SearchMovies';
-import {updateSearchMoviesQuery, startNewSearchMovies} from '../actions';
+import { updateSearchMoviesQuery, startNewSearchMovies } from '../actions';
 
 const mapStateToProps = (state) => ({
   query: state.searchMovies.query,

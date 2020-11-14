@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
-import {createStore, applyMiddleware, compose} from 'redux';
-import {Provider} from 'react-redux';
-import {BrowserRouter as Router} from 'react-router-dom';
+import { createStore, applyMiddleware, compose } from 'redux';
+import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
 import rootReducer from './reducers';
 import App from './components/App';
-import {loadState, saveState} from './localStorage';
+import { loadState, saveState } from './localStorage';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './sagas';
-import {fetchGenres} from './actions';
+import { fetchGenres } from './actions';
 
 const initialState = loadState();
 
@@ -19,9 +19,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   rootReducer,
   initialState,
-  composeEnhancers(
-    applyMiddleware(sagaMiddleware)
-  )
+  composeEnhancers(applyMiddleware(sagaMiddleware))
 );
 
 sagaMiddleware.run(rootSaga);
@@ -34,15 +32,16 @@ store.subscribe(() => {
 
 store.dispatch(fetchGenres());
 
-ReactDOM.render((
+ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <Router>
-        <App/>
+        <App />
       </Router>
     </Provider>
-  </React.StrictMode>
-), document.getElementById('root'));
+  </React.StrictMode>,
+  document.getElementById('root')
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

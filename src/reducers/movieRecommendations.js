@@ -1,7 +1,7 @@
 import {
   FETCH_MOVIE_RECOMMENDATIONS_REQUEST,
   FETCH_MOVIE_RECOMMENDATIONS_SUCCESS,
-  FETCH_MOVIE_RECOMMENDATIONS_FAILURE
+  FETCH_MOVIE_RECOMMENDATIONS_FAILURE,
 } from '../actions';
 
 const defaultState = {
@@ -30,9 +30,11 @@ export default function movieRecommendations(state = defaultState, action) {
           ...state.itemsById,
           [movieId]: [
             ...existentRecommendations,
-            ...action.payload.result.results.filter(id => !existentRecommendations.includes(id)),
+            ...action.payload.result.results.filter(
+              (id) => !existentRecommendations.includes(id)
+            ),
           ],
-        }
+        },
       };
 
     case FETCH_MOVIE_RECOMMENDATIONS_FAILURE:
@@ -46,4 +48,3 @@ export default function movieRecommendations(state = defaultState, action) {
       return state;
   }
 }
-

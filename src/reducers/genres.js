@@ -1,7 +1,7 @@
 import {
   FETCH_GENRES_REQUEST,
   FETCH_GENRES_SUCCESS,
-  FETCH_GENRES_FAILURE
+  FETCH_GENRES_FAILURE,
 } from '../actions';
 
 const defaultState = {

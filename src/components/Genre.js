@@ -1,18 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Chip from '@material-ui/core/Chip';
-import {withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     margin: theme.spacing(0.5),
   },
 });
 
-function Genre({classes, genre}) {
-  return (
-    <Chip className={classes.root} label={genre ? genre.name : '...'}/>
-  );
+function Genre({ classes, genre }) {
+  return <Chip className={classes.root} label={genre ? genre.name : '...'} />;
 }
 
 Genre.propTypes = {

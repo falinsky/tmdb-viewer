@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Avatar from '@material-ui/core/Avatar';
-import {withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     width: 44,
     height: 44,
@@ -20,14 +20,23 @@ const styles = theme => ({
     ...theme.typography.button,
     color: theme.palette.secondary.contrastText,
     padding: theme.spacing(1),
-  }
+  },
 });
 
-function Rating({classes, value}) {
+function Rating({ classes, value }) {
   return (
     <Avatar className={classes.root}>
-      <span className={classes.value}>{value}<sup className={classes.percentSign}>%</sup></span>
-      <CircularProgress value={value} variant="static" className={classes.progress} color="inherit" thickness={2}/>
+      <span className={classes.value}>
+        {value}
+        <sup className={classes.percentSign}>%</sup>
+      </span>
+      <CircularProgress
+        value={value}
+        variant="static"
+        className={classes.progress}
+        color="inherit"
+        thickness={2}
+      />
     </Avatar>
   );
 }

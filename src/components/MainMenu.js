@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import {withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
   root: {
@@ -10,8 +10,8 @@ const styles = {
   },
 };
 
-function MainMenu({classes, location, history, items}) {
-  const itemsMap = new Map(items.map(item => [item.path, item]));
+function MainMenu({ classes, location, history, items }) {
+  const itemsMap = new Map(items.map((item) => [item.path, item]));
   return (
     <Tabs
       className={classes.root}
@@ -20,8 +20,13 @@ function MainMenu({classes, location, history, items}) {
         history.push(value);
       }}
     >
-      {Array.from(itemsMap.values()).map(item => (
-        <Tab value={item.path} label={item.label} icon={<item.iconComponent />} key={item.path} />
+      {Array.from(itemsMap.values()).map((item) => (
+        <Tab
+          value={item.path}
+          label={item.label}
+          icon={<item.iconComponent />}
+          key={item.path}
+        />
       ))}
     </Tabs>
   );
