@@ -5,11 +5,11 @@ import { loadMovie } from '../actions';
 import { withDataAutoload } from '../hoc';
 
 const mapStateToProps = (state, ownProps) => ({
-  movie: state.entities.movies[ownProps.id],
+  movie: state.entities.movies[ownProps.movieId],
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  loadData: () => dispatch(loadMovie(ownProps.id)),
+  loadData: () => dispatch(loadMovie(ownProps.movieId)),
 });
 
 const MovieCardContainer = connect(
@@ -17,7 +17,7 @@ const MovieCardContainer = connect(
   mapDispatchToProps
 )(withDataAutoload(MovieCard));
 MovieCardContainer.propTypes = {
-  id: PropTypes.number.isRequired,
+  movieId: PropTypes.number.isRequired,
 };
 
 export default MovieCardContainer;

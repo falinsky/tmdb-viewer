@@ -61,7 +61,7 @@ function getRowsAmount(width, itemsAmount, hasMore) {
 const RowItem = React.memo(function RowItem({ movieId, classes }) {
   return (
     <Grid item className={classes.gridItem} key={movieId}>
-      <MovieCard id={movieId} classes={{ root: classes.card }} />
+      <MovieCard movieId={movieId} classes={{ root: classes.card }} />
     </Grid>
   );
 });
