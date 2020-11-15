@@ -83,7 +83,7 @@ function MovieDetails({ classes, movie }) {
                   </Typography>
                   <div className={classes.genresList}>
                     {movie.genres.map((id) => (
-                      <Genre id={id} key={id} />
+                      <Genre genreId={id} key={id} />
                     ))}
                   </div>
                 </section>
