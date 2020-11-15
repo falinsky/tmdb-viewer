@@ -90,7 +90,7 @@ function MovieDetails({ classes, movie }) {
               </CardContent>
             </div>
           </Card>
-          <MovieRecommendations movie={movie.id} title="Recommendations" />
+          <MovieRecommendations movieId={movie.id} title="Recommendations" />
         </React.Fragment>
       )}
     </section>

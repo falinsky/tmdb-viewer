@@ -5,13 +5,13 @@ import { withDataAutoload } from '../hoc';
 import { fetchMovieRecommendations } from '../actions';
 
 const mapStateToProps = (state, ownProps) => ({
-  movies: state.movieRecommendations.itemsById[ownProps.movie],
+  movies: state.movieRecommendations.itemsById[ownProps.movieId],
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  loadData: () => dispatch(fetchMovieRecommendations(ownProps.movie)),
+  loadData: () => dispatch(fetchMovieRecommendations(ownProps.movieId)),
   shouldReloadDataAfterUpdate: (prevProps, currentProps) =>
-    prevProps.movie !== currentProps.movie,
+    prevProps.movieId !== currentProps.movieId,
 });
 
 const MovieRecommendations = connect(
@@ -19,7 +19,7 @@ const MovieRecommendations = connect(
   mapDispatchToProps
 )(withDataAutoload(SingleLineMoviesList));
 MovieRecommendations.propTypes = {
-  movie: PropTypes.number.isRequired,
+  movieId: PropTypes.number.isRequired,
 };
 
 export default MovieRecommendations;
