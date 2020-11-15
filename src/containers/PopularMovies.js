@@ -3,7 +3,7 @@ import InfiniteMoviesList from '../components/InfiniteMoviesList';
 import { fetchPopularMovies } from '../actions';
 
 const mapStateToProps = (state) => ({
-  movies: state.popularMovies.items,
+  movieIds: state.popularMovies.items,
   hasMore: !state.popularMovies.allFetched,
   isFetching: state.popularMovies.isFetching,
 });

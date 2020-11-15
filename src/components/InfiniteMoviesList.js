@@ -98,19 +98,22 @@ class InfiniteMoviesList extends React.PureComponent {
       <section>
         <AutoSizer disableHeight>
           {({ width }) => {
-            const { movies, hasMore } = this.props;
-            const rowCount = getRowsAmount(width, movies.length, hasMore);
+            const { movieIds, hasMore } = this.props;
+            const rowCount = getRowsAmount(width, movieIds.length, hasMore);
 
             return (
               <InfiniteLoader
                 ref={this.infiniteLoaderRef}
                 rowCount={rowCount}
                 isRowLoaded={({ index }) => {
-                  const { hasMore, movies } = this.props;
+                  const { hasMore, movieIds } = this.props;
                   const maxItemsPerRow = getMaxItemsAmountPerRow(width);
                   const allItemsLoaded =
-                    generateIndexesForRow(index, maxItemsPerRow, movies.length)
-                      .length > 0;
+                    generateIndexesForRow(
+                      index,
+                      maxItemsPerRow,
+                      movieIds.length
+                    ).length > 0;
 
                   return !hasMore || allItemsLoaded;
                 }}
@@ -130,13 +133,13 @@ class InfiniteMoviesList extends React.PureComponent {
                         rowHeight={ITEM_HEIGHT}
                         onRowsRendered={onRowsRendered}
                         rowRenderer={({ index, style, key }) => {
-                          const { movies, classes } = this.props;
+                          const { movieIds, classes } = this.props;
                           const maxItemsPerRow = getMaxItemsAmountPerRow(width);
                           const moviesIds = generateIndexesForRow(
                             index,
                             maxItemsPerRow,
-                            movies.length
-                          ).map((movieIndex) => movies[movieIndex]);
+                            movieIds.length
+                          ).map((movieIndex) => movieIds[movieIndex]);
 
                           return (
                             <div
@@ -169,7 +172,7 @@ class InfiniteMoviesList extends React.PureComponent {
 }
 
 InfiniteMoviesList.defaultProps = {
-  movies: [],
+  movieIds: [],
   isFetching: false,
   hasMore: false,
   reset: false,
@@ -177,7 +180,7 @@ InfiniteMoviesList.defaultProps = {
 };
 
 InfiniteMoviesList.propTypes = {
-  movies: PropTypes.arrayOf(PropTypes.number.isRequired),
+  movieIds: PropTypes.arrayOf(PropTypes.number.isRequired),
   fetchMovies: PropTypes.func,
   hasMore: PropTypes.bool,
   isFetching: PropTypes.bool,
