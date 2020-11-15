@@ -1,6 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Route, Redirect, Switch } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect,
+  Switch,
+} from 'react-router-dom';
 import PopularMovies from '../containers/PopularMovies';
 import MovieDetails from '../containers/MovieDetails';
 import MainMenu from '../components/MainMenu';
@@ -35,7 +40,7 @@ const styles = {
 
 function App({ classes }) {
   return (
-    <>
+    <Router>
       <CssBaseline />
       <AppBar position={'sticky'}>
         <LoadingIndicator className={classes.progress} />
@@ -74,7 +79,7 @@ function App({ classes }) {
           </Switch>
         </div>
       </main>
-    </>
+    </Router>
   );
 }
 
