@@ -1,25 +1,27 @@
+import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import SingleLineMoviesList from '../components/SingleLineMoviesList';
-import { withDataAutoload } from '../hoc';
 import { fetchMovieRecommendations } from '../actions';
 
-const mapStateToProps = (state, ownProps) => ({
-  movieIds: state.movieRecommendations.itemsById[ownProps.movieId],
-});
+const MovieRecommendations = ({ movieId, title }) => {
+  const dispatch = useDispatch();
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  loadData: () => dispatch(fetchMovieRecommendations(ownProps.movieId)),
-  shouldReloadDataAfterUpdate: (prevProps, currentProps) =>
-    prevProps.movieId !== currentProps.movieId,
-});
+  useEffect(() => {
+    dispatch(fetchMovieRecommendations(movieId));
+  }, [movieId, dispatch]);
 
-const MovieRecommendations = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withDataAutoload(SingleLineMoviesList));
+  const movieIds = useSelector(
+    (state) => state.movieRecommendations.itemsById[movieId]
+  );
+
+  return <SingleLineMoviesList movieIds={movieIds} title={title} />;
+};
+
 MovieRecommendations.propTypes = {
   movieId: PropTypes.number.isRequired,
+  title: PropTypes.string,
 };
 
 export default MovieRecommendations;
