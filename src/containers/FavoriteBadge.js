@@ -4,12 +4,12 @@ import FavoriteBadge from '../components/FavoriteBadge';
 import { addMovieToFavorites, removeMovieFromFavorites } from '../actions';
 
 const mapStateToProps = (state, ownProps) => ({
-  inFavorites: state.favorites.includes(ownProps.movie),
+  inFavorites: state.favorites.includes(ownProps.movieId),
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onAdd: () => dispatch(addMovieToFavorites(ownProps.movie)),
-  onRemove: () => dispatch(removeMovieFromFavorites(ownProps.movie)),
+  onAdd: () => dispatch(addMovieToFavorites(ownProps.movieId)),
+  onRemove: () => dispatch(removeMovieFromFavorites(ownProps.movieId)),
 });
 
 const FavoriteBadgeContainer = connect(
@@ -17,7 +17,7 @@ const FavoriteBadgeContainer = connect(
   mapDispatchToProps
 )(FavoriteBadge);
 FavoriteBadgeContainer.propTypes = {
-  movie: PropTypes.number.isRequired,
+  movieId: PropTypes.number.isRequired,
 };
 
 export default FavoriteBadgeContainer;

@@ -64,7 +64,7 @@ function MovieDetails({ classes, movie }) {
                     </time>
                   </Typography>
                 }
-                action={<FavoriteBadge movie={movie.id} />}
+                action={<FavoriteBadge movieId={movie.id} />}
                 avatar={<Rating value={movie.vote_average * 10} />}
                 subheader={`User score based on ${movie.vote_count} ${
                   movie.vote_count > 1 ? 'votes' : 'vote'

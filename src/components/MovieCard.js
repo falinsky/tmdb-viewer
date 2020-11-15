@@ -40,7 +40,7 @@ function MovieCard({ classes, movie }) {
         <CardHeader
           title={movie.title}
           subheader={getMovieReleaseYear(movie)}
-          action={<FavoriteBadge movie={movie.id} />}
+          action={<FavoriteBadge movieId={movie.id} />}
         />
       </CardActionArea>
     </Card>

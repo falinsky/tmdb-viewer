@@ -35,7 +35,10 @@ function SingleLineMoviesListItem({ classes, movie, ...otherProps }) {
         }}
         actionIcon={
           <React.Fragment>
-            <FavoriteBadge movie={movie.id} classes={{ root: classes.title }} />
+            <FavoriteBadge
+              movieId={movie.id}
+              classes={{ root: classes.title }}
+            />
             <IconButton
               component={Link}
               to={`/movie/${movie.id}`}
