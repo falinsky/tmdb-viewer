@@ -1,21 +1,22 @@
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import MovieDetails from '../components/MovieDetails';
 import { loadMovie } from '../actions';
-import { withDataAutoload } from '../hoc';
 
-const mapStateToProps = (state, ownProps) => ({
-  movie: state.entities.movies[ownProps.match.params.id],
-});
+const MovieDetailsContainer = ({ match }) => {
+  const { id } = match.params;
+  const dispatch = useDispatch();
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  loadData: () => dispatch(loadMovie(ownProps.match.params.id)),
-});
+  useEffect(() => {
+    dispatch(loadMovie(id));
+  }, [id, dispatch]);
 
-const MovieDetailsContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withDataAutoload(MovieDetails));
+  const movie = useSelector((state) => state.entities.movies[id]);
+
+  return <MovieDetails movie={movie} />;
+};
+
 MovieDetailsContainer.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
