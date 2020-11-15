@@ -5,11 +5,11 @@ import { loadMovie } from '../actions';
 import { withDataAutoload } from '../hoc';
 
 const mapStateToProps = (state, ownProps) => ({
-  movie: state.entities.movies[ownProps.id],
+  movie: state.entities.movies[ownProps.movieId],
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  loadData: () => dispatch(loadMovie(ownProps.id)),
+  loadData: () => dispatch(loadMovie(ownProps.movieId)),
 });
 
 const SingleLineMoviesListItemContainer = connect(
@@ -17,7 +17,7 @@ const SingleLineMoviesListItemContainer = connect(
   mapDispatchToProps
 )(withDataAutoload(SingleLineGridListItem));
 SingleLineMoviesListItemContainer.propTypes = {
-  id: PropTypes.number.isRequired,
+  movieId: PropTypes.number.isRequired,
 };
 
 export default SingleLineMoviesListItemContainer;

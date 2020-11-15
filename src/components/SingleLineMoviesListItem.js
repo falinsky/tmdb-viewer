@@ -22,7 +22,7 @@ const styles = (theme) => ({
   },
 });
 
-function SingleLineMoviesListItem({ classes, movie, ...otherProps }) {
+function SingleLineMoviesListItem({ classes, movie, movieId, ...otherProps }) {
   return (
     <GridListTile {...otherProps}>
       <img src={getMovieBackdropImageUrl(movie)} alt={movie.title} />

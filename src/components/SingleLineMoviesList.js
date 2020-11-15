@@ -32,7 +32,7 @@ function SingleLineMoviesList({ classes, title, movies }) {
       {movies.length ? (
         <GridList className={classes.list} cols={2.5}>
           {movies.map((id) => (
-            <SingleLineMoviesListItem id={id} key={id} />
+            <SingleLineMoviesListItem movieId={id} key={id} />
           ))}
         </GridList>
       ) : (
