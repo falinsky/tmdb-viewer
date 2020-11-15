@@ -5,7 +5,7 @@ import { withDataAutoload } from '../hoc';
 import { fetchMovieRecommendations } from '../actions';
 
 const mapStateToProps = (state, ownProps) => ({
-  movies: state.movieRecommendations.itemsById[ownProps.movieId],
+  movieIds: state.movieRecommendations.itemsById[ownProps.movieId],
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

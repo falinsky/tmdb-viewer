@@ -21,7 +21,7 @@ const styles = (theme) => ({
   },
 });
 
-function SingleLineMoviesList({ classes, title, movies }) {
+function SingleLineMoviesList({ classes, title, movieIds }) {
   return (
     <Paper className={classes.root} component="section" elevation={2}>
       {title && (
@@ -29,9 +29,9 @@ function SingleLineMoviesList({ classes, title, movies }) {
           {title}
         </Typography>
       )}
-      {movies.length ? (
+      {movieIds.length ? (
         <GridList className={classes.list} cols={2.5}>
-          {movies.map((id) => (
+          {movieIds.map((id) => (
             <SingleLineMoviesListItem movieId={id} key={id} />
           ))}
         </GridList>
@@ -43,11 +43,11 @@ function SingleLineMoviesList({ classes, title, movies }) {
 }
 
 SingleLineMoviesList.defaultProps = {
-  movies: [],
+  movieIds: [],
 };
 
 SingleLineMoviesList.propTypes = {
-  movies: PropTypes.arrayOf(PropTypes.number.isRequired),
+  movieIds: PropTypes.arrayOf(PropTypes.number.isRequired),
   title: PropTypes.string,
   classes: PropTypes.object.isRequired,
 };
