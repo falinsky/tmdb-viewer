@@ -75,7 +75,7 @@ function App({ classes }) {
             <Route path="/" exact component={PopularMovies} />
             <Route path="/search/:query" component={SearchMoviesResult} />
             <Route path="/favorites" component={FavoriteMovies} />
-            <Route path="/movie/:id" component={MovieDetails} />
+            <Route path="/movie/:movieId" component={MovieDetails} />
           </Switch>
         </div>
       </main>

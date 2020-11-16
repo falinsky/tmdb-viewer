@@ -44,14 +44,14 @@ const styles = (theme) => ({
 });
 
 function MovieDetails({ classes, match }) {
-  const { id } = match.params;
+  const { movieId } = match.params;
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(loadMovie(id));
-  }, [id, dispatch]);
+    dispatch(loadMovie(movieId));
+  }, [movieId, dispatch]);
 
-  const movie = useSelector((state) => state.entities.movies[id]);
+  const movie = useSelector((state) => state.entities.movies[movieId]);
 
   return (
     <section>
@@ -111,7 +111,7 @@ function MovieDetails({ classes, match }) {
 MovieDetails.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
-      id: PropTypes.string.isRequired,
+      movieId: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
   classes: PropTypes.object.isRequired,
