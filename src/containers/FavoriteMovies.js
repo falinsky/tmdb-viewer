@@ -1,8 +1,11 @@
-import { connect } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import InfiniteMoviesList from '../components/InfiniteMoviesList';
 
-const mapStateToProps = (state) => ({
-  movieIds: state.favorites,
-});
+const FavoriteMovies = () => {
+  const movieIds = useSelector((state) => state.favorites);
 
-export default connect(mapStateToProps)(InfiniteMoviesList);
+  return <InfiniteMoviesList movieIds={movieIds} />;
+};
+
+export default FavoriteMovies;
