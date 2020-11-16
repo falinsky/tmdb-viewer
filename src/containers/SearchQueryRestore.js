@@ -1,25 +1,19 @@
-import React from 'react';
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { updateSearchMoviesQuery } from '../actions';
 
-class SearchQueryRestore extends React.Component {
-  componentDidMount() {
-    this.props.dispatch(updateSearchMoviesQuery(this.props.match.params.query));
-  }
+// FIXME: should this functionality be merged with SearchMoviesResult and/or SearchMovies component(s)
+const SearchQueryRestore = ({ match }) => {
+  const { query } = match.params;
+  const dispatch = useDispatch();
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.match.params.query !== this.props.match.params.query) {
-      this.props.dispatch(
-        updateSearchMoviesQuery(this.props.match.params.query)
-      );
-    }
-  }
+  useEffect(() => {
+    dispatch(updateSearchMoviesQuery(query));
+  }, [query, dispatch]);
 
-  render() {
-    return null;
-  }
-}
+  return null;
+};
 
 SearchQueryRestore.propTypes = {
   match: PropTypes.shape({
@@ -29,4 +23,4 @@ SearchQueryRestore.propTypes = {
   }).isRequired,
 };
 
-export default connect()(SearchQueryRestore);
+export default SearchQueryRestore;
