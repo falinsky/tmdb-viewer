@@ -1,21 +1,14 @@
+import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import MovieCard from '../components/MovieCard';
-import { loadMovie } from '../actions';
-import { withDataAutoload } from '../hoc';
 
-const mapStateToProps = (state, ownProps) => ({
-  movie: state.entities.movies[ownProps.movieId],
-});
+const MovieCardContainer = ({ movieId, ...otherProps }) => {
+  const movie = useSelector((state) => state.entities.movies[movieId]);
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  loadData: () => dispatch(loadMovie(ownProps.movieId)),
-});
+  return <MovieCard movie={movie} {...otherProps} />;
+};
 
-const MovieCardContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withDataAutoload(MovieCard));
 MovieCardContainer.propTypes = {
   movieId: PropTypes.number.isRequired,
 };
