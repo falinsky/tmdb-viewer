@@ -89,13 +89,3 @@ export const SEARCH_MOVIES_PREPARE_FOR_NEW_SEARCH =
 export const prepareForNewSearchMovies = () => ({
   type: SEARCH_MOVIES_PREPARE_FOR_NEW_SEARCH,
 });
-
-export const SEARCH_MOVIES_START_NEW_SEARCH = 'SEARCH_MOVIES_START_NEW_SEARCH';
-
-export const startNewSearchMovies = (value, history) => ({
-  type: SEARCH_MOVIES_START_NEW_SEARCH,
-  payload: {
-    value,
-    history,
-  },
-});

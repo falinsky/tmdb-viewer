@@ -28,10 +28,11 @@ class SearchMovies extends React.Component {
   }
 
   handleRequestSearch() {
-    const { query, onSubmit } = this.props;
+    const { query, onSubmit, history } = this.props;
 
     if (query.trim()) {
       onSubmit(query);
+      history.push(`/search/${query}`);
     }
   }
 
@@ -68,6 +69,9 @@ SearchMovies.propTypes = {
   onChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default withStyles(styles)(SearchMovies);
