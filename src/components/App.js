@@ -7,7 +7,7 @@ import {
   Switch,
 } from 'react-router-dom';
 import PopularMovies from '../containers/PopularMovies';
-import MovieDetails from '../containers/MovieDetails';
+import MovieDetails from '../components/MovieDetails';
 import MainMenu from '../components/MainMenu';
 import FavoriteMovies from '../containers/FavoriteMovies';
 import SearchMovies from '../containers/SearchMovies';

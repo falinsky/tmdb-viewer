@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { getMoviePosterImageUrl, getMovieReleaseYear } from '../api';
 import MovieRecommendations from '../containers/MovieRecommendations';
@@ -11,6 +11,8 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Rating from './Rating';
 import Genre from './Genre';
+import { useDispatch, useSelector } from 'react-redux';
+import { loadMovie } from '../actions';
 
 const styles = (theme) => ({
   card: {
@@ -41,7 +43,16 @@ const styles = (theme) => ({
   },
 });
 
-function MovieDetails({ classes, movie }) {
+function MovieDetails({ classes, match }) {
+  const { id } = match.params;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadMovie(id));
+  }, [id, dispatch]);
+
+  const movie = useSelector((state) => state.entities.movies[id]);
+
   return (
     <section>
       {!movie ? (
@@ -98,14 +109,11 @@ function MovieDetails({ classes, movie }) {
 }
 
 MovieDetails.propTypes = {
-  movie: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-    overview: PropTypes.string.isRequired,
-    release_date: PropTypes.string.isRequired,
-    vote_count: PropTypes.number.isRequired,
-    vote_average: PropTypes.number.isRequired,
-  }),
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
   classes: PropTypes.object.isRequired,
 };
 
