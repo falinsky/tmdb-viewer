@@ -58,10 +58,14 @@ function getRowsAmount(width, itemsAmount, hasMore) {
   return Math.ceil(itemsAmount / maxItemsPerRow) + (hasMore ? 1 : 0);
 }
 
-const RowItem = React.memo(function RowItem({ movieId, classes }) {
+const RowItem = React.memo(function RowItem({
+  movieId,
+  classes,
+  itemComponentType: ItemComponentType,
+}) {
   return (
     <Grid item className={classes.gridItem} key={movieId}>
-      <MovieCard movieId={movieId} classes={{ root: classes.card }} />
+      <ItemComponentType movieId={movieId} classes={{ root: classes.card }} />
     </Grid>
   );
 });
@@ -152,6 +156,9 @@ class InfiniteMoviesList extends React.PureComponent {
                                   key={movieId}
                                   movieId={movieId}
                                   classes={classes}
+                                  itemComponentType={
+                                    this.props.itemComponentType
+                                  }
                                 />
                               ))}
                             </div>
@@ -177,6 +184,7 @@ InfiniteMoviesList.defaultProps = {
   hasMore: false,
   reset: false,
   fetchMovies: () => {},
+  itemComponentType: MovieCard,
 };
 
 InfiniteMoviesList.propTypes = {
@@ -186,6 +194,7 @@ InfiniteMoviesList.propTypes = {
   isFetching: PropTypes.bool,
   reset: PropTypes.bool,
   classes: PropTypes.object.isRequired,
+  itemComponentType: PropTypes.elementType.isRequired,
 };
 
 export default withStyles(styles)(InfiniteMoviesList);
