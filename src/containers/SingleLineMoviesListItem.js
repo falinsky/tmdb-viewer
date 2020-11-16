@@ -1,21 +1,14 @@
+import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import SingleLineGridListItem from '../components/SingleLineMoviesListItem';
-import { loadMovie } from '../actions';
-import { withDataAutoload } from '../hoc';
+import { useSelector } from 'react-redux';
+import SingleLineMoviesListItem from '../components/SingleLineMoviesListItem';
 
-const mapStateToProps = (state, ownProps) => ({
-  movie: state.entities.movies[ownProps.movieId],
-});
+const SingleLineMoviesListItemContainer = ({ movieId, ...otherProps }) => {
+  const movie = useSelector((state) => state.entities.movies[movieId]);
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  loadData: () => dispatch(loadMovie(ownProps.movieId)),
-});
+  return <SingleLineMoviesListItem movie={movie} {...otherProps} />;
+};
 
-const SingleLineMoviesListItemContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withDataAutoload(SingleLineGridListItem));
 SingleLineMoviesListItemContainer.propTypes = {
   movieId: PropTypes.number.isRequired,
 };
