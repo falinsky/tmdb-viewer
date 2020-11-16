@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Chip from '@material-ui/core/Chip';
 import { withStyles } from '@material-ui/core/styles';
+import { useSelector } from 'react-redux';
 
 const styles = (theme) => ({
   root: {
@@ -9,14 +10,14 @@ const styles = (theme) => ({
   },
 });
 
-function Genre({ classes, genre }) {
+function Genre({ classes, genreId }) {
+  const genre = useSelector((state) => state.entities.genres[genreId]);
+
   return <Chip className={classes.root} label={genre ? genre.name : '...'} />;
 }
 
 Genre.propTypes = {
-  genre: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-  }),
+  genreId: PropTypes.number.isRequired,
   classes: PropTypes.object.isRequired,
 };
 
