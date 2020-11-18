@@ -3,7 +3,7 @@ import { watchPopularMoviesRequest } from './popularMovies';
 import { watchMovieRecommendationsRequest } from './movieRecommendations';
 import { watchGenresRequest } from './genres';
 import { watchSearchMoviesRequest } from './searchMovies';
-import { watchLoadMovie, watchMovieRequest } from './movie';
+import { watchMovieRequest } from './movie';
 
 export default function* rootSaga() {
   yield all([
@@ -12,6 +12,5 @@ export default function* rootSaga() {
     watchGenresRequest(),
     watchSearchMoviesRequest(),
     watchMovieRequest(),
-    watchLoadMovie(),
   ]);
 }

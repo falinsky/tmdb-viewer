@@ -1,11 +1,9 @@
-import { call, put, select, takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import * as api from '../api';
 import {
   FETCH_MOVIE_FAILURE,
   FETCH_MOVIE_REQUEST,
   FETCH_MOVIE_SUCCESS,
-  fetchMovie,
-  LOAD_MOVIE,
 } from '../actions';
 import { normalize } from 'normalizr';
 import * as schema from '../schema';
@@ -30,18 +28,4 @@ function* movieRequest(action) {
 
 export function* watchMovieRequest() {
   yield takeEvery(FETCH_MOVIE_REQUEST, movieRequest);
-}
-
-function* loadMovie(action) {
-  const { id } = action.payload;
-
-  const movie = yield select((store) => store.entities.movies[id]);
-
-  if (!movie) {
-    yield put(fetchMovie(id));
-  }
-}
-
-export function* watchLoadMovie() {
-  yield takeEvery(LOAD_MOVIE, loadMovie);
 }

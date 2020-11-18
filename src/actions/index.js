@@ -20,15 +20,6 @@ export const fetchMovie = (id) => ({
   },
 });
 
-export const LOAD_MOVIE = 'LOAD_MOVIE';
-
-export const loadMovie = (id) => ({
-  type: LOAD_MOVIE,
-  payload: {
-    id,
-  },
-});
-
 export const FETCH_MOVIE_RECOMMENDATIONS_REQUEST =
   'FETCH_MOVIE_RECOMMENDATIONS_REQUEST';
 export const FETCH_MOVIE_RECOMMENDATIONS_SUCCESS =
