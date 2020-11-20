@@ -10,7 +10,7 @@ import PopularMovies from '../containers/PopularMovies';
 import MovieDetails from '../components/MovieDetails';
 import MainMenu from '../components/MainMenu';
 import FavoriteMovies from '../containers/FavoriteMovies';
-import SearchMovies from '../containers/SearchMovies';
+import SearchMovies from '../components/SearchMovies';
 import SearchMoviesResult from '../containers/SearchMoviesResult';
 import SearchQueryRestore from '../containers/SearchQueryRestore';
 import AppBar from '@material-ui/core/AppBar';
