@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { getMoviePosterImageUrl, getMovieReleaseYear } from '../api';
-import MovieRecommendations from '../features/movie-recommendations/MovieRecommendations';
-import FavoriteBadge from '../features/favorites/FavoriteBadge';
+import { getMoviePosterImageUrl, getMovieReleaseYear } from '../../api';
+import MovieRecommendations from '../movie-recommendations/MovieRecommendations';
+import FavoriteBadge from '../favorites/FavoriteBadge';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -10,9 +10,9 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Rating from './Rating';
-import Genre from '../features/genres/Genre';
+import Genre from '../genres/Genre';
 import { useDispatch, useSelector } from 'react-redux';
-import fetchMovieDetails from '../features/movie-details/movieDetailsThunk';
+import fetchMovieDetails from './movieDetailsThunk';
 
 const styles = (theme) => ({
   card: {
