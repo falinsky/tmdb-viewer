@@ -1,4 +1,4 @@
-import imageFallback from '../no-image.png';
+import imageFallback from './no-image.png';
 
 const BASE_API_URL = '//api.themoviedb.org/3/';
 const BASE_IMG_API = '//image.tmdb.org/t/p/';
