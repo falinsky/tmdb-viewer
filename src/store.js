@@ -1,11 +1,23 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { loadState, saveState } from './localStorage';
-import rootReducer from './reducers';
+import popularMoviesReducer from './features/popular-movies/popularMoviesSlice';
+import genresReducer from './features/genres/genresSlice';
+import entitiesReducer from './reducers/entities';
+import movieRecommendationsReducer from './features/movie-recommendations/movieRecommendationsSlice';
+import favoritesReducer from './features/favorites/favoritesSlice';
+import searchMoviesReducer from './features/search-movies/searchMoviesSlice';
 
 const initialState = loadState();
 
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: {
+    popularMovies: popularMoviesReducer,
+    genres: genresReducer,
+    entities: entitiesReducer,
+    movieRecommendations: movieRecommendationsReducer,
+    favorites: favoritesReducer,
+    searchMovies: searchMoviesReducer,
+  },
   preloadedState: initialState,
 });
 
