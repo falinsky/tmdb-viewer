@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import Rating from './Rating';
 import Genre from '../features/genres/Genre';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchMovie } from '../actions';
+import fetchMovieDetails from '../features/movie-details/movieDetailsThunk';
 
 const styles = (theme) => ({
   card: {
@@ -48,7 +48,7 @@ function MovieDetails({ classes, match }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchMovie(movieId));
+    dispatch(fetchMovieDetails(movieId));
   }, [movieId, dispatch]);
 
   const movie = useSelector((state) => state.entities.movies[movieId]);
