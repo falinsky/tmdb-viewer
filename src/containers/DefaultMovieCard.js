@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import MovieCard from '../components/MovieCard';
 
-const MovieCardContainer = ({ movieId, ...otherProps }) => {
+const DefaultMovieCard = ({ movieId, ...otherProps }) => {
   const movie = useSelector((state) => state.entities.movies[movieId]);
 
   return <MovieCard movie={movie} {...otherProps} />;
 };
 
-MovieCardContainer.propTypes = {
+DefaultMovieCard.propTypes = {
   movieId: PropTypes.number.isRequired,
 };
 
-export default MovieCardContainer;
+export default DefaultMovieCard;
