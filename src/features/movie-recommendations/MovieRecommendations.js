@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import SingleLineMoviesList from './SingleLineMoviesList';
-import { fetchMovieRecommendations } from '../features/movie-recommendations/movieRecommendationsSlice';
+import SingleLineMoviesList from '../../components/SingleLineMoviesList';
+import { fetchMovieRecommendations } from './movieRecommendationsSlice';
 
 const MovieRecommendations = ({ movieId, title }) => {
   const dispatch = useDispatch();

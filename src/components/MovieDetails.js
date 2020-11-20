@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { getMoviePosterImageUrl, getMovieReleaseYear } from '../api';
-import MovieRecommendations from './MovieRecommendations';
+import MovieRecommendations from '../features/movie-recommendations/MovieRecommendations';
 import FavoriteBadge from './FavoriteBadge';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
