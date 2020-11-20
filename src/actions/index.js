@@ -9,20 +9,6 @@ export const fetchMovie = (id) => ({
   },
 });
 
-export const FETCH_MOVIE_RECOMMENDATIONS_REQUEST =
-  'FETCH_MOVIE_RECOMMENDATIONS_REQUEST';
-export const FETCH_MOVIE_RECOMMENDATIONS_SUCCESS =
-  'FETCH_MOVIE_RECOMMENDATIONS_SUCCESS';
-export const FETCH_MOVIE_RECOMMENDATIONS_FAILURE =
-  'FETCH_MOVIE_RECOMMENDATIONS_FAILURE';
-
-export const fetchMovieRecommendations = (id) => ({
-  type: FETCH_MOVIE_RECOMMENDATIONS_REQUEST,
-  payload: {
-    id,
-  },
-});
-
 export const FAVORITES_ADD_MOVIE = 'FAVORITES_ADD_MOVIE';
 export const FAVORITES_REMOVE_MOVIE = 'FAVORITES_REMOVE_MOVIE';
 
