@@ -6,7 +6,7 @@ import {
   Redirect,
   Switch,
 } from 'react-router-dom';
-import PopularMovies from './PopularMovies';
+import PopularMovies from '../features/popular-movies/PopularMovies';
 import MovieDetails from '../components/MovieDetails';
 import MainMenu from '../components/MainMenu';
 import FavoriteMovies from './FavoriteMovies';
