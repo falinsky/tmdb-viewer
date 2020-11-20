@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import InfiniteMoviesList from './InfiniteMoviesList';
-import { fetchPopularMovies } from '../actions';
+import { fetchPopularMovies } from '../features/popular-movies/popularMoviesSlice';
 
 const PopularMovies = () => {
   const movieIds = useSelector((state) => state.popularMovies.items);

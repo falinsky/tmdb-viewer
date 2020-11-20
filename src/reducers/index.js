@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import popularMovies from './popularMovies';
+import popularMoviesReducer from '../features/popular-movies/popularMoviesSlice';
 import genres from './genres';
 import entities from './entities';
 import movieRecommendations from './movieRecommendations';
@@ -7,7 +7,7 @@ import favorites from './favorites';
 import searchMovies from './searchMovies';
 
 export default combineReducers({
-  popularMovies,
+  popularMovies: popularMoviesReducer,
   genres,
   entities,
   movieRecommendations,
