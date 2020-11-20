@@ -6,7 +6,7 @@ import {
   WindowScroller,
   AutoSizer,
 } from 'react-virtualized';
-import MovieCard from '../containers/DefaultMovieCard';
+import MovieCard from './DefaultMovieCard';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';

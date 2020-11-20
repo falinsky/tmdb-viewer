@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import SingleLineMoviesListItem from '../components/SingleLineMoviesListItem';
+import SingleLineMoviesListItem from './SingleLineMoviesListItem';
 
 const SingleLineMoviesListDefaultItem = ({ movieId, ...otherProps }) => {
   const movie = useSelector((state) => state.entities.movies[movieId]);

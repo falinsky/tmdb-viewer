@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import MovieCard from '../components/MovieCard';
+import MovieCard from './MovieCard';
 import { fetchMovie } from '../actions';
 
 const FavoriteMovieCard = ({ movieId, ...otherProps }) => {

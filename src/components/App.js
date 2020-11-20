@@ -6,20 +6,20 @@ import {
   Redirect,
   Switch,
 } from 'react-router-dom';
-import PopularMovies from '../containers/PopularMovies';
+import PopularMovies from './PopularMovies';
 import MovieDetails from '../components/MovieDetails';
 import MainMenu from '../components/MainMenu';
-import FavoriteMovies from '../containers/FavoriteMovies';
+import FavoriteMovies from './FavoriteMovies';
 import SearchMovies from '../components/SearchMovies';
-import SearchMoviesResult from '../containers/SearchMoviesResult';
-import SearchQueryRestore from '../containers/SearchQueryRestore';
+import SearchMoviesResult from './SearchMoviesResult';
+import SearchQueryRestore from './SearchQueryRestore';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import { withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import LoadingIndicator from '../containers/LoadingIndicator';
+import LoadingIndicator from './LoadingIndicator';
 
 const styles = {
   toolbar: {

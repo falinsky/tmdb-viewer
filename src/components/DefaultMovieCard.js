@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import MovieCard from '../components/MovieCard';
+import MovieCard from './MovieCard';
 
 const DefaultMovieCard = ({ movieId, ...otherProps }) => {
   const movie = useSelector((state) => state.entities.movies[movieId]);
