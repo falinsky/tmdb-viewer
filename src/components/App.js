@@ -9,7 +9,7 @@ import {
 import PopularMovies from '../features/popular-movies/PopularMovies';
 import MovieDetails from '../components/MovieDetails';
 import MainMenu from '../components/MainMenu';
-import FavoriteMovies from './FavoriteMovies';
+import FavoriteMovies from '../features/favorites/FavoriteMovies';
 import SearchMovies from '../features/search-movies/SearchMovies';
 import SearchMoviesResult from '../features/search-movies/SearchMoviesResult';
 import SearchQueryRestore from '../features/search-movies/SearchQueryRestore';

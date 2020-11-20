@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
-import FavoriteBadge from './FavoriteBadge';
+import FavoriteBadge from '../features/favorites/FavoriteBadge';
 import { getMovieBackdropImageUrl } from '../api';
 import { Link } from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';

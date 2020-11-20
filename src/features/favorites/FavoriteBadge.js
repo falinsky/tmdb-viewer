@@ -6,7 +6,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import { withStyles } from '@material-ui/core/styles';
 import Tooltip from '@material-ui/core/Tooltip';
 import { useDispatch, useSelector } from 'react-redux';
-import { addMovie, removeMovie } from '../features/favorites/favoritesSlice';
+import { addMovie, removeMovie } from './favoritesSlice';
 
 const styles = (theme) => ({
   root: {

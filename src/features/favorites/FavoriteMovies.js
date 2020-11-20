@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import InfiniteMoviesList from './InfiniteMoviesList';
+import InfiniteMoviesList from '../../components/InfiniteMoviesList';
 import FavoriteMovieCard from './FavoriteMovieCard';
 
 const FavoriteMovies = () => {
