@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import SearchBar from 'material-ui-search-bar';
 import { withStyles } from '@material-ui/core/styles';
 import debounce from 'lodash/debounce';
-import { prepareForNewSearchMovies, updateSearchMoviesQuery } from '../actions';
+import {
+  updateQuery,
+  prepareForNewSearch,
+} from '../features/search-movies/searchMoviesSlice';
 import { connect } from 'react-redux';
 
 const styles = (theme) => ({
@@ -81,8 +84,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onChange: (value) => dispatch(updateSearchMoviesQuery(value)),
-  onSubmit: () => dispatch(prepareForNewSearchMovies()),
+  onChange: (value) => dispatch(updateQuery(value)),
+  onSubmit: () => dispatch(prepareForNewSearch()),
 });
 
 export default connect(

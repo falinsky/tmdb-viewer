@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { updateSearchMoviesQuery } from '../actions';
+import { updateQuery } from '../features/search-movies/searchMoviesSlice';
 
 // FIXME: should this functionality be merged with SearchMoviesResult and/or SearchMovies component(s)
 const SearchQueryRestore = ({ match }) => {
@@ -9,7 +9,7 @@ const SearchQueryRestore = ({ match }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(updateSearchMoviesQuery(query));
+    dispatch(updateQuery(query));
   }, [query, dispatch]);
 
   return null;

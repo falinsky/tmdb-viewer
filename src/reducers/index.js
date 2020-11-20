@@ -4,7 +4,7 @@ import genresReducer from '../features/genres/genresSlice';
 import entities from './entities';
 import movieRecommendationsReducer from '../features/movie-recommendations/movieRecommendationsSlice';
 import favorites from './favorites';
-import searchMovies from './searchMovies';
+import searchMoviesReducer from '../features/search-movies/searchMoviesSlice';
 
 export default combineReducers({
   popularMovies: popularMoviesReducer,
@@ -12,5 +12,5 @@ export default combineReducers({
   entities,
   movieRecommendations: movieRecommendationsReducer,
   favorites,
-  searchMovies,
+  searchMovies: searchMoviesReducer,
 });
