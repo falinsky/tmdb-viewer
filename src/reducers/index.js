@@ -3,7 +3,7 @@ import popularMoviesReducer from '../features/popular-movies/popularMoviesSlice'
 import genresReducer from '../features/genres/genresSlice';
 import entities from './entities';
 import movieRecommendationsReducer from '../features/movie-recommendations/movieRecommendationsSlice';
-import favorites from './favorites';
+import favoritesReducer from '../features/favorites/favoritesSlice';
 import searchMoviesReducer from '../features/search-movies/searchMoviesSlice';
 
 export default combineReducers({
@@ -11,6 +11,6 @@ export default combineReducers({
   genres: genresReducer,
   entities,
   movieRecommendations: movieRecommendationsReducer,
-  favorites,
+  favorites: favoritesReducer,
   searchMovies: searchMoviesReducer,
 });

@@ -6,7 +6,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import { withStyles } from '@material-ui/core/styles';
 import Tooltip from '@material-ui/core/Tooltip';
 import { useDispatch, useSelector } from 'react-redux';
-import { addMovieToFavorites, removeMovieFromFavorites } from '../actions';
+import { addMovie, removeMovie } from '../features/favorites/favoritesSlice';
 
 const styles = (theme) => ({
   root: {
@@ -22,9 +22,9 @@ function FavoriteBadge({ classes, movieId }) {
     e.preventDefault();
 
     if (inFavorites) {
-      dispatch(removeMovieFromFavorites(movieId));
+      dispatch(removeMovie(movieId));
     } else {
-      dispatch(addMovieToFavorites(movieId));
+      dispatch(addMovie(movieId));
     }
   };
 
