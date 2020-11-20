@@ -10,7 +10,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Rating from './Rating';
-import Genre from './Genre';
+import Genre from '../features/genres/Genre';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMovie } from '../actions';
 
