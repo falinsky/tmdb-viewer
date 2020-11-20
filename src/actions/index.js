@@ -2,11 +2,8 @@ export const FETCH_POPULAR_MOVIES_REQUEST = 'FETCH_POPULAR_MOVIES_REQUEST';
 export const FETCH_POPULAR_MOVIES_SUCCESS = 'FETCH_POPULAR_MOVIES_SUCCESS';
 export const FETCH_POPULAR_MOVIES_FAILURE = 'FETCH_POPULAR_MOVIES_FAILURE';
 
-export const fetchPopularMovies = (page) => ({
+export const fetchPopularMovies = () => ({
   type: FETCH_POPULAR_MOVIES_REQUEST,
-  payload: {
-    page,
-  },
 });
 
 export const FETCH_MOVIE_REQUEST = 'FETCH_MOVIE_REQUEST';

@@ -8,11 +8,9 @@ import {
 import { normalize } from 'normalizr';
 import * as schema from '../schema';
 
-function* popularMoviesRequest(action) {
+function* popularMoviesRequest() {
   try {
-    const page =
-      action.payload.page ||
-      (yield select((store) => store.popularMovies.page)) + 1;
+    const page = (yield select((store) => store.popularMovies.page)) + 1;
     const data = yield call(api.getPopularMovies, page);
 
     yield put({
