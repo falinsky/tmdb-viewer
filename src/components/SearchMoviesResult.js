@@ -19,8 +19,8 @@ const SearchMoviesResult = () => {
       hasMore={hasMore}
       isFetching={isFetching}
       reset={reset}
-      fetchMovies={(page) => {
-        dispatch(searchMovies(query, page));
+      fetchMovies={() => {
+        dispatch(searchMovies(query));
       }}
     />
   );

@@ -12,9 +12,7 @@ function* searchMoviesRequest(action) {
   const { query } = action.payload;
 
   try {
-    const page =
-      action.payload.page ||
-      (yield select((store) => store.searchMovies.page)) + 1;
+    const page = (yield select((store) => store.searchMovies.page)) + 1;
     const data = yield call(api.searchMovies, query, page);
 
     yield put({
