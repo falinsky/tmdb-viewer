@@ -4,7 +4,7 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './store';
 import App from './components/App';
-import { fetchGenres } from './actions';
+import { fetchGenres } from './features/genres/genresSlice';
 
 store.dispatch(fetchGenres());
 
