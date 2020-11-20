@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import InfiniteMoviesList from './InfiniteMoviesList';
-import { searchMovies } from '../features/search-movies/searchMoviesSlice';
+import InfiniteMoviesList from '../../components/InfiniteMoviesList';
+import { searchMovies } from './searchMoviesSlice';
 
 const SearchMoviesResult = () => {
   const movieIds = useSelector((state) => state.searchMovies.items);

@@ -3,10 +3,7 @@ import PropTypes from 'prop-types';
 import SearchBar from 'material-ui-search-bar';
 import { withStyles } from '@material-ui/core/styles';
 import debounce from 'lodash/debounce';
-import {
-  updateQuery,
-  prepareForNewSearch,
-} from '../features/search-movies/searchMoviesSlice';
+import { updateQuery, prepareForNewSearch } from './searchMoviesSlice';
 import { connect } from 'react-redux';
 
 const styles = (theme) => ({

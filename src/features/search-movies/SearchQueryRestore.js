@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { updateQuery } from '../features/search-movies/searchMoviesSlice';
+import { updateQuery } from './searchMoviesSlice';
 
 // FIXME: should this functionality be merged with SearchMoviesResult and/or SearchMovies component(s)
 const SearchQueryRestore = ({ match }) => {
