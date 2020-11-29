@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import * as api from '../../api';
+import * as api from '../../app/api';
 import { normalize } from 'normalizr';
-import * as schema from '../../schema';
+import * as schema from '../../app/schema';
 
 export const fetchMovieRecommendations = createAsyncThunk(
   'movieRecommendations/fetchMovieRecommendations',

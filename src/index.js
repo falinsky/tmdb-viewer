@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
-import store from './store';
+import store from './app/store';
 import App from './app/App';
 import { fetchGenres } from './features/genres/genresSlice';
 

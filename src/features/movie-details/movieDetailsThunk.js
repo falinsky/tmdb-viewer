@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import * as api from '../../api';
+import * as api from '../../app/api';
 import { normalize } from 'normalizr';
-import * as schema from '../../schema';
+import * as schema from '../../app/schema';
 
 const fetchMovieDetails = createAsyncThunk(
   'movieDetails/fetchMovieDetails',
