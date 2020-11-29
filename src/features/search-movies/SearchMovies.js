@@ -33,7 +33,7 @@ class SearchMovies extends React.Component {
     const { query, onSubmit, history } = this.props;
 
     if (query.trim()) {
-      onSubmit(query);
+      onSubmit();
       history.push(`/search/${query}`);
     }
   }
