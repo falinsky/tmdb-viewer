@@ -5,13 +5,14 @@ import MovieCard from '../../app/MovieCard';
 import fetchMovieDetails from '../movie-details/movieDetailsThunk';
 
 const FavoriteMovieCard = ({ movieId, ...otherProps }) => {
+  const movie = useSelector((state) => state.entities.movies[movieId]);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchMovieDetails(movieId));
-  }, [movieId, dispatch]);
-
-  const movie = useSelector((state) => state.entities.movies[movieId]);
+    if (!movie) {
+      dispatch(fetchMovieDetails(movieId));
+    }
+  }, [movieId, dispatch, movie]);
 
   return <MovieCard movie={movie} {...otherProps} />;
 };
