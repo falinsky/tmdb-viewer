@@ -10,7 +10,6 @@ const SearchMoviesResult = () => {
   );
   const isFetching = useSelector((state) => state.searchMovies.isFetching);
   const reset = useSelector((state) => state.searchMovies.reset);
-  const query = useSelector((state) => state.searchMovies.query);
   const dispatch = useDispatch();
 
   return (
@@ -20,7 +19,7 @@ const SearchMoviesResult = () => {
       isFetching={isFetching}
       reset={reset}
       fetchMovies={() => {
-        dispatch(searchMovies(query));
+        dispatch(searchMovies());
       }}
     />
   );

@@ -5,9 +5,9 @@ import * as schema from '../../app/schema';
 
 export const searchMovies = createAsyncThunk(
   'searchMovies/searchMovies',
-  async (query, { getState }) => {
+  async (_, { getState }) => {
     const {
-      searchMovies: { page },
+      searchMovies: { page, query },
     } = getState();
 
     const data = await api.searchMovies(query, page + 1);
