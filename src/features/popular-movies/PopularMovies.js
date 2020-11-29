@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import InfiniteMoviesList from '../../components/InfiniteMoviesList';
+import InfiniteMoviesList from '../../app/InfiniteMoviesList';
 import { fetchPopularMovies } from './popularMoviesSlice';
 
 const PopularMovies = () => {

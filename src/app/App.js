@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 import PopularMovies from '../features/popular-movies/PopularMovies';
 import MovieDetails from '../features/movie-details/MovieDetails';
-import MainMenu from '../components/MainMenu';
+import MainMenu from './MainMenu';
 import FavoriteMovies from '../features/favorites/FavoriteMovies';
 import SearchMovies from '../features/search-movies/SearchMovies';
 import SearchMoviesResult from '../features/search-movies/SearchMoviesResult';
