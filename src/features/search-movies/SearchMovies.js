@@ -41,7 +41,7 @@ class SearchMovies extends React.Component {
   handleChange(value) {
     this.props.onChange(value);
 
-    this.handleDebouncedRequestSearch(this.props.query);
+    this.handleDebouncedRequestSearch();
   }
 
   componentWillUnmount() {
