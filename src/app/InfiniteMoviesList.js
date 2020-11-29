@@ -139,7 +139,7 @@ class InfiniteMoviesList extends React.PureComponent {
                         rowRenderer={({ index, style, key }) => {
                           const { movieIds, classes } = this.props;
                           const maxItemsPerRow = getMaxItemsAmountPerRow(width);
-                          const moviesIds = generateIndexesForRow(
+                          const movieIdsForRow = generateIndexesForRow(
                             index,
                             maxItemsPerRow,
                             movieIds.length
@@ -151,7 +151,7 @@ class InfiniteMoviesList extends React.PureComponent {
                               key={key}
                               className={classes.row}
                             >
-                              {moviesIds.map((movieId) => (
+                              {movieIdsForRow.map((movieId) => (
                                 <RowItem
                                   key={movieId}
                                   movieId={movieId}
