@@ -11,9 +11,6 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
-const ITEM_WIDTH = 400;
-const ITEM_HEIGHT = 360;
-
 const styles = (theme) => ({
   grid: {
     marginTop: theme.spacing(1),
@@ -97,7 +94,7 @@ class InfiniteMoviesList extends React.PureComponent {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, itemWidth, itemHeight } = this.props;
 
     return (
       <section>
@@ -106,7 +103,7 @@ class InfiniteMoviesList extends React.PureComponent {
             const { movieIds, hasMore } = this.props;
             const rowCount = getRowsAmount(
               width,
-              ITEM_WIDTH,
+              itemWidth,
               movieIds.length,
               hasMore
             );
@@ -121,7 +118,7 @@ class InfiniteMoviesList extends React.PureComponent {
                     generateIndexesForRow(
                       index,
                       width,
-                      ITEM_WIDTH,
+                      itemWidth,
                       movieIds.length
                     ).length > 0;
 
@@ -140,14 +137,14 @@ class InfiniteMoviesList extends React.PureComponent {
                         scrollTop={scrollTop}
                         width={width}
                         rowCount={rowCount}
-                        rowHeight={ITEM_HEIGHT}
+                        rowHeight={itemHeight}
                         onRowsRendered={onRowsRendered}
                         rowRenderer={({ index, style, key }) => {
                           const { movieIds, classes } = this.props;
                           const movieIdsForRow = generateIndexesForRow(
                             index,
                             width,
-                            ITEM_WIDTH,
+                            itemWidth,
                             movieIds.length
                           ).map((movieIndex) => movieIds[movieIndex]);
 
@@ -165,7 +162,7 @@ class InfiniteMoviesList extends React.PureComponent {
                                   itemComponentType={
                                     this.props.itemComponentType
                                   }
-                                  width={ITEM_WIDTH}
+                                  width={itemWidth}
                                 />
                               ))}
                             </div>
@@ -192,6 +189,8 @@ InfiniteMoviesList.defaultProps = {
   reset: false,
   fetchMovies: () => {},
   itemComponentType: MovieCard,
+  itemWidth: 400,
+  itemHeight: 360,
 };
 
 InfiniteMoviesList.propTypes = {
@@ -202,6 +201,8 @@ InfiniteMoviesList.propTypes = {
   reset: PropTypes.bool,
   classes: PropTypes.object.isRequired,
   itemComponentType: PropTypes.elementType.isRequired,
+  itemWidth: PropTypes.number,
+  itemHeight: PropTypes.number,
 };
 
 export default withStyles(styles)(InfiniteMoviesList);
