@@ -33,8 +33,9 @@ const styles = (theme) => ({
   },
 });
 
-function generateIndexesForRow(rowIndex, maxItemsPerRow, itemsAmount) {
+function generateIndexesForRow(rowIndex, rowWidth, itemsAmount) {
   const result = [];
+  const maxItemsPerRow = getMaxItemsAmountPerRow(rowWidth);
   const startIndex = rowIndex * maxItemsPerRow;
 
   for (
@@ -111,13 +112,9 @@ class InfiniteMoviesList extends React.PureComponent {
                 rowCount={rowCount}
                 isRowLoaded={({ index }) => {
                   const { hasMore, movieIds } = this.props;
-                  const maxItemsPerRow = getMaxItemsAmountPerRow(width);
                   const allItemsLoaded =
-                    generateIndexesForRow(
-                      index,
-                      maxItemsPerRow,
-                      movieIds.length
-                    ).length > 0;
+                    generateIndexesForRow(index, width, movieIds.length)
+                      .length > 0;
 
                   return !hasMore || allItemsLoaded;
                 }}
@@ -138,10 +135,9 @@ class InfiniteMoviesList extends React.PureComponent {
                         onRowsRendered={onRowsRendered}
                         rowRenderer={({ index, style, key }) => {
                           const { movieIds, classes } = this.props;
-                          const maxItemsPerRow = getMaxItemsAmountPerRow(width);
                           const movieIdsForRow = generateIndexesForRow(
                             index,
-                            maxItemsPerRow,
+                            width,
                             movieIds.length
                           ).map((movieIndex) => movieIds[movieIndex]);
 
