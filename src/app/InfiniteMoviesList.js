@@ -33,9 +33,9 @@ const styles = (theme) => ({
   },
 });
 
-function generateIndexesForRow(rowIndex, rowWidth, itemsAmount) {
+function generateIndexesForRow(rowIndex, rowWidth, itemWidth, itemsAmount) {
   const result = [];
-  const maxItemsPerRow = getMaxItemsAmountPerRow(rowWidth);
+  const maxItemsPerRow = getMaxItemsAmountPerRow(rowWidth, itemWidth);
   const startIndex = rowIndex * maxItemsPerRow;
 
   for (
@@ -49,12 +49,12 @@ function generateIndexesForRow(rowIndex, rowWidth, itemsAmount) {
   return result;
 }
 
-function getMaxItemsAmountPerRow(rowWidth) {
-  return Math.max(Math.floor(rowWidth / ITEM_WIDTH), 1);
+function getMaxItemsAmountPerRow(rowWidth, itemWidth) {
+  return Math.max(Math.floor(rowWidth / itemWidth), 1);
 }
 
-function getRowsAmount(rowWidth, itemsAmount, hasMore) {
-  const maxItemsPerRow = getMaxItemsAmountPerRow(rowWidth);
+function getRowsAmount(rowWidth, itemWidth, itemsAmount, hasMore) {
+  const maxItemsPerRow = getMaxItemsAmountPerRow(rowWidth, itemWidth);
 
   return Math.ceil(itemsAmount / maxItemsPerRow) + (hasMore ? 1 : 0);
 }
@@ -104,7 +104,12 @@ class InfiniteMoviesList extends React.PureComponent {
         <AutoSizer disableHeight>
           {({ width }) => {
             const { movieIds, hasMore } = this.props;
-            const rowCount = getRowsAmount(width, movieIds.length, hasMore);
+            const rowCount = getRowsAmount(
+              width,
+              ITEM_WIDTH,
+              movieIds.length,
+              hasMore
+            );
 
             return (
               <InfiniteLoader
@@ -113,8 +118,12 @@ class InfiniteMoviesList extends React.PureComponent {
                 isRowLoaded={({ index }) => {
                   const { hasMore, movieIds } = this.props;
                   const allItemsLoaded =
-                    generateIndexesForRow(index, width, movieIds.length)
-                      .length > 0;
+                    generateIndexesForRow(
+                      index,
+                      width,
+                      ITEM_WIDTH,
+                      movieIds.length
+                    ).length > 0;
 
                   return !hasMore || allItemsLoaded;
                 }}
@@ -138,6 +147,7 @@ class InfiniteMoviesList extends React.PureComponent {
                           const movieIdsForRow = generateIndexesForRow(
                             index,
                             width,
+                            ITEM_WIDTH,
                             movieIds.length
                           ).map((movieIndex) => movieIds[movieIndex]);
 
