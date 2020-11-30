@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import {
   InfiniteLoader,
@@ -68,121 +68,112 @@ const RowItem = React.memo(function RowItem({
   );
 });
 
-class InfiniteMoviesList extends React.PureComponent {
-  infiniteLoaderRef = React.createRef();
+const InfiniteMoviesList = ({
+  classes,
+  itemWidth,
+  itemHeight,
+  hasMore,
+  movieIds,
+  itemComponentType,
+  reset,
+  isFetching,
+  fetchMovies,
+}) => {
+  const infiniteLoaderRef = useRef();
 
-  loadMoreRows = () => {
-    if (!this.props.isFetching) {
-      this.props.fetchMovies();
+  useEffect(() => {
+    if (reset && infiniteLoaderRef.current) {
+      infiniteLoaderRef.current.resetLoadMoreRowsCache(true);
+    }
+  }, [reset, infiniteLoaderRef]);
+
+  const loadMoreRows = () => {
+    if (!isFetching) {
+      fetchMovies();
     }
   };
 
-  noRowsRenderer = () => (
+  const noRowsRenderer = () => (
     <Grid item>
       <Typography>No movies found</Typography>
     </Grid>
   );
 
-  componentDidUpdate(prevProps) {
-    if (
-      !prevProps.reset &&
-      this.props.reset &&
-      this.infiniteLoaderRef.current
-    ) {
-      this.infiniteLoaderRef.current.resetLoadMoreRowsCache(true);
-    }
-  }
+  return (
+    <section>
+      <AutoSizer disableHeight>
+        {({ width: rowWidth }) => {
+          const rowCount = getRowsAmount(
+            rowWidth,
+            itemWidth,
+            movieIds.length,
+            hasMore
+          );
 
-  render() {
-    const {
-      classes,
-      itemWidth,
-      itemHeight,
-      hasMore,
-      movieIds,
-      itemComponentType,
-    } = this.props;
+          return (
+            <InfiniteLoader
+              ref={infiniteLoaderRef}
+              rowCount={rowCount}
+              isRowLoaded={({ index }) => {
+                const allItemsLoaded =
+                  generateIndexesForRow(
+                    index,
+                    rowWidth,
+                    itemWidth,
+                    movieIds.length
+                  ).length > 0;
 
-    return (
-      <section>
-        <AutoSizer disableHeight>
-          {({ width: rowWidth }) => {
-            const rowCount = getRowsAmount(
-              rowWidth,
-              itemWidth,
-              movieIds.length,
-              hasMore
-            );
+                return !hasMore || allItemsLoaded;
+              }}
+              loadMoreRows={loadMoreRows}
+            >
+              {({ onRowsRendered, registerChild }) => (
+                <WindowScroller>
+                  {({ height, scrollTop }) => (
+                    <List
+                      className={classes.grid}
+                      autoHeight
+                      ref={registerChild}
+                      height={height}
+                      scrollTop={scrollTop}
+                      width={rowWidth}
+                      rowCount={rowCount}
+                      rowHeight={itemHeight}
+                      onRowsRendered={onRowsRendered}
+                      rowRenderer={({ index, style, key }) => {
+                        const movieIdsForRow = generateIndexesForRow(
+                          index,
+                          rowWidth,
+                          itemWidth,
+                          movieIds.length
+                        ).map((movieIndex) => movieIds[movieIndex]);
 
-            return (
-              <InfiniteLoader
-                ref={this.infiniteLoaderRef}
-                rowCount={rowCount}
-                isRowLoaded={({ index }) => {
-                  const allItemsLoaded =
-                    generateIndexesForRow(
-                      index,
-                      rowWidth,
-                      itemWidth,
-                      movieIds.length
-                    ).length > 0;
-
-                  return !hasMore || allItemsLoaded;
-                }}
-                loadMoreRows={this.loadMoreRows}
-              >
-                {({ onRowsRendered, registerChild }) => (
-                  <WindowScroller>
-                    {({ height, scrollTop }) => (
-                      <List
-                        className={classes.grid}
-                        autoHeight
-                        ref={registerChild}
-                        height={height}
-                        scrollTop={scrollTop}
-                        width={rowWidth}
-                        rowCount={rowCount}
-                        rowHeight={itemHeight}
-                        onRowsRendered={onRowsRendered}
-                        rowRenderer={({ index, style, key }) => {
-                          const movieIdsForRow = generateIndexesForRow(
-                            index,
-                            rowWidth,
-                            itemWidth,
-                            movieIds.length
-                          ).map((movieIndex) => movieIds[movieIndex]);
-
-                          return (
-                            <div
-                              style={style}
-                              key={key}
-                              className={classes.row}
-                            >
-                              {movieIdsForRow.map((movieId) => (
-                                <RowItem
-                                  key={movieId}
-                                  movieId={movieId}
-                                  classes={classes}
-                                  itemComponentType={itemComponentType}
-                                  width={itemWidth}
-                                />
-                              ))}
-                            </div>
-                          );
-                        }}
-                        noRowsRenderer={this.noRowsRenderer}
-                      />
-                    )}
-                  </WindowScroller>
-                )}
-              </InfiniteLoader>
-            );
-          }}
-        </AutoSizer>
-      </section>
-    );
-  }
-}
+                        return (
+                          <div style={style} key={key} className={classes.row}>
+                            {movieIdsForRow.map((movieId) => (
+                              <RowItem
+                                key={movieId}
+                                movieId={movieId}
+                                classes={classes}
+                                itemComponentType={itemComponentType}
+                                width={itemWidth}
+                              />
+                            ))}
+                          </div>
+                        );
+                      }}
+                      noRowsRenderer={noRowsRenderer}
+                    />
+                  )}
+                </WindowScroller>
+              )}
+            </InfiniteLoader>
+          );
+        }}
+      </AutoSizer>
+    </section>
+  );
+};
 
 InfiniteMoviesList.defaultProps = {
   movieIds: [],
