@@ -193,7 +193,7 @@ InfiniteMoviesList.propTypes = {
   isFetching: PropTypes.bool,
   reset: PropTypes.bool,
   classes: PropTypes.object.isRequired,
-  itemComponentType: PropTypes.elementType.isRequired,
+  itemComponentType: PropTypes.elementType,
   itemWidth: PropTypes.number,
   itemHeight: PropTypes.number,
 };
