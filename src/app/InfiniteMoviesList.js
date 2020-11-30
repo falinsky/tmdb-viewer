@@ -65,7 +65,7 @@ const RowItem = React.memo(function RowItem({
   itemComponentType: ItemComponentType,
 }) {
   return (
-    <Grid item className={classes.gridItem} key={movieId}>
+    <Grid item className={classes.gridItem}>
       <ItemComponentType movieId={movieId} classes={{ root: classes.card }} />
     </Grid>
   );
