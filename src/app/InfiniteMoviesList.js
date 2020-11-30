@@ -21,7 +21,6 @@ const styles = (theme) => ({
     justifyContent: 'center',
   },
   gridItem: {
-    width: ITEM_WIDTH,
     padding: theme.spacing(1.5),
   },
   card: {
@@ -63,9 +62,10 @@ const RowItem = React.memo(function RowItem({
   movieId,
   classes,
   itemComponentType: ItemComponentType,
+  width,
 }) {
   return (
-    <Grid item className={classes.gridItem}>
+    <Grid item className={classes.gridItem} style={{ width }}>
       <ItemComponentType movieId={movieId} classes={{ root: classes.card }} />
     </Grid>
   );
@@ -165,6 +165,7 @@ class InfiniteMoviesList extends React.PureComponent {
                                   itemComponentType={
                                     this.props.itemComponentType
                                   }
+                                  width={ITEM_WIDTH}
                                 />
                               ))}
                             </div>
