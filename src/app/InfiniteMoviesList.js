@@ -94,13 +94,19 @@ class InfiniteMoviesList extends React.PureComponent {
   }
 
   render() {
-    const { classes, itemWidth, itemHeight } = this.props;
+    const {
+      classes,
+      itemWidth,
+      itemHeight,
+      hasMore,
+      movieIds,
+      itemComponentType,
+    } = this.props;
 
     return (
       <section>
         <AutoSizer disableHeight>
           {({ width: rowWidth }) => {
-            const { movieIds, hasMore } = this.props;
             const rowCount = getRowsAmount(
               rowWidth,
               itemWidth,
@@ -113,7 +119,6 @@ class InfiniteMoviesList extends React.PureComponent {
                 ref={this.infiniteLoaderRef}
                 rowCount={rowCount}
                 isRowLoaded={({ index }) => {
-                  const { hasMore, movieIds } = this.props;
                   const allItemsLoaded =
                     generateIndexesForRow(
                       index,
@@ -140,7 +145,6 @@ class InfiniteMoviesList extends React.PureComponent {
                         rowHeight={itemHeight}
                         onRowsRendered={onRowsRendered}
                         rowRenderer={({ index, style, key }) => {
-                          const { movieIds, classes } = this.props;
                           const movieIdsForRow = generateIndexesForRow(
                             index,
                             rowWidth,
@@ -159,9 +163,7 @@ class InfiniteMoviesList extends React.PureComponent {
                                   key={movieId}
                                   movieId={movieId}
                                   classes={classes}
-                                  itemComponentType={
-                                    this.props.itemComponentType
-                                  }
+                                  itemComponentType={itemComponentType}
                                   width={itemWidth}
                                 />
                               ))}
