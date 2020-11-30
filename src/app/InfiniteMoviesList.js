@@ -49,12 +49,12 @@ function generateIndexesForRow(rowIndex, rowWidth, itemsAmount) {
   return result;
 }
 
-function getMaxItemsAmountPerRow(width) {
-  return Math.max(Math.floor(width / ITEM_WIDTH), 1);
+function getMaxItemsAmountPerRow(rowWidth) {
+  return Math.max(Math.floor(rowWidth / ITEM_WIDTH), 1);
 }
 
-function getRowsAmount(width, itemsAmount, hasMore) {
-  const maxItemsPerRow = getMaxItemsAmountPerRow(width);
+function getRowsAmount(rowWidth, itemsAmount, hasMore) {
+  const maxItemsPerRow = getMaxItemsAmountPerRow(rowWidth);
 
   return Math.ceil(itemsAmount / maxItemsPerRow) + (hasMore ? 1 : 0);
 }
