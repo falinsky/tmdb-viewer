@@ -20,9 +20,6 @@ const styles = (theme) => ({
   gridItem: {
     padding: theme.spacing(1.5),
   },
-  card: {
-    height: '100%',
-  },
   row: {
     display: 'flex',
     justifyContent: 'center',
@@ -63,7 +60,7 @@ const RowItem = React.memo(function RowItem({
 }) {
   return (
     <Grid item className={classes.gridItem} style={{ width }}>
-      <ItemComponentType movieId={movieId} classes={{ root: classes.card }} />
+      <ItemComponentType movieId={movieId} />
     </Grid>
   );
 });

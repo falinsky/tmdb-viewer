@@ -10,7 +10,9 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
-  root: {},
+  root: {
+    height: '100%',
+  },
   actionArea: {
     height: '100%',
   },
