@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { getMoviePosterImageUrl, getMovieReleaseYear } from '../../app/api';
 import MovieRecommendations from '../movie-recommendations/MovieRecommendations';
 import FavoriteBadge from '../favorites/FavoriteBadge';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -14,7 +14,7 @@ import Genre from '../genres/Genre';
 import { useDispatch, useSelector } from 'react-redux';
 import fetchMovieDetails from './movieDetailsThunk';
 
-const styles = (theme) => ({
+const useStyles = makeStyles((theme) => ({
   card: {
     display: 'flex',
     marginTop: theme.spacing(2),
@@ -41,10 +41,11 @@ const styles = (theme) => ({
   section: {
     marginTop: theme.spacing(2),
   },
-});
+}));
 
-function MovieDetails({ classes, match }) {
+function MovieDetails({ match }) {
   const { movieId } = match.params;
+  const classes = useStyles();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -114,7 +115,6 @@ MovieDetails.propTypes = {
       movieId: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
-  classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(MovieDetails);
+export default MovieDetails;

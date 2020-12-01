@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import FavoriteBadge from '../features/favorites/FavoriteBadge';
@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
 import LinkIcon from '@material-ui/icons/Link';
 
-const styles = (theme) => ({
+const useStyles = makeStyles((theme) => ({
   title: {
     color: theme.palette.primary.contrastText,
   },
@@ -20,9 +20,11 @@ const styles = (theme) => ({
   actionIcon: {
     display: 'flex',
   },
-});
+}));
 
-function SingleLineMoviesListItem({ classes, movie, movieId, ...otherProps }) {
+function SingleLineMoviesListItem({ movie, movieId, ...otherProps }) {
+  const classes = useStyles();
+
   return (
     <GridListTile {...otherProps}>
       <img src={getMovieBackdropImageUrl(movie)} alt={movie.title} />
@@ -35,10 +37,7 @@ function SingleLineMoviesListItem({ classes, movie, movieId, ...otherProps }) {
         }}
         actionIcon={
           <React.Fragment>
-            <FavoriteBadge
-              movieId={movie.id}
-              classes={{ root: classes.title }}
-            />
+            <FavoriteBadge movieId={movie.id} className={classes.title} />
             <IconButton
               component={Link}
               to={`/movie/${movie.id}`}
@@ -58,7 +57,6 @@ SingleLineMoviesListItem.propTypes = {
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
   }),
-  classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SingleLineMoviesListItem);
+export default SingleLineMoviesListItem;

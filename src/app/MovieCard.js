@@ -7,9 +7,9 @@ import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
-const styles = {
+const useStyles = makeStyles({
   root: {
     height: '100%',
   },
@@ -20,9 +20,11 @@ const styles = {
     height: 0,
     paddingTop: '56.25%', // 16:9
   },
-};
+});
 
-function MovieCard({ classes, movie }) {
+function MovieCard({ movie }) {
+  const classes = useStyles();
+
   if (!movie) {
     return null;
   }
@@ -54,7 +56,6 @@ MovieCard.propTypes = {
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
   }),
-  classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(MovieCard);
+export default MovieCard;

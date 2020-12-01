@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
   BrowserRouter as Router,
   Route,
@@ -14,13 +13,13 @@ import SearchMovies from '../features/search-movies/SearchMovies';
 import SearchMoviesResult from '../features/search-movies/SearchMoviesResult';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import LoadingIndicator from './LoadingIndicator';
 
-const styles = {
+const useStyles = makeStyles({
   toolbar: {
     justifyContent: 'space-between',
   },
@@ -35,9 +34,11 @@ const styles = {
     position: 'absolute',
     width: '100%',
   },
-};
+});
 
-function App({ classes }) {
+function App() {
+  const classes = useStyles();
+
   return (
     <Router>
       <CssBaseline />
@@ -81,8 +82,4 @@ function App({ classes }) {
   );
 }
 
-App.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(App);
+export default App;

@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import SearchBar from 'material-ui-search-bar';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import debounce from 'lodash/debounce';
 import { prepareForNewSearch } from './searchMoviesSlice';
 import { useDispatch } from 'react-redux';
 
-const styles = (theme) => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
@@ -18,9 +18,10 @@ const styles = (theme) => ({
       width: '100%',
     },
   },
-});
+}));
 
-const SearchMovies = ({ classes, history, match }) => {
+const SearchMovies = ({ history, match }) => {
+  const classes = useStyles();
   const [query, setQuery] = useState('');
   const dispatch = useDispatch();
 
@@ -67,7 +68,6 @@ const SearchMovies = ({ classes, history, match }) => {
 };
 
 SearchMovies.propTypes = {
-  classes: PropTypes.object.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
@@ -78,4 +78,4 @@ SearchMovies.propTypes = {
   }).isRequired,
 };
 
-export default withStyles(styles)(SearchMovies);
+export default SearchMovies;

@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import GridList from '@material-ui/core/GridList';
 import SingleLineMoviesListItem from './SingleLineMoviesListDefaultItem';
 import Paper from '@material-ui/core/Paper';
 
-const styles = (theme) => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     overflow: 'hidden',
     backgroundColor: theme.palette.background.paper,
@@ -19,9 +19,11 @@ const styles = (theme) => ({
     // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
     transform: 'translateZ(0)',
   },
-});
+}));
 
-function SingleLineMoviesList({ classes, title, movieIds }) {
+function SingleLineMoviesList({ title, movieIds }) {
+  const classes = useStyles();
+
   return (
     <Paper className={classes.root} component="section" elevation={2}>
       {title && (
@@ -49,7 +51,6 @@ SingleLineMoviesList.defaultProps = {
 SingleLineMoviesList.propTypes = {
   movieIds: PropTypes.arrayOf(PropTypes.number.isRequired),
   title: PropTypes.string,
-  classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SingleLineMoviesList);
+export default SingleLineMoviesList;

@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Avatar from '@material-ui/core/Avatar';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
-const styles = (theme) => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     width: 44,
     height: 44,
@@ -21,9 +21,11 @@ const styles = (theme) => ({
     color: theme.palette.secondary.contrastText,
     padding: theme.spacing(1),
   },
-});
+}));
 
-function Rating({ classes, value }) {
+function Rating({ value }) {
+  const classes = useStyles();
+
   return (
     <Avatar className={classes.root}>
       <span className={classes.value}>
@@ -42,8 +44,7 @@ function Rating({ classes, value }) {
 }
 
 Rating.propTypes = {
-  classes: PropTypes.object.isRequired,
   value: PropTypes.number.isRequired,
 };
 
-export default withStyles(styles)(Rating);
+export default Rating;

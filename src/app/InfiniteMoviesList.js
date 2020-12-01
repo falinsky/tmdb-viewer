@@ -9,9 +9,9 @@ import {
 import MovieCard from './DefaultMovieCard';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
-const styles = (theme) => ({
+const useStyles = makeStyles((theme) => ({
   grid: {
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
@@ -24,7 +24,7 @@ const styles = (theme) => ({
     display: 'flex',
     justifyContent: 'center',
   },
-});
+}));
 
 function generateIndexesForRow(rowIndex, rowWidth, itemWidth, itemsAmount) {
   const result = [];
@@ -54,19 +54,18 @@ function getRowsAmount(rowWidth, itemWidth, itemsAmount, hasMore) {
 
 const RowItem = React.memo(function RowItem({
   movieId,
-  classes,
+  className,
   itemComponentType: ItemComponentType,
   width,
 }) {
   return (
-    <Grid item className={classes.gridItem} style={{ width }}>
+    <Grid item className={className} style={{ width }}>
       <ItemComponentType movieId={movieId} />
     </Grid>
   );
 });
 
 const InfiniteMoviesList = ({
-  classes,
   itemWidth,
   itemHeight,
   hasMore,
@@ -76,6 +75,7 @@ const InfiniteMoviesList = ({
   isFetching,
   fetchMovies,
 }) => {
+  const classes = useStyles();
   const infiniteLoaderRef = useRef();
 
   useEffect(() => {
@@ -151,7 +151,7 @@ const InfiniteMoviesList = ({
                               <RowItem
                                 key={movieId}
                                 movieId={movieId}
-                                classes={classes}
+                                className={classes.gridItem}
                                 itemComponentType={itemComponentType}
                                 width={itemWidth}
                               />
@@ -189,10 +189,9 @@ InfiniteMoviesList.propTypes = {
   hasMore: PropTypes.bool,
   isFetching: PropTypes.bool,
   reset: PropTypes.bool,
-  classes: PropTypes.object.isRequired,
   itemComponentType: PropTypes.elementType,
   itemWidth: PropTypes.number,
   itemHeight: PropTypes.number,
 };
 
-export default withStyles(styles)(InfiniteMoviesList);
+export default InfiniteMoviesList;

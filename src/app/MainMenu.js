@@ -2,15 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
-const styles = {
+const useStyles = makeStyles({
   root: {
     flexShrink: 0,
   },
-};
+});
 
-function MainMenu({ classes, location, history, items }) {
+function MainMenu({ location, history, items }) {
+  const classes = useStyles();
   const itemsMap = new Map(items.map((item) => [item.path, item]));
   return (
     <Tabs
@@ -50,7 +51,6 @@ MainMenu.propTypes = {
       ]),
     }).isRequired
   ).isRequired,
-  classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(MainMenu);
+export default MainMenu;
