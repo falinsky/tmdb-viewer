@@ -32,7 +32,7 @@ function Rating({ classes, value }) {
       </span>
       <CircularProgress
         value={value}
-        variant="static"
+        variant="determinate"
         className={classes.progress}
         color="inherit"
         thickness={2}
