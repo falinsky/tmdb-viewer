@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import SearchBar from 'material-ui-search-bar';
 import { withStyles } from '@material-ui/core/styles';
 import debounce from 'lodash/debounce';
-import { updateQuery, prepareForNewSearch } from './searchMoviesSlice';
+import { prepareForNewSearch } from './searchMoviesSlice';
 import { connect } from 'react-redux';
 
 const styles = (theme) => ({
@@ -21,6 +21,10 @@ const styles = (theme) => ({
 });
 
 class SearchMovies extends React.Component {
+  state = {
+    query: '',
+  };
+
   constructor(props) {
     super(props);
 
@@ -29,19 +33,31 @@ class SearchMovies extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  componentDidMount() {
+    const {
+      onSubmit,
+      match: {
+        params: { query },
+      },
+    } = this.props;
+
+    if (query) {
+      this.setState({ query }, () => onSubmit(query));
+    }
+  }
+
   handleRequestSearch() {
-    const { query, onSubmit, history } = this.props;
+    const { onSubmit, history } = this.props;
+    const { query } = this.state;
 
     if (query.trim()) {
-      onSubmit();
+      onSubmit(query);
       history.push(`/search/${query}`);
     }
   }
 
-  handleChange(value) {
-    this.props.onChange(value);
-
-    this.handleDebouncedRequestSearch();
+  handleChange(query) {
+    this.setState({ query }, () => this.handleDebouncedRequestSearch());
   }
 
   componentWillUnmount() {
@@ -49,7 +65,8 @@ class SearchMovies extends React.Component {
   }
 
   render() {
-    const { classes, query } = this.props;
+    const { classes } = this.props;
+    const { query } = this.state;
 
     return (
       <div className={classes.root}>
@@ -67,25 +84,23 @@ class SearchMovies extends React.Component {
 }
 
 SearchMovies.propTypes = {
-  query: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      query: PropTypes.string,
+    }).isRequired,
+  }).isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  query: state.searchMovies.query,
-});
-
 const mapDispatchToProps = (dispatch) => ({
-  onChange: (value) => dispatch(updateQuery(value)),
-  onSubmit: () => dispatch(prepareForNewSearch()),
+  onSubmit: (query) => dispatch(prepareForNewSearch(query)),
 });
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(withStyles(styles)(SearchMovies));

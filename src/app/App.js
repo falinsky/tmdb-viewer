@@ -12,7 +12,6 @@ import MainMenu from './MainMenu';
 import FavoriteMovies from '../features/favorites/FavoriteMovies';
 import SearchMovies from '../features/search-movies/SearchMovies';
 import SearchMoviesResult from '../features/search-movies/SearchMoviesResult';
-import SearchQueryRestore from '../features/search-movies/SearchQueryRestore';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import { withStyles } from '@material-ui/core/styles';
@@ -64,8 +63,7 @@ function App({ classes }) {
               />
             )}
           />
-          <Route component={SearchMovies} />
-          <Route path="/search/:query" component={SearchQueryRestore} />
+          <Route path={['/search/:query', '/']} component={SearchMovies} />
         </Toolbar>
       </AppBar>
       <main className={classes.main}>

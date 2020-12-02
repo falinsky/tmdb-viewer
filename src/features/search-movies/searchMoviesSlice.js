@@ -33,14 +33,10 @@ const searchMoviesSlice = createSlice({
   name: 'searchMovies',
   initialState,
   reducers: {
-    updateQuery(state, action) {
-      state.query = action.payload;
-      state.reset = false;
-    },
-    prepareForNewSearch(state) {
+    prepareForNewSearch(state, action) {
       return {
         ...initialState,
-        query: state.query,
+        query: action.payload,
         reset: true,
       };
     },
@@ -49,6 +45,7 @@ const searchMoviesSlice = createSlice({
     builder.addCase(searchMovies.pending, (state) => {
       state.isFetching = true;
       state.isError = false;
+      state.reset = false;
     });
 
     builder.addCase(searchMovies.fulfilled, (state, action) => {
@@ -71,6 +68,6 @@ const searchMoviesSlice = createSlice({
   },
 });
 
-export const { updateQuery, prepareForNewSearch } = searchMoviesSlice.actions;
+export const { prepareForNewSearch } = searchMoviesSlice.actions;
 
 export default searchMoviesSlice.reducer;
