@@ -8,9 +8,9 @@ function LoadingIndicator({ className }) {
     Object.values(state).some((value) => value.isFetching)
   );
 
-  return (
-    isLoading && <LinearProgress className={className} color="secondary" />
-  );
+  return isLoading ? (
+    <LinearProgress className={className} color="secondary" />
+  ) : null;
 }
 
 LoadingIndicator.propTypes = {
