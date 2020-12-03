@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import SearchBar from 'material-ui-search-bar';
 import { withStyles } from '@material-ui/core/styles';
 import debounce from 'lodash/debounce';
 import { prepareForNewSearch } from './searchMoviesSlice';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 const styles = (theme) => ({
   root: {
@@ -20,71 +20,53 @@ const styles = (theme) => ({
   },
 });
 
-class SearchMovies extends React.Component {
-  state = {
-    query: '',
-  };
+const SearchMovies = ({ classes, history, match }) => {
+  const [query, setQuery] = useState('');
+  const dispatch = useDispatch();
 
-  constructor(props) {
-    super(props);
-
-    this.handleRequestSearch = this.handleRequestSearch.bind(this);
-    this.handleDebouncedRequestSearch = debounce(this.handleRequestSearch, 500);
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  componentDidMount() {
-    const {
-      onSubmit,
-      match: {
-        params: { query },
-      },
-    } = this.props;
-
-    if (query) {
-      this.setState({ query }, () => onSubmit(query));
-    }
-  }
-
-  handleRequestSearch() {
-    const { onSubmit, history } = this.props;
-    const { query } = this.state;
-
+  const search = (query) => {
     if (query.trim()) {
-      onSubmit(query);
+      dispatch(prepareForNewSearch(query));
       history.push(`/search/${query}`);
     }
-  }
+  };
 
-  handleChange(query) {
-    this.setState({ query }, () => this.handleDebouncedRequestSearch());
-  }
+  const debouncedSearch = useRef(debounce(search, 500));
 
-  componentWillUnmount() {
-    this.handleDebouncedRequestSearch.cancel();
-  }
+  useEffect(() => {
+    const {
+      params: { query },
+    } = match;
 
-  render() {
-    const { classes } = this.props;
-    const { query } = this.state;
+    if (typeof query !== 'undefined') {
+      setQuery(query);
+    }
+  }, [match]);
 
-    return (
-      <div className={classes.root}>
-        <SearchBar
-          value={query}
-          onChange={this.handleChange}
-          onRequestSearch={this.handleRequestSearch}
-          classes={{
-            input: classes.input,
-          }}
-        />
-      </div>
-    );
-  }
-}
+  useEffect(() => {
+    debouncedSearch.current(query);
+  }, [query]);
+
+  const handleRequestSearch = () => {
+    debouncedSearch.current.cancel();
+    search(query);
+  };
+
+  return (
+    <div className={classes.root}>
+      <SearchBar
+        value={query}
+        onChange={setQuery}
+        onRequestSearch={handleRequestSearch}
+        classes={{
+          input: classes.input,
+        }}
+      />
+    </div>
+  );
+};
 
 SearchMovies.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
@@ -96,11 +78,4 @@ SearchMovies.propTypes = {
   }).isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  onSubmit: (query) => dispatch(prepareForNewSearch(query)),
-});
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(withStyles(styles)(SearchMovies));
+export default withStyles(styles)(SearchMovies);
