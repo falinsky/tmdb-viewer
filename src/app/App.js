@@ -30,10 +30,6 @@ const useStyles = makeStyles({
   content: {
     width: '85%',
   },
-  progress: {
-    position: 'absolute',
-    width: '100%',
-  },
 });
 
 function App() {
@@ -43,7 +39,7 @@ function App() {
     <Router>
       <CssBaseline />
       <AppBar position={'sticky'}>
-        <LoadingIndicator className={classes.progress} />
+        <LoadingIndicator />
         <Toolbar className={classes.toolbar}>
           <Route
             render={(props) => (
