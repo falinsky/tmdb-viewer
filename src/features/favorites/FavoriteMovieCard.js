@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import MovieCard from '../../app/MovieCard';
 import fetchMovieDetails from '../movie-details/movieDetailsThunk';
 
-const FavoriteMovieCard = ({ movieId, ...otherProps }) => {
+const FavoriteMovieCard = ({ movieId }) => {
   const movie = useSelector((state) => state.entities.movies[movieId]);
   const dispatch = useDispatch();
 
@@ -14,7 +14,7 @@ const FavoriteMovieCard = ({ movieId, ...otherProps }) => {
     }
   }, [movieId, dispatch, movie]);
 
-  return <MovieCard movie={movie} {...otherProps} />;
+  return <MovieCard movie={movie} />;
 };
 
 FavoriteMovieCard.propTypes = {
