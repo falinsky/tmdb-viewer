@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
+import { RouteComponentProps } from 'react-router-dom';
 import SearchBar from 'material-ui-search-bar';
 import { makeStyles } from '@material-ui/core/styles';
 import debounce from 'lodash/debounce';
@@ -20,12 +20,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SearchMovies = ({ history, match }) => {
+type SearchMoviesProps = RouteComponentProps<{ query?: string }>;
+
+const SearchMovies = ({ history, match }: SearchMoviesProps) => {
   const classes = useStyles();
   const [query, setQuery] = useState('');
   const dispatch = useDispatch();
 
-  const search = (query) => {
+  const search = (query: string) => {
     if (query.trim()) {
       dispatch(prepareForNewSearch(query));
       history.push(`/search/${query}`);
@@ -65,17 +67,6 @@ const SearchMovies = ({ history, match }) => {
       />
     </div>
   );
-};
-
-SearchMovies.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-  }).isRequired,
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      query: PropTypes.string,
-    }).isRequired,
-  }).isRequired,
 };
 
 export default SearchMovies;
