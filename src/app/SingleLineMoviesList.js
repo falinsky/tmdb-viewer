@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import GridList from '@material-ui/core/GridList';
-import SingleLineMoviesListItem from './SingleLineMoviesListDefaultItem';
+import SingleLineMoviesListItem from './SingleLineMoviesListItem';
 import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles((theme) => ({

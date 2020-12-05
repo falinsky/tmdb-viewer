@@ -8,6 +8,7 @@ import { getMovieBackdropImageUrl } from './api';
 import { Link } from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
 import LinkIcon from '@material-ui/icons/Link';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -22,8 +23,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SingleLineMoviesListItem({ movie, movieId, ...otherProps }) {
+function SingleLineMoviesListItem({ movieId, ...otherProps }) {
   const classes = useStyles();
+  const movie = useSelector((state) => state.entities.movies[movieId]);
 
   return (
     <GridListTile {...otherProps}>
@@ -53,10 +55,7 @@ function SingleLineMoviesListItem({ movie, movieId, ...otherProps }) {
 }
 
 SingleLineMoviesListItem.propTypes = {
-  movie: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-  }),
+  movieId: PropTypes.number.isRequired,
 };
 
 export default SingleLineMoviesListItem;
