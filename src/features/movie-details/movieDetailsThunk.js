@@ -8,7 +8,7 @@ const fetchMovieDetails = createAsyncThunk(
   async (id) => {
     const data = await api.getMovie(id);
 
-    return normalize(data, schema.movie);
+    return normalize(data, schema.movieSchema);
   }
 );
 

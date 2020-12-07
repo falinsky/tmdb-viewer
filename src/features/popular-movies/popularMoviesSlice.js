@@ -12,7 +12,7 @@ export const fetchPopularMovies = createAsyncThunk(
 
     const data = await api.getPopularMovies(page + 1);
 
-    return normalize(data, schema.paginatedListOfMovies);
+    return normalize(data, schema.paginatedMoviesListSchema);
   }
 );
 

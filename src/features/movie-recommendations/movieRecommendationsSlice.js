@@ -9,7 +9,7 @@ export const fetchMovieRecommendations = createAsyncThunk(
     const data = await api.getMovieRecommendations(id);
 
     return {
-      ...normalize(data, schema.paginatedListOfMovies),
+      ...normalize(data, schema.paginatedMoviesListSchema),
       id,
     };
   }

@@ -1,11 +1,11 @@
 import { schema } from 'normalizr';
 
-const genre = new schema.Entity('genres');
-export const arrayOfGenres = new schema.Array(genre);
+const genreSchema = new schema.Entity('genres');
+export const genresArraySchema = new schema.Array(genreSchema);
 
-export const movie = new schema.Entity(
+export const movieSchema = new schema.Entity(
   'movies',
-  { genres: arrayOfGenres },
+  { genres: genresArraySchema },
   {
     processStrategy: (value) => {
       // movies lists and separate movie details apis return related genres data
@@ -19,8 +19,6 @@ export const movie = new schema.Entity(
   }
 );
 
-const arrayOfMovies = new schema.Array(movie);
-
-export const paginatedListOfMovies = {
-  results: arrayOfMovies,
+export const paginatedMoviesListSchema = {
+  results: new schema.Array(movieSchema),
 };

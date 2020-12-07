@@ -6,7 +6,7 @@ import * as schema from '../../app/schema';
 export const fetchGenres = createAsyncThunk('genres/fetchGenres', async () => {
   const { genres } = await api.getGenresListForMovies();
 
-  return normalize(genres, schema.arrayOfGenres);
+  return normalize(genres, schema.genresArraySchema);
 });
 
 const initialState = {

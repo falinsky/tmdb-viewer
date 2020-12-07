@@ -13,7 +13,7 @@ export const searchMovies = createAsyncThunk(
     const data = await api.searchMovies(query, page + 1);
 
     return {
-      ...normalize(data, schema.paginatedListOfMovies),
+      ...normalize(data, schema.paginatedMoviesListSchema),
       query,
     };
   }
