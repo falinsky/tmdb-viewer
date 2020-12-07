@@ -1,22 +1,37 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import * as api from '../../app/api';
-import { normalize } from 'normalizr';
-import { paginatedMoviesListSchema } from '../../app/schema';
+import { normalize, NormalizedSchema } from 'normalizr';
+import {
+  NormalizedMovies,
+  NormalizedPaginatedListOfMovies,
+  paginatedMoviesListSchema,
+} from '../../app/schema';
+import { MovieID } from '../../app/types';
+import { RootState } from '../../app/store';
 
-export const fetchPopularMovies = createAsyncThunk(
-  'popularMovies/fetchPopularMovies',
-  async (_, { getState }) => {
-    const {
-      popularMovies: { page },
-    } = getState();
+export const fetchPopularMovies = createAsyncThunk<
+  NormalizedSchema<NormalizedMovies, NormalizedPaginatedListOfMovies>,
+  void,
+  { state: RootState }
+>('popularMovies/fetchPopularMovies', async (_, { getState }) => {
+  const {
+    popularMovies: { page },
+  } = getState();
 
-    const data = await api.getPopularMovies(page + 1);
+  const data = await api.getPopularMovies(page + 1);
 
-    return normalize(data, paginatedMoviesListSchema);
-  }
-);
+  return normalize(data, paginatedMoviesListSchema);
+});
 
-const initialState = {
+interface PopularMoviesState {
+  items: MovieID[];
+  isFetching: boolean;
+  isError: boolean;
+  allFetched: boolean;
+  page: number;
+}
+
+const initialState: PopularMoviesState = {
   items: [],
   isFetching: false,
   isError: false,
@@ -27,6 +42,7 @@ const initialState = {
 const popularMoviesSlice = createSlice({
   name: 'popularMovies',
   initialState,
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchPopularMovies.pending, (state) => {
       state.isFetching = true;

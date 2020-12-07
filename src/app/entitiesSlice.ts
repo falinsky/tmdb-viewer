@@ -5,8 +5,11 @@ import { fetchMovieRecommendations } from '../features/movie-recommendations/mov
 import { searchMovies } from '../features/search-movies/searchMoviesSlice';
 import fetchMovieDetails from '../features/movie-details/movieDetailsThunk';
 import { fetchGenres } from '../features/genres/genresSlice';
+import { NormalizedGenres, NormalizedMovies } from './schema';
 
-const initialState = {
+type EntitiesState = NormalizedMovies & NormalizedGenres;
+
+const initialState: EntitiesState = {
   movies: {},
   genres: {},
 };
@@ -14,6 +17,7 @@ const initialState = {
 const entitiesSlice = createSlice({
   name: 'entities',
   initialState,
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchPopularMovies.fulfilled, (state, action) => {
       state.movies = merge(state.movies, action.payload.entities.movies);
