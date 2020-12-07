@@ -1,25 +1,44 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import * as api from '../../app/api';
-import { normalize } from 'normalizr';
-import { paginatedMoviesListSchema } from '../../app/schema';
+import { normalize, NormalizedSchema } from 'normalizr';
+import {
+  NormalizedMovies,
+  NormalizedPaginatedListOfMovies,
+  paginatedMoviesListSchema,
+} from '../../app/schema';
+import { MovieID } from '../../app/types';
+import { RootState } from '../../app/store';
 
-export const searchMovies = createAsyncThunk(
-  'searchMovies/searchMovies',
-  async (_, { getState }) => {
-    const {
-      searchMovies: { page, query },
-    } = getState();
+export const searchMovies = createAsyncThunk<
+  NormalizedSchema<NormalizedMovies, NormalizedPaginatedListOfMovies> & {
+    query: string;
+  },
+  void,
+  { state: RootState }
+>('searchMovies/searchMovies', async (_, { getState }) => {
+  const {
+    searchMovies: { page, query },
+  } = getState();
 
-    const data = await api.searchMovies(query, page + 1);
+  const data = await api.searchMovies(query, page + 1);
 
-    return {
-      ...normalize(data, paginatedMoviesListSchema),
-      query,
-    };
-  }
-);
+  return {
+    ...normalize(data, paginatedMoviesListSchema),
+    query,
+  };
+});
 
-const initialState = {
+interface SearchMoviesState {
+  items: MovieID[];
+  isFetching: boolean;
+  isError: boolean;
+  allFetched: boolean;
+  page: number;
+  query: string;
+  reset: boolean;
+}
+
+const initialState: SearchMoviesState = {
   items: [],
   query: '',
   isFetching: false,
@@ -33,7 +52,7 @@ const searchMoviesSlice = createSlice({
   name: 'searchMovies',
   initialState,
   reducers: {
-    prepareForNewSearch(state, action) {
+    prepareForNewSearch(state, action: PayloadAction<string>) {
       return {
         ...initialState,
         query: action.payload,

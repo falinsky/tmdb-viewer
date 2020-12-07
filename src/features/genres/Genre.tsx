@@ -1,8 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Chip from '@material-ui/core/Chip';
 import { makeStyles } from '@material-ui/core/styles';
 import { useSelector } from 'react-redux';
+import { GenreID } from '../../app/types';
+import { RootState } from '../../app/store';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -10,15 +11,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Genre({ genreId }) {
+interface GenreProps {
+  genreId: GenreID;
+}
+
+function Genre({ genreId }: GenreProps) {
   const classes = useStyles();
-  const genre = useSelector((state) => state.entities.genres[genreId]);
+  const genre = useSelector(
+    (state: RootState) => state.entities.genres[genreId]
+  );
 
   return <Chip className={classes.root} label={genre ? genre.name : '...'} />;
 }
-
-Genre.propTypes = {
-  genreId: PropTypes.number.isRequired,
-};
 
 export default Genre;

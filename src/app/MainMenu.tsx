@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { RouteComponentProps } from 'react-router-dom';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,7 +10,17 @@ const useStyles = makeStyles({
   },
 });
 
-function MainMenu({ location, history, items }) {
+interface MainMenuItem {
+  path: string;
+  label: string;
+  iconComponent: React.ElementType;
+}
+
+type MainMenuProps = RouteComponentProps & {
+  items: MainMenuItem[];
+};
+
+function MainMenu({ location, history, items }: MainMenuProps) {
   const classes = useStyles();
   const itemsMap = new Map(items.map((item) => [item.path, item]));
   return (
@@ -32,25 +42,5 @@ function MainMenu({ location, history, items }) {
     </Tabs>
   );
 }
-
-MainMenu.propTypes = {
-  location: PropTypes.shape({
-    pathname: PropTypes.string.isRequired,
-  }).isRequired,
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-  }).isRequired,
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      path: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
-      iconComponent: PropTypes.oneOfType([
-        PropTypes.func,
-        PropTypes.string,
-        PropTypes.object,
-      ]),
-    }).isRequired
-  ).isRequired,
-};
 
 export default MainMenu;

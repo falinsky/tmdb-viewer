@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
+import { RouteComponentProps } from 'react-router-dom';
 import { getMoviePosterImageUrl, getMovieReleaseYear } from '../../app/api';
 import MovieRecommendations from '../movie-recommendations/MovieRecommendations';
 import FavoriteBadge from '../favorites/FavoriteBadge';
@@ -13,6 +13,8 @@ import Rating from './Rating';
 import Genre from '../genres/Genre';
 import { useDispatch, useSelector } from 'react-redux';
 import fetchMovieDetails from './movieDetailsThunk';
+import { RootState } from '../../app/store';
+import { MovieID } from '../../app/types';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -43,8 +45,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function MovieDetails({ match }) {
-  const { movieId } = match.params;
+type MovieDetailsProps = RouteComponentProps<{ movieId: string }>;
+
+function MovieDetails({ match }: MovieDetailsProps) {
+  const { movieId: id } = match.params;
+  const movieId = Number(id) as MovieID;
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -52,7 +57,9 @@ function MovieDetails({ match }) {
     dispatch(fetchMovieDetails(movieId));
   }, [movieId, dispatch]);
 
-  const movie = useSelector((state) => state.entities.movies[movieId]);
+  const movie = useSelector(
+    (state: RootState) => state.entities.movies[movieId]
+  );
 
   return (
     <section>
@@ -108,13 +115,5 @@ function MovieDetails({ match }) {
     </section>
   );
 }
-
-MovieDetails.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      movieId: PropTypes.string.isRequired,
-    }).isRequired,
-  }).isRequired,
-};
 
 export default MovieDetails;

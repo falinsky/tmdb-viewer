@@ -1,10 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import GridList from '@material-ui/core/GridList';
 import SingleLineMoviesListItem from './SingleLineMoviesListItem';
 import Paper from '@material-ui/core/Paper';
+import { MovieID } from './types';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,7 +21,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SingleLineMoviesList({ title, movieIds }) {
+interface SingleLineMoviesListProps {
+  title?: string;
+  movieIds?: MovieID[];
+}
+
+function SingleLineMoviesList({
+  title,
+  movieIds = [],
+}: SingleLineMoviesListProps) {
   const classes = useStyles();
 
   return (
@@ -43,14 +51,5 @@ function SingleLineMoviesList({ title, movieIds }) {
     </Paper>
   );
 }
-
-SingleLineMoviesList.defaultProps = {
-  movieIds: [],
-};
-
-SingleLineMoviesList.propTypes = {
-  movieIds: PropTypes.arrayOf(PropTypes.number.isRequired),
-  title: PropTypes.string,
-};
 
 export default SingleLineMoviesList;

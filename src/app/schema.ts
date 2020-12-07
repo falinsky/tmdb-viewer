@@ -1,4 +1,5 @@
 import { schema } from 'normalizr';
+import { Genre, Movie, MovieID } from './types';
 
 const genreSchema = new schema.Entity('genres');
 export const genresArraySchema = new schema.Array(genreSchema);
@@ -22,3 +23,18 @@ export const movieSchema = new schema.Entity(
 export const paginatedMoviesListSchema = {
   results: new schema.Array(movieSchema),
 };
+
+export interface NormalizedMovies {
+  movies: { [id: number]: Movie };
+}
+
+export interface NormalizedGenres {
+  genres: { [id: number]: Genre };
+}
+
+export interface NormalizedPaginatedListOfMovies {
+  results: MovieID[];
+  page: number;
+  total_pages: number;
+  total_results: number;
+}

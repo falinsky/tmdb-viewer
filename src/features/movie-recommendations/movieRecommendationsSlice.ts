@@ -1,21 +1,34 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import * as api from '../../app/api';
-import { normalize } from 'normalizr';
-import { paginatedMoviesListSchema } from '../../app/schema';
+import { normalize, NormalizedSchema } from 'normalizr';
+import {
+  NormalizedMovies,
+  NormalizedPaginatedListOfMovies,
+  paginatedMoviesListSchema,
+} from '../../app/schema';
+import { MovieID } from '../../app/types';
 
-export const fetchMovieRecommendations = createAsyncThunk(
-  'movieRecommendations/fetchMovieRecommendations',
-  async (id) => {
-    const data = await api.getMovieRecommendations(id);
+export const fetchMovieRecommendations = createAsyncThunk<
+  NormalizedSchema<NormalizedMovies, NormalizedPaginatedListOfMovies> & {
+    id: MovieID;
+  },
+  MovieID
+>('movieRecommendations/fetchMovieRecommendations', async (id) => {
+  const data = await api.getMovieRecommendations(id);
 
-    return {
-      ...normalize(data, paginatedMoviesListSchema),
-      id,
-    };
-  }
-);
+  return {
+    ...normalize(data, paginatedMoviesListSchema),
+    id,
+  };
+});
 
-const initialState = {
+interface MovieRecommendationsState {
+  itemsById: { [id: number]: MovieID[] };
+  isFetching: boolean;
+  isError: boolean;
+}
+
+const initialState: MovieRecommendationsState = {
   itemsById: {},
   isFetching: false,
   isError: false,
@@ -24,6 +37,7 @@ const initialState = {
 const movieRecommendationsSlice = createSlice({
   name: 'movieRecommendations',
   initialState,
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchMovieRecommendations.pending, (state) => {
       state.isFetching = true;

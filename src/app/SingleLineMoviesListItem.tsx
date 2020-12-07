@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
@@ -9,6 +8,8 @@ import { Link } from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
 import LinkIcon from '@material-ui/icons/Link';
 import { useSelector } from 'react-redux';
+import { MovieID } from './types';
+import { RootState } from './store';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -23,9 +24,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SingleLineMoviesListItem({ movieId, ...otherProps }) {
+interface SingleLineMoviesListItemProps {
+  movieId: MovieID;
+}
+
+function SingleLineMoviesListItem({
+  movieId,
+  ...otherProps
+}: SingleLineMoviesListItemProps) {
   const classes = useStyles();
-  const movie = useSelector((state) => state.entities.movies[movieId]);
+  const movie = useSelector(
+    (state: RootState) => state.entities.movies[movieId]
+  );
 
   return (
     <GridListTile {...otherProps}>
@@ -53,9 +63,5 @@ function SingleLineMoviesListItem({ movieId, ...otherProps }) {
     </GridListTile>
   );
 }
-
-SingleLineMoviesListItem.propTypes = {
-  movieId: PropTypes.number.isRequired,
-};
 
 export default SingleLineMoviesListItem;

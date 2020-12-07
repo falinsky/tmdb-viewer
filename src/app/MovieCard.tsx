@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { getMovieBackdropImageUrl, getMovieReleaseYear } from './api';
 import FavoriteBadge from '../features/favorites/FavoriteBadge';
@@ -8,6 +7,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { makeStyles } from '@material-ui/core/styles';
+import { Movie } from './types';
 
 const useStyles = makeStyles({
   root: {
@@ -22,7 +22,11 @@ const useStyles = makeStyles({
   },
 });
 
-function MovieCard({ movie }) {
+interface MovieCardProps {
+  movie: Movie;
+}
+
+function MovieCard({ movie }: MovieCardProps) {
   const classes = useStyles();
 
   if (!movie) {
@@ -50,12 +54,5 @@ function MovieCard({ movie }) {
     </Card>
   );
 }
-
-MovieCard.propTypes = {
-  movie: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequired,
-  }),
-};
 
 export default MovieCard;
