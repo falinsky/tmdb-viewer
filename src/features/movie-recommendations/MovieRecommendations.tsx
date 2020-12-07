@@ -1,11 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import SingleLineMoviesList from '../../app/SingleLineMoviesList';
 import { fetchMovieRecommendations } from './movieRecommendationsSlice';
+import { MovieID } from '../../app/types';
+import { RootState } from '../../app/store';
 
-const MovieRecommendations = ({ movieId, title }) => {
+interface MovieRecommendationsProps {
+  movieId: MovieID;
+  title: string;
+}
+
+const MovieRecommendations = ({
+  movieId,
+  title,
+}: MovieRecommendationsProps) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -13,15 +22,10 @@ const MovieRecommendations = ({ movieId, title }) => {
   }, [movieId, dispatch]);
 
   const movieIds = useSelector(
-    (state) => state.movieRecommendations.itemsById[movieId]
+    (state: RootState) => state.movieRecommendations.itemsById[movieId]
   );
 
   return <SingleLineMoviesList movieIds={movieIds} title={title} />;
-};
-
-MovieRecommendations.propTypes = {
-  movieId: PropTypes.number.isRequired,
-  title: PropTypes.string,
 };
 
 export default MovieRecommendations;
