@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import * as api from '../../app/api';
 import { normalize } from 'normalizr';
-import * as schema from '../../app/schema';
+import { paginatedMoviesListSchema } from '../../app/schema';
 
 export const fetchPopularMovies = createAsyncThunk(
   'popularMovies/fetchPopularMovies',
@@ -12,7 +12,7 @@ export const fetchPopularMovies = createAsyncThunk(
 
     const data = await api.getPopularMovies(page + 1);
 
-    return normalize(data, schema.paginatedMoviesListSchema);
+    return normalize(data, paginatedMoviesListSchema);
   }
 );
 

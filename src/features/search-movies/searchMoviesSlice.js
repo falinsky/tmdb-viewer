@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import * as api from '../../app/api';
 import { normalize } from 'normalizr';
-import * as schema from '../../app/schema';
+import { paginatedMoviesListSchema } from '../../app/schema';
 
 export const searchMovies = createAsyncThunk(
   'searchMovies/searchMovies',
@@ -13,7 +13,7 @@ export const searchMovies = createAsyncThunk(
     const data = await api.searchMovies(query, page + 1);
 
     return {
-      ...normalize(data, schema.paginatedMoviesListSchema),
+      ...normalize(data, paginatedMoviesListSchema),
       query,
     };
   }
