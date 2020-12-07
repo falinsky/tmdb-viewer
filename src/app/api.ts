@@ -1,4 +1,5 @@
 import imageFallback from './no-image.png';
+import { Movie, MovieID } from './types';
 
 const BASE_API_URL = '//api.themoviedb.org/3/';
 const BASE_IMG_API = '//image.tmdb.org/t/p/';
@@ -6,7 +7,9 @@ const BASE_IMG_API = '//image.tmdb.org/t/p/';
 // api key is stored here for the simplicity purposes
 const API_KEY = '63683e7ba09287916ca1fd562d966e29';
 
-function generateQueryString(params = {}) {
+type QueryStringParams = { [key: string]: string | number };
+
+function generateQueryString(params: QueryStringParams = {}) {
   params = {
     api_key: API_KEY,
     ...params,
@@ -17,17 +20,22 @@ function generateQueryString(params = {}) {
     .join('&');
 }
 
-function generateUrl(path, params = {}) {
+function generateUrl(path: string, params = {}) {
   const query = generateQueryString(params);
 
   return `${BASE_API_URL}${path}?${query}`;
 }
 
-function throwCommonError(data) {
+interface ApiError {
+  status_message: string;
+  status_code: number;
+}
+
+function throwCommonError(data: ApiError) {
   throw new Error(`${data.status_message} (error code: ${data.status_code})`);
 }
 
-async function handleApiCall(url) {
+async function handleApiCall(url: string) {
   const response = await fetch(url);
   const data = await response.json();
 
@@ -44,13 +52,13 @@ export function getPopularMovies(page = 1) {
   return handleApiCall(url);
 }
 
-export function getMovie(id) {
+export function getMovie(id: MovieID) {
   const url = generateUrl(`movie/${id}`);
 
   return handleApiCall(url);
 }
 
-export function getMovieRecommendations(id) {
+export function getMovieRecommendations(id: MovieID) {
   const url = generateUrl(`movie/${id}/recommendations`);
 
   return handleApiCall(url);
@@ -62,13 +70,13 @@ export function getGenresListForMovies() {
   return handleApiCall(url);
 }
 
-export function searchMovies(query, page = 1) {
+export function searchMovies(query: string, page = 1) {
   const url = generateUrl('search/movie', { query, page });
 
   return handleApiCall(url);
 }
 
-export function getMoviePosterImageUrl(movie) {
+export function getMoviePosterImageUrl(movie: Movie) {
   if (!movie.poster_path) {
     return imageFallback;
   }
@@ -76,7 +84,7 @@ export function getMoviePosterImageUrl(movie) {
   return `${BASE_IMG_API}w500/${movie.poster_path}`;
 }
 
-export function getMovieBackdropImageUrl(movie) {
+export function getMovieBackdropImageUrl(movie: Movie) {
   if (!movie.backdrop_path) {
     return imageFallback;
   }
@@ -84,7 +92,7 @@ export function getMovieBackdropImageUrl(movie) {
   return `${BASE_IMG_API}w500/${movie.backdrop_path}`;
 }
 
-export function getMovieReleaseYear(movie) {
+export function getMovieReleaseYear(movie: Movie) {
   if (!movie.release_date) {
     return 'N/A';
   }
