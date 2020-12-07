@@ -24,10 +24,6 @@ function generateUrl(path, params = {}) {
 }
 
 function throwCommonError(data) {
-  if (data.errors && data.errors.length) {
-    throw new Error(data.errors.join(' | '));
-  }
-
   throw new Error(`${data.status_message} (error code: ${data.status_code})`);
 }
 
