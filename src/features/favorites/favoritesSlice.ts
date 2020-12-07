@@ -1,9 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { MovieID } from '../../app/types';
 
+export type FavoritesState = MovieID[];
+
 const favoritesSlice = createSlice({
   name: 'favorites',
-  initialState: [] as MovieID[],
+  initialState: [] as FavoritesState,
   reducers: {
     addMovie(state, action: PayloadAction<MovieID>) {
       if (!state.includes(action.payload)) {
