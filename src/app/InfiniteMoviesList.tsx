@@ -1,15 +1,16 @@
 import React, { useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
 import {
   InfiniteLoader,
   List,
   WindowScroller,
   AutoSizer,
+  IndexRange,
 } from 'react-virtualized';
 import MovieCard from './DefaultMovieCard';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import { MovieID } from './types';
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -26,7 +27,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function generateIndexesForRow(rowIndex, rowWidth, itemWidth, itemsAmount) {
+function generateIndexesForRow(
+  rowIndex: number,
+  rowWidth: number,
+  itemWidth: number,
+  itemsAmount: number
+) {
   const result = [];
   const maxItemsPerRow = getMaxItemsAmountPerRow(rowWidth, itemWidth);
   const startIndex = rowIndex * maxItemsPerRow;
@@ -42,14 +48,26 @@ function generateIndexesForRow(rowIndex, rowWidth, itemWidth, itemsAmount) {
   return result;
 }
 
-function getMaxItemsAmountPerRow(rowWidth, itemWidth) {
+function getMaxItemsAmountPerRow(rowWidth: number, itemWidth: number) {
   return Math.max(Math.floor(rowWidth / itemWidth), 1);
 }
 
-function getRowsAmount(rowWidth, itemWidth, itemsAmount, hasMore) {
+function getRowsAmount(
+  rowWidth: number,
+  itemWidth: number,
+  itemsAmount: number,
+  hasMore: boolean
+) {
   const maxItemsPerRow = getMaxItemsAmountPerRow(rowWidth, itemWidth);
 
   return Math.ceil(itemsAmount / maxItemsPerRow) + (hasMore ? 1 : 0);
+}
+
+interface RowItemProps {
+  movieId: MovieID;
+  className: string;
+  itemComponentType: React.ElementType;
+  width: number;
 }
 
 const RowItem = React.memo(function RowItem({
@@ -57,7 +75,7 @@ const RowItem = React.memo(function RowItem({
   className,
   itemComponentType: ItemComponentType,
   width,
-}) {
+}: RowItemProps) {
   return (
     <Grid item className={className} style={{ width }}>
       <ItemComponentType movieId={movieId} />
@@ -65,18 +83,29 @@ const RowItem = React.memo(function RowItem({
   );
 });
 
+interface InfiniteMoviesListProps {
+  movieIds?: MovieID[];
+  fetchMovies?: Function;
+  hasMore?: boolean;
+  isFetching?: boolean;
+  reset?: boolean;
+  itemComponentType?: React.ElementType;
+  itemWidth?: number;
+  itemHeight?: number;
+}
+
 const InfiniteMoviesList = ({
-  itemWidth,
-  itemHeight,
-  hasMore,
-  movieIds,
-  itemComponentType,
-  reset,
-  isFetching,
-  fetchMovies,
-}) => {
+  itemWidth = 400,
+  itemHeight = 360,
+  hasMore = false,
+  movieIds = [],
+  itemComponentType = MovieCard,
+  reset = false,
+  isFetching = false,
+  fetchMovies = () => {},
+}: InfiniteMoviesListProps) => {
   const classes = useStyles();
-  const infiniteLoaderRef = useRef();
+  const infiniteLoaderRef = useRef<InfiniteLoader>(null);
 
   useEffect(() => {
     if (reset && infiniteLoaderRef.current) {
@@ -84,7 +113,8 @@ const InfiniteMoviesList = ({
     }
   }, [reset, infiniteLoaderRef]);
 
-  const loadMoreRows = () => {
+  // TODO: check if it's possible to leverage the returned promise
+  const loadMoreRows = async (_: IndexRange) => {
     if (!isFetching) {
       fetchMovies();
     }
@@ -170,28 +200,6 @@ const InfiniteMoviesList = ({
       </AutoSizer>
     </section>
   );
-};
-
-InfiniteMoviesList.defaultProps = {
-  movieIds: [],
-  isFetching: false,
-  hasMore: false,
-  reset: false,
-  fetchMovies: () => {},
-  itemComponentType: MovieCard,
-  itemWidth: 400,
-  itemHeight: 360,
-};
-
-InfiniteMoviesList.propTypes = {
-  movieIds: PropTypes.arrayOf(PropTypes.number.isRequired),
-  fetchMovies: PropTypes.func,
-  hasMore: PropTypes.bool,
-  isFetching: PropTypes.bool,
-  reset: PropTypes.bool,
-  itemComponentType: PropTypes.elementType,
-  itemWidth: PropTypes.number,
-  itemHeight: PropTypes.number,
 };
 
 export default InfiniteMoviesList;
