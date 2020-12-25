@@ -29,7 +29,7 @@ jobs:
       - name: E2E
         uses: cypress-io/github-action@v2
         with:
-          start: npm install -g serve, serve -s build -l 3000 -n
+          start: npx serve -s build -l 3000 -n
           wait-on: 'http://localhost:3000'
 
       - name: Deploy to Surge.sh
