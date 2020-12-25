@@ -4,19 +4,37 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
-  build-and-deploy:
+  main:
     runs-on: ubuntu-latest
-    name: Build and deploy to surge.sh
     steps:
-      - uses: actions/checkout@v1
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Setup node
         uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: npm install -g surge
-      - run: npm ci
-      - run: npm run build
-      - run: cp ./build/index.html ./build/200.html
-      - run: surge ./build/ ${{ secrets.SURGE_DOMAIN }} --token ${{ secrets.SURGE_TOKEN }}
+
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1
+
+      - name: Build
+        run: npm run build
+
+      - name: E2E
+        uses: cypress-io/github-action@v2
+        with:
+          start: npx serve -s build -l 3000 -n
+          wait-on: 'http://localhost:3000'
+
+      - name: Deploy to Surge.sh
+        if: ${{ github.event_name != 'pull_request' }}
+        run: |
+          npm install -g surge
+          cp ./build/index.html ./build/200.html
+          surge ./build/ ${{ secrets.SURGE_DOMAIN }} --token ${{ secrets.SURGE_TOKEN }}
