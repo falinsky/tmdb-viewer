@@ -1,16 +1,12 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import {
   BrowserRouter as Router,
   Route,
   Redirect,
   Switch,
 } from 'react-router-dom';
-import PopularMovies from '../features/popular-movies/PopularMovies';
-import MovieDetails from '../features/movie-details/MovieDetails';
 import MainMenu from './MainMenu';
-import FavoriteMovies from '../features/favorites/FavoriteMovies';
 import SearchMovies from '../features/search-movies/SearchMovies';
-import SearchMoviesResult from '../features/search-movies/SearchMoviesResult';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import { makeStyles } from '@material-ui/core/styles';
@@ -18,6 +14,20 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import LoadingIndicator from './LoadingIndicator';
+import Typography from '@material-ui/core/Typography';
+
+const PopularMovies = React.lazy(
+  () => import('../features/popular-movies/PopularMovies')
+);
+const SearchMoviesResult = React.lazy(
+  () => import('../features/search-movies/SearchMoviesResult')
+);
+const FavoriteMovies = React.lazy(
+  () => import('../features/favorites/FavoriteMovies')
+);
+const MovieDetails = React.lazy(
+  () => import('../features/movie-details/MovieDetails')
+);
 
 const useStyles = makeStyles({
   toolbar: {
@@ -65,13 +75,15 @@ function App() {
       </AppBar>
       <main className={classes.main}>
         <div className={classes.content}>
-          <Switch>
-            <Redirect from="/search" exact to="/" />
-            <Route path="/" exact component={PopularMovies} />
-            <Route path="/search/:query" component={SearchMoviesResult} />
-            <Route path="/favorites" component={FavoriteMovies} />
-            <Route path="/movie/:movieId" component={MovieDetails} />
-          </Switch>
+          <Suspense fallback={<Typography>Loading...</Typography>}>
+            <Switch>
+              <Redirect from="/search" exact to="/" />
+              <Route path="/" exact component={PopularMovies} />
+              <Route path="/search/:query" component={SearchMoviesResult} />
+              <Route path="/favorites" component={FavoriteMovies} />
+              <Route path="/movie/:movieId" component={MovieDetails} />
+            </Switch>
+          </Suspense>
         </div>
       </main>
     </Router>
