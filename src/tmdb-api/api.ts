@@ -1,7 +1,6 @@
 import imageFallback from './no-image.png';
 import {
   GenresResult,
-  Movie,
   MovieDetailsResult,
   MovieID,
   MovieListResult,
@@ -85,7 +84,10 @@ export function searchMovies(
   return handleApiCall(url);
 }
 
-export function getMoviePosterImageUrl(movie: Movie) {
+// FIXME: should these 3 helper methods be extracted to a separate module?
+export function getMoviePosterImageUrl(
+  movie: Pick<MovieDetailsResult, 'poster_path'>
+) {
   if (!movie.poster_path) {
     return imageFallback;
   }
@@ -93,7 +95,9 @@ export function getMoviePosterImageUrl(movie: Movie) {
   return `${BASE_IMG_API}w500/${movie.poster_path}`;
 }
 
-export function getMovieBackdropImageUrl(movie: Movie) {
+export function getMovieBackdropImageUrl(
+  movie: Pick<MovieDetailsResult, 'backdrop_path'>
+) {
   if (!movie.backdrop_path) {
     return imageFallback;
   }
@@ -101,7 +105,9 @@ export function getMovieBackdropImageUrl(movie: Movie) {
   return `${BASE_IMG_API}w500/${movie.backdrop_path}`;
 }
 
-export function getMovieReleaseYear(movie: Movie) {
+export function getMovieReleaseYear(
+  movie: Pick<MovieDetailsResult, 'release_date'>
+) {
   if (!movie.release_date) {
     return 'N/A';
   }
