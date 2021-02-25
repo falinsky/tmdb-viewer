@@ -1,5 +1,11 @@
 import imageFallback from './no-image.png';
-import { Movie, MovieID } from './types';
+import {
+  GenresResult,
+  Movie,
+  MovieDetailsResult,
+  MovieID,
+  MovieListResult,
+} from './types';
 
 const BASE_API_URL = '//api.themoviedb.org/3/';
 const BASE_IMG_API = '//image.tmdb.org/t/p/';
@@ -46,31 +52,34 @@ async function handleApiCall(url: string) {
   return data;
 }
 
-export function getPopularMovies(page = 1) {
+export function getPopularMovies(page = 1): Promise<MovieListResult> {
   const url = generateUrl('movie/popular', { page });
 
   return handleApiCall(url);
 }
 
-export function getMovie(id: MovieID) {
+export function getMovie(id: MovieID): Promise<MovieDetailsResult> {
   const url = generateUrl(`movie/${id}`);
 
   return handleApiCall(url);
 }
 
-export function getMovieRecommendations(id: MovieID) {
+export function getMovieRecommendations(id: MovieID): Promise<MovieListResult> {
   const url = generateUrl(`movie/${id}/recommendations`);
 
   return handleApiCall(url);
 }
 
-export function getGenresListForMovies() {
+export function getGenresListForMovies(): Promise<GenresResult> {
   const url = generateUrl('genre/movie/list');
 
   return handleApiCall(url);
 }
 
-export function searchMovies(query: string, page = 1) {
+export function searchMovies(
+  query: string,
+  page = 1
+): Promise<MovieListResult> {
   const url = generateUrl('search/movie', { query, page });
 
   return handleApiCall(url);

@@ -18,3 +18,20 @@ export interface Movie {
   poster_path: string | null;
   backdrop_path: string | null;
 }
+
+export type MovieDetailsResult = Omit<Movie, 'genres'> & { genres: Genre[] };
+
+export type MovieListResultItem = Omit<Movie, 'genres'> & {
+  genre_ids: GenreID;
+};
+
+export interface MovieListResult {
+  page: number;
+  results: MovieListResultItem[];
+  total_results: number;
+  total_pages: number;
+}
+
+export interface GenresResult {
+  genres: Genre[];
+}
