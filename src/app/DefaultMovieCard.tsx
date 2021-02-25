@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import MovieCard from './MovieCard';
-import { MovieID } from './types';
+import { MovieID } from '../tmdb-api/types';
 import { RootState } from './store';
 
 interface DefaultMovieCardProps {

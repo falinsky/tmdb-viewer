@@ -2,7 +2,7 @@ import React from 'react';
 import Chip from '@material-ui/core/Chip';
 import { makeStyles } from '@material-ui/core/styles';
 import { useSelector } from 'react-redux';
-import { GenreID } from '../../app/types';
+import { GenreID } from '../../tmdb-api/types';
 import { RootState } from '../../app/store';
 
 const useStyles = makeStyles((theme) => ({

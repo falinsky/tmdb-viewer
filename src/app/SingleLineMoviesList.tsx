@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import GridList from '@material-ui/core/GridList';
 import SingleLineMoviesListItem from './SingleLineMoviesListItem';
 import Paper from '@material-ui/core/Paper';
-import { MovieID } from './types';
+import { MovieID } from '../tmdb-api/types';
 
 const useStyles = makeStyles((theme) => ({
   root: {

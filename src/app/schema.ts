@@ -1,5 +1,5 @@
 import { schema } from 'normalizr';
-import { Genre, Movie, MovieID } from './types';
+import { Genre, Movie, MovieID } from '../tmdb-api/types';
 
 const genreSchema = new schema.Entity('genres');
 export const genresArraySchema = new schema.Array(genreSchema);

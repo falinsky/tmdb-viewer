@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { getMoviePosterImageUrl, getMovieReleaseYear } from '../../app/api';
+import {
+  getMoviePosterImageUrl,
+  getMovieReleaseYear,
+} from '../../tmdb-api/api';
 import MovieRecommendations from '../movie-recommendations/MovieRecommendations';
 import FavoriteBadge from '../favorites/FavoriteBadge';
 import { makeStyles } from '@material-ui/core/styles';
@@ -14,7 +17,7 @@ import Genre from '../genres/Genre';
 import { useDispatch, useSelector } from 'react-redux';
 import fetchMovieDetails from './movieDetailsThunk';
 import { RootState } from '../../app/store';
-import { MovieID } from '../../app/types';
+import { MovieID } from '../../tmdb-api/types';
 
 const useStyles = makeStyles((theme) => ({
   card: {

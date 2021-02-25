@@ -1,12 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import * as api from '../../app/api';
+import * as api from '../../tmdb-api/api';
 import { normalize, NormalizedSchema } from 'normalizr';
 import {
   NormalizedGenres,
   NormalizedMovies,
   movieSchema,
 } from '../../app/schema';
-import { MovieID } from '../../app/types';
+import { MovieID } from '../../tmdb-api/types';
 
 const fetchMovieDetails = createAsyncThunk<
   NormalizedSchema<NormalizedMovies & NormalizedGenres, MovieID>,

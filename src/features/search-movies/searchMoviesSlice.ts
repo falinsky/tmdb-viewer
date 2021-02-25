@@ -1,12 +1,12 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import * as api from '../../app/api';
+import * as api from '../../tmdb-api/api';
 import { normalize, NormalizedSchema } from 'normalizr';
 import {
   NormalizedMovies,
   NormalizedPaginatedListOfMovies,
   paginatedMoviesListSchema,
 } from '../../app/schema';
-import { MovieID } from '../../app/types';
+import { MovieID } from '../../tmdb-api/types';
 import { RootState } from '../../app/store';
 
 export const searchMovies = createAsyncThunk<

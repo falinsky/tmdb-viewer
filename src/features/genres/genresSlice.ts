@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import * as api from '../../app/api';
+import * as api from '../../tmdb-api/api';
 import { normalize, NormalizedSchema } from 'normalizr';
 import { genresArraySchema, NormalizedGenres } from '../../app/schema';
-import { GenreID } from '../../app/types';
+import { GenreID } from '../../tmdb-api/types';
 
 export const fetchGenres = createAsyncThunk<
   NormalizedSchema<NormalizedGenres, GenreID[]>

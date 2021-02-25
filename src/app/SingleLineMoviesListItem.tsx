@@ -3,12 +3,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import FavoriteBadge from '../features/favorites/FavoriteBadge';
-import { getMovieBackdropImageUrl } from './api';
+import { getMovieBackdropImageUrl } from '../tmdb-api/api';
 import { Link } from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
 import LinkIcon from '@material-ui/icons/Link';
 import { useSelector } from 'react-redux';
-import { MovieID } from './types';
+import { MovieID } from '../tmdb-api/types';
 import { RootState } from './store';
 
 const useStyles = makeStyles((theme) => ({

@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getMovieBackdropImageUrl, getMovieReleaseYear } from './api';
+import { getMovieBackdropImageUrl, getMovieReleaseYear } from '../tmdb-api/api';
 import FavoriteBadge from '../features/favorites/FavoriteBadge';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import { makeStyles } from '@material-ui/core/styles';
-import { Movie } from './types';
+import { Movie } from '../tmdb-api/types';
 
 const useStyles = makeStyles({
   root: {

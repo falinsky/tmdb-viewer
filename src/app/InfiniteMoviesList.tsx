@@ -10,7 +10,7 @@ import MovieCard from './DefaultMovieCard';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import { MovieID } from './types';
+import { MovieID } from '../tmdb-api/types';
 
 const useStyles = makeStyles((theme) => ({
   grid: {
