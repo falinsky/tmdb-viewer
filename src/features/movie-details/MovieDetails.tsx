@@ -13,11 +13,11 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Rating from './Rating';
-import Genre from '../genres/Genre';
 import { useDispatch, useSelector } from 'react-redux';
 import fetchMovieDetails from './movieDetailsThunk';
 import { RootState } from '../../app/store';
 import { MovieID } from '../../tmdb-api/types';
+import Chip from '@material-ui/core/Chip';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -43,6 +43,9 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexWrap: 'wrap',
   },
+  genreItem: {
+    margin: theme.spacing(0.5),
+  },
   section: {
     marginTop: theme.spacing(2),
   },
@@ -62,6 +65,11 @@ function MovieDetails({ match }: MovieDetailsProps) {
 
   const movie = useSelector(
     (state: RootState) => state.entities.movies[movieId]
+  );
+
+  // FIXME: temporary retrieve genres
+  const genres = useSelector((state: RootState) =>
+    movie?.genres.map((genreId) => state.entities.genres[genreId])
   );
 
   return (
@@ -104,8 +112,12 @@ function MovieDetails({ match }: MovieDetailsProps) {
                     Genres
                   </Typography>
                   <div className={classes.genresList}>
-                    {movie.genres.map((id) => (
-                      <Genre genreId={id} key={id} />
+                    {genres.map((genre) => (
+                      <Chip
+                        className={classes.genreItem}
+                        label={genre.name}
+                        key={genre.id}
+                      />
                     ))}
                   </div>
                 </section>
