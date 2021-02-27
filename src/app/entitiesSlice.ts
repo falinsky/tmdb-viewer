@@ -4,14 +4,12 @@ import { fetchPopularMovies } from '../features/popular-movies/popularMoviesSlic
 import { fetchMovieRecommendations } from '../features/movie-recommendations/movieRecommendationsSlice';
 import { searchMovies } from '../features/search-movies/searchMoviesSlice';
 import fetchMovieDetails from '../features/movie-details/movieDetailsThunk';
-import { fetchGenres } from '../features/genres/genresSlice';
-import { NormalizedGenres, NormalizedMovies } from './schema';
+import { NormalizedMovies } from './schema';
 
-type EntitiesState = NormalizedMovies & NormalizedGenres;
+type EntitiesState = NormalizedMovies;
 
 const initialState: EntitiesState = {
   movies: {},
-  genres: {},
 };
 
 const entitiesSlice = createSlice({
@@ -34,11 +32,6 @@ const entitiesSlice = createSlice({
     builder.addCase(fetchMovieDetails.fulfilled, (state, action) => {
       // FIXME: items returned by movie details contain more data than returned in movies lists - so check if it needs to use a separate state to store such movie details.
       state.movies = merge(state.movies, action.payload.entities.movies);
-      state.genres = merge(state.genres, action.payload.entities.genres);
-    });
-
-    builder.addCase(fetchGenres.fulfilled, (state, action) => {
-      state.genres = merge(state.genres, action.payload.entities.genres);
     });
   },
 });

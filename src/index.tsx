@@ -4,11 +4,9 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './app/store';
 import App from './app/App';
-import { fetchGenres } from './features/genres/genresSlice';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
-store.dispatch(fetchGenres());
 const queryClient = new QueryClient();
 
 ReactDOM.render(
