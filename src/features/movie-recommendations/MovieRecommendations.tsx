@@ -21,11 +21,13 @@ const MovieRecommendations = ({
     dispatch(fetchMovieRecommendations(movieId));
   }, [movieId, dispatch]);
 
-  const movieIds = useSelector(
-    (state: RootState) => state.movieRecommendations.itemsById[movieId]
+  const movies = useSelector((state: RootState) =>
+    state.movieRecommendations.itemsById[movieId]?.map(
+      (id) => state.entities.movies[id]
+    )
   );
 
-  return <SingleLineMoviesList movieIds={movieIds} title={title} />;
+  return <SingleLineMoviesList movies={movies} title={title} />;
 };
 
 export default MovieRecommendations;

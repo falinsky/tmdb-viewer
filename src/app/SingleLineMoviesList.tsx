@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import GridList from '@material-ui/core/GridList';
 import Paper from '@material-ui/core/Paper';
-import { MovieID } from '../tmdb-api/types';
+import { Movie } from '../tmdb-api/types';
 import { getMovieBackdropImageUrl } from '../tmdb-api/api';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import FavoriteBadge from '../features/favorites/FavoriteBadge';
@@ -11,8 +11,6 @@ import IconButton from '@material-ui/core/IconButton';
 import { Link } from 'react-router-dom';
 import LinkIcon from '@material-ui/icons/Link';
 import GridListTile from '@material-ui/core/GridListTile';
-import { RootState } from './store';
-import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,17 +39,14 @@ const useStyles = makeStyles((theme) => ({
 
 interface SingleLineMoviesListProps {
   title?: string;
-  movieIds?: MovieID[];
+  movies?: Movie[];
 }
 
 function SingleLineMoviesList({
   title,
-  movieIds = [],
+  movies = [],
 }: SingleLineMoviesListProps) {
   const classes = useStyles();
-  const movies = useSelector((state: RootState) =>
-    movieIds.map((id) => state.entities.movies[id])
-  );
 
   return (
     <Paper className={classes.root} component="section" elevation={2}>
