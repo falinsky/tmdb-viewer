@@ -1,7 +1,6 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import {
-  getMovie,
   getMoviePosterImageUrl,
   getMovieReleaseYear,
 } from '../../tmdb-api/api';
@@ -16,7 +15,7 @@ import Typography from '@material-ui/core/Typography';
 import Rating from './Rating';
 import { MovieID } from '../../tmdb-api/types';
 import Chip from '@material-ui/core/Chip';
-import { useQuery } from 'react-query';
+import useMovieDetails from '../../app/useMovieDetails';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -56,9 +55,7 @@ function MovieDetails({ match }: MovieDetailsProps) {
   const { movieId: id } = match.params;
   const movieId = Number(id) as MovieID;
   const classes = useStyles();
-  const { isLoading, data: movie } = useQuery(['movieDetails', movieId], () =>
-    getMovie(movieId)
-  );
+  const { isLoading, data: movie } = useMovieDetails(movieId);
 
   return (
     <section>
