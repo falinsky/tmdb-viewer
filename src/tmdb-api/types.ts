@@ -7,23 +7,26 @@ export interface Genre {
 
 export type MovieID = number;
 
-export interface Movie {
+interface MovieCommon {
   id: MovieID;
   title: string;
   release_date: string;
   vote_average: number;
   vote_count: number;
   overview: string;
-  genres: GenreID[];
   poster_path: string | null;
   backdrop_path: string | null;
 }
 
-export type MovieDetailsResult = Omit<Movie, 'genres'> & { genres: Genre[] };
+export type MovieDetailsResult = MovieCommon & {
+  genres: Genre[];
+};
 
-export type MovieListResultItem = Omit<Movie, 'genres'> & {
+export type MovieListResultItem = MovieCommon & {
   genre_ids: GenreID;
 };
+
+export type Movie = MovieDetailsResult | MovieListResultItem;
 
 export interface MovieListResult {
   page: number;
