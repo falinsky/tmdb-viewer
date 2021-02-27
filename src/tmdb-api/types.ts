@@ -34,7 +34,3 @@ export interface MovieListResult {
   total_results: number;
   total_pages: number;
 }
-
-export interface GenresResult {
-  genres: Genre[];
-}

@@ -1,11 +1,5 @@
 import imageFallback from './no-image.png';
-import {
-  GenresResult,
-  Movie,
-  MovieDetailsResult,
-  MovieID,
-  MovieListResult,
-} from './types';
+import { Movie, MovieDetailsResult, MovieID, MovieListResult } from './types';
 
 const BASE_API_URL = '//api.themoviedb.org/3/';
 const BASE_IMG_API = '//image.tmdb.org/t/p/';
@@ -66,12 +60,6 @@ export function getMovie(id: MovieID): Promise<MovieDetailsResult> {
 
 export function getMovieRecommendations(id: MovieID): Promise<MovieListResult> {
   const url = generateUrl(`movie/${id}/recommendations`);
-
-  return handleApiCall(url);
-}
-
-export function getGenresListForMovies(): Promise<GenresResult> {
-  const url = generateUrl('genre/movie/list');
 
   return handleApiCall(url);
 }
