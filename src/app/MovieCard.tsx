@@ -23,7 +23,7 @@ const useStyles = makeStyles({
 });
 
 interface MovieCardProps {
-  movie: Movie;
+  movie?: Movie;
 }
 
 function MovieCard({ movie }: MovieCardProps) {
