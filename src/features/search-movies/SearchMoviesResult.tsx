@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import InfiniteMoviesList from '../../app/InfiniteMoviesList';
 import { searchMovies } from './searchMoviesSlice';
 import { RootState } from '../../app/store';
+import DefaultMovieCard from '../../app/DefaultMovieCard';
 
 const SearchMoviesResult = () => {
   const movieIds = useSelector((state: RootState) => state.searchMovies.items);
@@ -25,7 +26,9 @@ const SearchMoviesResult = () => {
       fetchMovies={() => {
         dispatch(searchMovies());
       }}
-    />
+    >
+      {(movieId) => <DefaultMovieCard movieId={movieId} />}
+    </InfiniteMoviesList>
   );
 };
 

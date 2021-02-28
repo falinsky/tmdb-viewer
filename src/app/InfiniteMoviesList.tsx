@@ -6,7 +6,6 @@ import {
   AutoSizer,
   IndexRange,
 } from 'react-virtualized';
-import MovieCard from './DefaultMovieCard';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -93,7 +92,7 @@ interface InfiniteMoviesListProps {
   reset?: boolean;
   itemWidth?: number;
   itemHeight?: number;
-  children?: ItemRenderer;
+  children: ItemRenderer;
 }
 
 const InfiniteMoviesList = ({
@@ -104,7 +103,7 @@ const InfiniteMoviesList = ({
   reset = false,
   isFetching = false,
   fetchMovies = () => {},
-  children = (item) => <MovieCard movieId={item} />,
+  children,
 }: InfiniteMoviesListProps) => {
   const classes = useStyles();
   const infiniteLoaderRef = useRef<InfiniteLoader>(null);
