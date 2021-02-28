@@ -63,22 +63,24 @@ function getRowsAmount(
   return Math.ceil(itemsAmount / maxItemsPerRow) + (hasMore ? 1 : 0);
 }
 
+type ItemRenderer = (item: MovieID) => React.ReactNode;
+
 interface RowItemProps {
   movieId: MovieID;
   className: string;
-  itemComponentType: React.ElementType;
   width: number;
+  itemRenderer: ItemRenderer;
 }
 
 const RowItem = React.memo(function RowItem({
   movieId,
   className,
-  itemComponentType: ItemComponentType,
   width,
+  itemRenderer,
 }: RowItemProps) {
   return (
     <Grid item className={className} style={{ width }}>
-      <ItemComponentType movieId={movieId} />
+      {itemRenderer(movieId)}
     </Grid>
   );
 });
@@ -89,9 +91,9 @@ interface InfiniteMoviesListProps {
   hasMore?: boolean;
   isFetching?: boolean;
   reset?: boolean;
-  itemComponentType?: React.ElementType;
   itemWidth?: number;
   itemHeight?: number;
+  children?: ItemRenderer;
 }
 
 const InfiniteMoviesList = ({
@@ -99,10 +101,10 @@ const InfiniteMoviesList = ({
   itemHeight = 360,
   hasMore = false,
   movieIds = [],
-  itemComponentType = MovieCard,
   reset = false,
   isFetching = false,
   fetchMovies = () => {},
+  children = (item) => <MovieCard movieId={item} />,
 }: InfiniteMoviesListProps) => {
   const classes = useStyles();
   const infiniteLoaderRef = useRef<InfiniteLoader>(null);
@@ -182,8 +184,8 @@ const InfiniteMoviesList = ({
                                 key={movieId}
                                 movieId={movieId}
                                 className={classes.gridItem}
-                                itemComponentType={itemComponentType}
                                 width={itemWidth}
+                                itemRenderer={children}
                               />
                             ))}
                           </div>
