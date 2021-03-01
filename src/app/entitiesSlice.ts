@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import merge from 'lodash/merge';
-import { fetchPopularMovies } from '../features/popular-movies/popularMoviesSlice';
 import { searchMovies } from '../features/search-movies/searchMoviesSlice';
 import { NormalizedMovies } from './schema';
 
@@ -15,10 +14,6 @@ const entitiesSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchPopularMovies.fulfilled, (state, action) => {
-      state.movies = merge(state.movies, action.payload.entities.movies);
-    });
-
     builder.addCase(searchMovies.fulfilled, (state, action) => {
       state.movies = merge(state.movies, action.payload.entities.movies);
     });

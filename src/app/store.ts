@@ -1,6 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { createLocalStorageWrapper } from './localStorage';
-import popularMoviesReducer from '../features/popular-movies/popularMoviesSlice';
 import entitiesReducer from './entitiesSlice';
 import favoritesReducer, {
   FavoritesState,
@@ -15,7 +14,6 @@ const initialState = loadState();
 
 const store = configureStore({
   reducer: {
-    popularMovies: popularMoviesReducer,
     entities: entitiesReducer,
     favorites: favoritesReducer,
     searchMovies: searchMoviesReducer,
