@@ -64,8 +64,8 @@ function getRowsAmount(
 type ItemRenderer<ItemType> = (item: ItemType) => React.ReactNode;
 
 interface InfiniteMoviesListProps<ItemType> {
-  movieIds?: ItemType[];
-  fetchMovies?: Function;
+  items?: ItemType[];
+  fetchItems?: Function;
   hasMore?: boolean;
   isFetching?: boolean;
   reset?: boolean;
@@ -78,10 +78,10 @@ function InfiniteMoviesList<ItemType>({
   itemWidth = 400,
   itemHeight = 360,
   hasMore = false,
-  movieIds = [],
+  items = [],
   reset = false,
   isFetching = false,
-  fetchMovies = () => {},
+  fetchItems = () => {},
   children,
 }: InfiniteMoviesListProps<ItemType>) {
   const classes = useStyles();
@@ -96,7 +96,7 @@ function InfiniteMoviesList<ItemType>({
   // TODO: check if it's possible to leverage the returned promise
   const loadMoreRows = async (_: IndexRange) => {
     if (!isFetching) {
-      fetchMovies();
+      fetchItems();
     }
   };
 
@@ -113,7 +113,7 @@ function InfiniteMoviesList<ItemType>({
           const rowCount = getRowsAmount(
             rowWidth,
             itemWidth,
-            movieIds.length,
+            items.length,
             hasMore
           );
 
@@ -127,7 +127,7 @@ function InfiniteMoviesList<ItemType>({
                     index,
                     rowWidth,
                     itemWidth,
-                    movieIds.length
+                    items.length
                   ).length > 0;
 
                 return !hasMore || allItemsLoaded;
@@ -148,23 +148,23 @@ function InfiniteMoviesList<ItemType>({
                       rowHeight={itemHeight}
                       onRowsRendered={onRowsRendered}
                       rowRenderer={({ index, style, key }) => {
-                        const movieIdsForRow = generateIndexesForRow(
+                        const itemsForRow = generateIndexesForRow(
                           index,
                           rowWidth,
                           itemWidth,
-                          movieIds.length
-                        ).map((movieIndex) => movieIds[movieIndex]);
+                          items.length
+                        ).map((itemIndex) => items[itemIndex]);
 
                         return (
                           <div style={style} key={key} className={classes.row}>
-                            {movieIdsForRow.map((movieId, itemIndex) => (
+                            {itemsForRow.map((item, itemIndex) => (
                               <Grid
                                 item
                                 className={classes.gridItem}
                                 style={{ width: itemWidth }}
                                 key={itemIndex}
                               >
-                                {children(movieId)}
+                                {children(item)}
                               </Grid>
                             ))}
                           </div>

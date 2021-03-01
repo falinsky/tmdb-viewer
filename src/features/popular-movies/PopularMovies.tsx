@@ -17,10 +17,10 @@ const PopularMovies = () => {
 
   return (
     <InfiniteMoviesList
-      movieIds={movieIds}
+      items={movieIds}
       hasMore={hasMore}
       isFetching={isFetching}
-      fetchMovies={() => {
+      fetchItems={() => {
         dispatch(fetchPopularMovies());
       }}
     >

@@ -19,11 +19,11 @@ const SearchMoviesResult = () => {
 
   return (
     <InfiniteMoviesList
-      movieIds={movieIds}
+      items={movieIds}
       hasMore={hasMore}
       isFetching={isFetching}
       reset={reset}
-      fetchMovies={() => {
+      fetchItems={() => {
         dispatch(searchMovies());
       }}
     >

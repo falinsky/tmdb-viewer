@@ -8,7 +8,7 @@ const FavoriteMovies = () => {
   const movieIds = useSelector((state: RootState) => state.favorites);
 
   return (
-    <InfiniteMoviesList movieIds={movieIds}>
+    <InfiniteMoviesList items={movieIds}>
       {(movieId) => <FavoriteMovieCard movieId={movieId} />}
     </InfiniteMoviesList>
   );
