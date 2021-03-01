@@ -8,9 +8,7 @@ import { MovieListResultItem } from '../../tmdb-api/types';
 import MovieCard from '../../app/MovieCard';
 
 const SearchMoviesResult = () => {
-  const { reset, query } = useSelector(
-    (state: RootState) => state.searchMovies
-  );
+  const query = useSelector((state: RootState) => state.searchMovies.query);
 
   const {
     data,
@@ -37,7 +35,6 @@ const SearchMoviesResult = () => {
       items={movies}
       hasMore={hasNextPage}
       isFetching={isFetchingNextPage}
-      reset={reset}
       fetchItems={fetchNextPage}
     >
       {(movie) => <MovieCard movie={movie} />}
