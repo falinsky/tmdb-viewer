@@ -2,12 +2,10 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface SearchMoviesState {
   query: string;
-  reset: boolean;
 }
 
 const initialState: SearchMoviesState = {
   query: '',
-  reset: false,
 };
 
 const searchMoviesSlice = createSlice({
@@ -18,7 +16,6 @@ const searchMoviesSlice = createSlice({
       return {
         ...initialState,
         query: action.payload,
-        reset: true,
       };
     },
   },
