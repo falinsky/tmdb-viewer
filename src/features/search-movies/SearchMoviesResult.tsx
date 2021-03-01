@@ -1,33 +1,46 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import InfiniteMoviesList from '../../app/InfiniteMoviesList';
-import { searchMovies } from './searchMoviesSlice';
 import { RootState } from '../../app/store';
-import DefaultMovieCard from '../../app/DefaultMovieCard';
+import { useInfiniteQuery } from 'react-query';
+import { searchMovies } from '../../tmdb-api/api';
+import { MovieListResultItem } from '../../tmdb-api/types';
+import MovieCard from '../../app/MovieCard';
 
 const SearchMoviesResult = () => {
-  const movieIds = useSelector((state: RootState) => state.searchMovies.items);
-  const hasMore = useSelector(
-    (state: RootState) =>
-      !state.searchMovies.allFetched && state.searchMovies.query !== ''
+  const { reset, query } = useSelector(
+    (state: RootState) => state.searchMovies
   );
-  const isFetching = useSelector(
-    (state: RootState) => state.searchMovies.isFetching
+
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery(
+    ['searchMovies', query],
+    ({ pageParam = 1 }) => searchMovies(query, pageParam),
+    {
+      getNextPageParam: (lastPage) =>
+        lastPage.page < lastPage.total_pages ? lastPage.page + 1 : false,
+      enabled: query !== '',
+    }
   );
-  const reset = useSelector((state: RootState) => state.searchMovies.reset);
-  const dispatch = useDispatch();
+
+  const movies = data?.pages.reduce<MovieListResultItem[]>(
+    (result, page) => result.concat(page.results),
+    []
+  );
 
   return (
     <InfiniteMoviesList
-      items={movieIds}
-      hasMore={hasMore}
-      isFetching={isFetching}
+      items={movies}
+      hasMore={hasNextPage}
+      isFetching={isFetchingNextPage}
       reset={reset}
-      fetchItems={() => {
-        dispatch(searchMovies());
-      }}
+      fetchItems={fetchNextPage}
     >
-      {(movieId) => <DefaultMovieCard movieId={movieId} />}
+      {(movie) => <MovieCard movie={movie} />}
     </InfiniteMoviesList>
   );
 };
