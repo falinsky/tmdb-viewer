@@ -64,26 +64,6 @@ function getRowsAmount(
 
 type ItemRenderer = (item: MovieID) => React.ReactNode;
 
-interface RowItemProps {
-  movieId: MovieID;
-  className: string;
-  width: number;
-  itemRenderer: ItemRenderer;
-}
-
-const RowItem = React.memo(function RowItem({
-  movieId,
-  className,
-  width,
-  itemRenderer,
-}: RowItemProps) {
-  return (
-    <Grid item className={className} style={{ width }}>
-      {itemRenderer(movieId)}
-    </Grid>
-  );
-});
-
 interface InfiniteMoviesListProps {
   movieIds?: MovieID[];
   fetchMovies?: Function;
@@ -179,13 +159,14 @@ const InfiniteMoviesList = ({
                         return (
                           <div style={style} key={key} className={classes.row}>
                             {movieIdsForRow.map((movieId) => (
-                              <RowItem
-                                key={movieId}
-                                movieId={movieId}
+                              <Grid
+                                item
                                 className={classes.gridItem}
-                                width={itemWidth}
-                                itemRenderer={children}
-                              />
+                                style={{ width: itemWidth }}
+                                key={movieId}
+                              >
+                                {children(movieId)}
+                              </Grid>
                             ))}
                           </div>
                         );
