@@ -9,7 +9,6 @@ import {
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import { MovieID } from '../tmdb-api/types';
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -62,20 +61,20 @@ function getRowsAmount(
   return Math.ceil(itemsAmount / maxItemsPerRow) + (hasMore ? 1 : 0);
 }
 
-type ItemRenderer = (item: MovieID) => React.ReactNode;
+type ItemRenderer<ItemType> = (item: ItemType) => React.ReactNode;
 
-interface InfiniteMoviesListProps {
-  movieIds?: MovieID[];
+interface InfiniteMoviesListProps<ItemType> {
+  movieIds?: ItemType[];
   fetchMovies?: Function;
   hasMore?: boolean;
   isFetching?: boolean;
   reset?: boolean;
   itemWidth?: number;
   itemHeight?: number;
-  children: ItemRenderer;
+  children: ItemRenderer<ItemType>;
 }
 
-const InfiniteMoviesList = ({
+function InfiniteMoviesList<ItemType>({
   itemWidth = 400,
   itemHeight = 360,
   hasMore = false,
@@ -84,7 +83,7 @@ const InfiniteMoviesList = ({
   isFetching = false,
   fetchMovies = () => {},
   children,
-}: InfiniteMoviesListProps) => {
+}: InfiniteMoviesListProps<ItemType>) {
   const classes = useStyles();
   const infiniteLoaderRef = useRef<InfiniteLoader>(null);
 
@@ -158,12 +157,12 @@ const InfiniteMoviesList = ({
 
                         return (
                           <div style={style} key={key} className={classes.row}>
-                            {movieIdsForRow.map((movieId) => (
+                            {movieIdsForRow.map((movieId, itemIndex) => (
                               <Grid
                                 item
                                 className={classes.gridItem}
                                 style={{ width: itemWidth }}
-                                key={movieId}
+                                key={itemIndex}
                               >
                                 {children(movieId)}
                               </Grid>
@@ -182,6 +181,6 @@ const InfiniteMoviesList = ({
       </AutoSizer>
     </section>
   );
-};
+}
 
 export default InfiniteMoviesList;
