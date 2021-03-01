@@ -1,28 +1,39 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import InfiniteMoviesList from '../../app/InfiniteMoviesList';
-import { fetchPopularMovies } from './popularMoviesSlice';
-import { RootState } from '../../app/store';
+import { useInfiniteQuery } from 'react-query';
+import { getPopularMovies } from '../../tmdb-api/api';
+import { MovieListResultItem } from '../../tmdb-api/types';
+import MovieCard from '../../app/MovieCard';
 
 const PopularMovies = () => {
-  const movieIds = useSelector((state: RootState) => state.popularMovies.items);
-  const hasMore = useSelector(
-    (state: RootState) => !state.popularMovies.allFetched
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery(
+    ['popularMovies'],
+    ({ pageParam = 1 }) => getPopularMovies(pageParam),
+    {
+      getNextPageParam: (lastPage) =>
+        lastPage.page < lastPage.total_pages ? lastPage.page + 1 : false,
+    }
   );
-  const isFetching = useSelector(
-    (state: RootState) => state.popularMovies.isFetching
+
+  const movies = data?.pages.reduce<MovieListResultItem[]>(
+    (result, page) => result.concat(page.results),
+    []
   );
-  const dispatch = useDispatch();
 
   return (
     <InfiniteMoviesList
-      movieIds={movieIds}
-      hasMore={hasMore}
-      isFetching={isFetching}
-      fetchMovies={() => {
-        dispatch(fetchPopularMovies());
-      }}
-    />
+      items={movies}
+      hasMore={hasNextPage}
+      isFetching={isFetchingNextPage}
+      fetchItems={fetchNextPage}
+    >
+      {(movie) => <MovieCard movie={movie} />}
+    </InfiniteMoviesList>
   );
 };
 

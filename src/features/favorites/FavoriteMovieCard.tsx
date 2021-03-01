@@ -1,25 +1,14 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 import MovieCard from '../../app/MovieCard';
-import fetchMovieDetails from '../movie-details/movieDetailsThunk';
-import { MovieID } from '../../app/types';
-import { RootState } from '../../app/store';
+import { MovieID } from '../../tmdb-api/types';
+import useMovieDetails from '../../app/useMovieDetails';
 
 interface FavoriteMovieCardProps {
   movieId: MovieID;
 }
 
 const FavoriteMovieCard = ({ movieId }: FavoriteMovieCardProps) => {
-  const movie = useSelector(
-    (state: RootState) => state.entities.movies[movieId]
-  );
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (!movie) {
-      dispatch(fetchMovieDetails(movieId));
-    }
-  }, [movieId, dispatch, movie]);
+  const { data: movie } = useMovieDetails(movieId);
 
   return <MovieCard movie={movie} />;
 };

@@ -1,10 +1,8 @@
 import React from 'react';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import SingleLineMoviesList from '../../app/SingleLineMoviesList';
-import { fetchMovieRecommendations } from './movieRecommendationsSlice';
-import { MovieID } from '../../app/types';
-import { RootState } from '../../app/store';
+import { MovieID } from '../../tmdb-api/types';
+import { useQuery } from 'react-query';
+import { getMovieRecommendations } from '../../tmdb-api/api';
 
 interface MovieRecommendationsProps {
   movieId: MovieID;
@@ -15,17 +13,11 @@ const MovieRecommendations = ({
   movieId,
   title,
 }: MovieRecommendationsProps) => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchMovieRecommendations(movieId));
-  }, [movieId, dispatch]);
-
-  const movieIds = useSelector(
-    (state: RootState) => state.movieRecommendations.itemsById[movieId]
+  const { data } = useQuery(['movieRecommendations', movieId], () =>
+    getMovieRecommendations(movieId)
   );
 
-  return <SingleLineMoviesList movieIds={movieIds} title={title} />;
+  return <SingleLineMoviesList movies={data?.results} title={title} />;
 };
 
 export default MovieRecommendations;

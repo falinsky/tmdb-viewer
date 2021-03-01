@@ -6,11 +6,9 @@ import {
   AutoSizer,
   IndexRange,
 } from 'react-virtualized';
-import MovieCard from './DefaultMovieCard';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import { MovieID } from './types';
 
 const useStyles = makeStyles((theme) => ({
   grid: {
@@ -63,47 +61,29 @@ function getRowsAmount(
   return Math.ceil(itemsAmount / maxItemsPerRow) + (hasMore ? 1 : 0);
 }
 
-interface RowItemProps {
-  movieId: MovieID;
-  className: string;
-  itemComponentType: React.ElementType;
-  width: number;
-}
+type ItemRenderer<ItemType> = (item: ItemType) => React.ReactNode;
 
-const RowItem = React.memo(function RowItem({
-  movieId,
-  className,
-  itemComponentType: ItemComponentType,
-  width,
-}: RowItemProps) {
-  return (
-    <Grid item className={className} style={{ width }}>
-      <ItemComponentType movieId={movieId} />
-    </Grid>
-  );
-});
-
-interface InfiniteMoviesListProps {
-  movieIds?: MovieID[];
-  fetchMovies?: Function;
+interface InfiniteMoviesListProps<ItemType> {
+  items?: ItemType[];
+  fetchItems?: Function;
   hasMore?: boolean;
   isFetching?: boolean;
   reset?: boolean;
-  itemComponentType?: React.ElementType;
   itemWidth?: number;
   itemHeight?: number;
+  children: ItemRenderer<ItemType>;
 }
 
-const InfiniteMoviesList = ({
+function InfiniteMoviesList<ItemType>({
   itemWidth = 400,
   itemHeight = 360,
   hasMore = false,
-  movieIds = [],
-  itemComponentType = MovieCard,
+  items = [],
   reset = false,
   isFetching = false,
-  fetchMovies = () => {},
-}: InfiniteMoviesListProps) => {
+  fetchItems = () => {},
+  children,
+}: InfiniteMoviesListProps<ItemType>) {
   const classes = useStyles();
   const infiniteLoaderRef = useRef<InfiniteLoader>(null);
 
@@ -116,7 +96,7 @@ const InfiniteMoviesList = ({
   // TODO: check if it's possible to leverage the returned promise
   const loadMoreRows = async (_: IndexRange) => {
     if (!isFetching) {
-      fetchMovies();
+      fetchItems();
     }
   };
 
@@ -133,7 +113,7 @@ const InfiniteMoviesList = ({
           const rowCount = getRowsAmount(
             rowWidth,
             itemWidth,
-            movieIds.length,
+            items.length,
             hasMore
           );
 
@@ -147,7 +127,7 @@ const InfiniteMoviesList = ({
                     index,
                     rowWidth,
                     itemWidth,
-                    movieIds.length
+                    items.length
                   ).length > 0;
 
                 return !hasMore || allItemsLoaded;
@@ -168,23 +148,24 @@ const InfiniteMoviesList = ({
                       rowHeight={itemHeight}
                       onRowsRendered={onRowsRendered}
                       rowRenderer={({ index, style, key }) => {
-                        const movieIdsForRow = generateIndexesForRow(
+                        const itemsForRow = generateIndexesForRow(
                           index,
                           rowWidth,
                           itemWidth,
-                          movieIds.length
-                        ).map((movieIndex) => movieIds[movieIndex]);
+                          items.length
+                        ).map((itemIndex) => items[itemIndex]);
 
                         return (
                           <div style={style} key={key} className={classes.row}>
-                            {movieIdsForRow.map((movieId) => (
-                              <RowItem
-                                key={movieId}
-                                movieId={movieId}
+                            {itemsForRow.map((item, itemIndex) => (
+                              <Grid
+                                item
                                 className={classes.gridItem}
-                                itemComponentType={itemComponentType}
-                                width={itemWidth}
-                              />
+                                style={{ width: itemWidth }}
+                                key={itemIndex}
+                              >
+                                {children(item)}
+                              </Grid>
                             ))}
                           </div>
                         );
@@ -200,6 +181,6 @@ const InfiniteMoviesList = ({
       </AutoSizer>
     </section>
   );
-};
+}
 
 export default InfiniteMoviesList;
