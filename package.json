@@ -11,7 +11,6 @@
     "@testing-library/user-event": "^12.7.3",
     "lodash": "^4.17.21",
     "material-ui-search-bar": "^1.0.0",
-    "normalizr": "^3.6.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-query": "^3.12.0",
